@@ -1,242 +1,185 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './App.css'; // Ensure you import your CSS file
+import './App.css'; // Make sure this points to your CSS file
 
 const App = () => {
-  // State hooks
-  const [imageIndex, setImageIndex] = useState(0);
-  const [dateTime, setDateTime] = useState({ date: '', time: '' });
-  const [visitorCount, setVisitorCount] = useState(0);
-  const [activeTab, setActiveTab] = useState('objective');
+    const [imageIndex, setImageIndex] = useState(0);
+    const [currentTime, setCurrentTime] = useState(new Date());
+    const [visitorCount, setVisitorCount] = useState(() => {
+        let count = parseInt(localStorage.getItem('visitorCount')) || 0;
+        localStorage.setItem('visitorCount', ++count);
+        return count;
+    });
+    const [showObjective, setShowObjective] = useState(false);
 
-  // Refs
-  const carouselRef = useRef(null);
-  const intervalRef = useRef(null);
+    const carouselRef = useRef(null);
+    const intervalRef = useRef(null);
 
-  // Image Slider Logic
-  useEffect(() => {
-    const carousel = carouselRef.current;
-    const images = carousel ? carousel.querySelectorAll('img') : [];
-    const totalImages = images.length;
+    useEffect(() => {
+        // Handle image sliding
+        const slideImage = () => {
+            setImageIndex((prevIndex) => (prevIndex + 1) % 1); // Adjust this for number of images
+        };
 
-    const slideImage = (index) => {
-      setImageIndex(index);
-      if (carousel) {
-        carousel.style.transform = `translate(-${index * 100}%)`;
-      }
+        intervalRef.current = setInterval(slideImage, 10000);
+        return () => clearInterval(intervalRef.current);
+    }, []);
+
+    useEffect(() => {
+        // Handle time and date updates
+        const updateTimeAndDate = () => {
+            setCurrentTime(new Date());
+        };
+
+        updateTimeAndDate();
+        const timerId = setInterval(updateTimeAndDate, 1000);
+        return () => clearInterval(timerId);
+    }, []);
+
+    const handleImageClick = (direction) => {
+        clearInterval(intervalRef.current);
+        setImageIndex((prevIndex) =>
+            direction === 'next'
+                ? (prevIndex + 1) % 1 // Adjust this for number of images
+                : (prevIndex - 1 + 1) % 1 // Adjust this for number of images
+        );
+        intervalRef.current = setInterval(() => handleImageClick('next'), 10000);
     };
 
-    const autoSlide = () => {
-      intervalRef.current = setInterval(() => {
-        slideImage((imageIndex + 1) % totalImages);
-      }, 10000);
+    const handleContentToggle = (contentType) => {
+        setShowObjective(contentType === 'objective');
     };
 
-    autoSlide();
-
-    const handleMouseOver = () => clearInterval(intervalRef.current);
-    const handleMouseLeave = () => autoSlide();
-
-    if (carousel) {
-      carousel.addEventListener('mouseover', handleMouseOver);
-      carousel.addEventListener('mouseleave', handleMouseLeave);
-    }
-
-    return () => {
-      if (carousel) {
-        carousel.removeEventListener('mouseover', handleMouseOver);
-        carousel.removeEventListener('mouseleave', handleMouseLeave);
-      }
-      clearInterval(intervalRef.current);
-    };
-  }, [imageIndex]);
-
-  // Time and Date Logic
-  useEffect(() => {
-    const updateTimeAndDate = () => {
-      const now = new Date();
-      const optionsDate = { day: '2-digit', month: 'short', year: 'numeric' };
-      const optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
-
-      setDateTime({
-        date: now.toLocaleDateString('en-GB', optionsDate),
-        time: now.toLocaleTimeString('en-GB', optionsTime)
-      });
-    };
-
-    updateTimeAndDate();
-    const intervalId = setInterval(updateTimeAndDate, 1000);
-
-    return () => clearInterval(intervalId);
-  }, []);
-
-  // Visitor Count Logic
-  useEffect(() => {
-    const count = parseInt(localStorage.getItem('visitorCount')) || 0;
-    setVisitorCount(count + 1);
-    localStorage.setItem('visitorCount', count + 1);
-  }, []);
-
-  // Tab Switching Logic
-  const handleTabClick = (tab) => {
-    setActiveTab(tab);
-  };
-
-  return (
-    <div>
-      {/* Top Section */}
-      <div className="top">
-        <div className="top-head">
-          <div className="time-date">
-            <span className="date">{dateTime.date}</span>
-            <span> | </span>
-            <span className="time">{dateTime.time}</span>
-          </div>
-          <div className="face-id">
-            Visitors <span id="visitor-count">{visitorCount}</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <img src="/Sources/Face-logo.png" alt="Facebook logo" />
-          </div>
-        </div>
-      </div>
-
-      {/* Header Section */}
-      <header>
-        <div className="header-head">
-          <div className="left-head">
-            <img className="vl-logo" src="/Sources/vl-logo.jpg" alt="Virtual Labs logo" />
-            <p className="title">
-              An Initiative of<br />
-              <span className="sec-line">Ministry of Education<br /></span>
-              <span className="third-line">Under the National Mission on Education through <span className="red">ICT</span></span>
-            </p>
-          </div>
-          <div className="right-head">
-            <form>
-              <input type="search" name="search-bar" id="searching" placeholder="Search lab" />
-              <span><img src="/Sources/search logo.png" className="search-bar" alt="Search icon" /></span>
-            </form>
-          </div>
-        </div>
-        <nav>
-          <div className="nav">
-            <ul>
-              <li><a className="nav-link" href="#">Home</a></li>
-              <li><a className="nav-link" href="#">About</a></li>
-              <li><a className="nav-link" href="#">Programs</a></li>
-              <li><a className="nav-link" href="#">Events</a></li>
-              <li><a className="nav-link" href="#">Contact</a></li>
-            </ul>
-          </div>
-        </nav>
-      </header>
-
-      {/* Main Section */}
-      <main>
-        <section className="wrapper">
-          <i
-            id="prev"
-            className="fa-solid fa-arrow-left button"
-            onClick={() => setImageIndex((prev) => (prev - 1 + carouselRef.current.querySelectorAll('img').length) % carouselRef.current.querySelectorAll('img').length)}
-          ></i>
-          <div className="image-container">
-            <div className="carousel" ref={carouselRef}>
-              <img src="/Album/img1.jpg" alt="Image 1" />
-              <img src="/Album/img2.png" alt="Image 2" />
-              <img src="/Album/img3.png" alt="Image 3" />
-              <img src="/Album/img4.jpg" alt="Image 4" />
-              <img src="/Album/img5.jpg" alt="Image 5" />
-              <img src="/Album/img6.jpg" alt="Image 6" />
-              <img src="/Album/img7.png" alt="Image 7" />
-            </div>
-            <i
-              id="next"
-              className="fa-solid fa-arrow-right button"
-              onClick={() => setImageIndex((prev) => (prev + 1) % carouselRef.current.querySelectorAll('img').length)}
-            ></i>
-          </div>
-        </section>
-
-        {/* Tabs Section */}
-        <section className="two">
-          <div className="contain-two">
-            <div className="tab">
-              <button onClick={() => handleTabClick('objective')} className={activeTab === 'objective' ? 'active' : ''}>Objective</button>
-              <button onClick={() => handleTabClick('philosophy')} className={activeTab === 'philosophy' ? 'active' : ''}>The Philosophy</button>
-            </div>
-            <div className="below-div">
-              {activeTab === 'objective' && (
-                <div id="objective-content">
-                  <div className="topic-name">Objective</div>
-                  <div className="topic-bio">
-                    1. To provide remote-access to simulation-based Labs in various disciplines of Science and
-                    Engineering.<br /><br />
-                    2. To enthuse students to conduct experiments by arousing their curiosity. This would help
-                    them in learning basic and advanced concepts through remote experimentation.<br /><br />
-                    3. To provide a complete Learning Management System around the Virtual Labs where the
-                    students/teachers can avail the various tools for learning, including additional
-                    web-resources, video-lectures, animated demonstrations, and self-evaluation.
-                  </div>
+    return (
+        <div>
+            <div className="top">
+                <div className="top-head">
+                    <div className="time-date">
+                        <span className="date">{currentTime.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}</span>
+                        <span> | </span>
+                        <span className="time">{currentTime.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true })}</span>
+                    </div>
+                    <div className="face-id">
+                        Visitors <span id="visitor-count">{visitorCount}</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <img src="/Sources/Face-logo.png" alt="Facebook logo" />
+                    </div>
                 </div>
-              )}
-              {activeTab === 'philosophy' && (
-                <div id="philosophy-content">
-                  <div className="topic-name">The Philosophy</div>
-                  <div className="topic-bio">
-                    Good lab facilities and updated lab experiments are critical for any engineering college.
-                    Paucity of lab facilities often makes it difficult to conduct experiments. Also, good
-                    teachers are always a scarce resource. The Virtual Labs project addresses this issue of lack
-                    of good lab facilities, as well as trained teachers, by providing remote-access to
-                    simulation-based Labs in various disciplines of science and engineering. Yet another
-                    objective is to arouse the curiosity of the students and permit them to learn at their own
-                    pace. This student-centric approach facilitates the absorption of basic and advanced
-                    concepts through simulation-based experimentation. Internet-based experimentation further
-                    permits use of additional web-resources, video-lectures, animated demonstrations, and
-                    self-evaluation. Specifically, the Virtual Labs project addresses the following:<br /><br />
-                    <ul>
-                      <li>Access to online labs to those engineering colleges that lack these lab facilities</li>
-                      <li>Access to online labs as a complementary facility to those colleges that already have labs</li>
-                      <li>Training and skill-set augmentation through workshops and on-site/online training</li>
-                    </ul>
-                    <br /><br />
-                    Virtual labs are any place, any pace, any-time, any-type labs. It is a paradigm shift in
-                    student-centric, online education.
-                  </div>
-                </div>
-              )}
             </div>
-          </div>
-        </section>
 
-        {/* Broad Areas Section */}
-        <section className="three">
-          <div className="three-sec">
-            <div className="labs">Broad Areas of Virtual Labs</div>
-          </div>
-          <div className="lab-link">
-          <ul>
-                    <li><a href="https://www.vlab.co.in/broad-area-electronics-and-communications">
-                            📚&nbsp;Electronics & Communications</a></li>
-                    <li><a href="https://www.vlab.co.in/broad-area-biotechnology-and-biomedical-engineering">
-                            📚&nbsp;Biotechnology and Biomedical Engineering</a></li>
-                    <li><a href="https://www.vlab.co.in/broad-area-computer-science-and-engineering">
-                            📚&nbsp;Computer Science & Engineering</a></li>
-                    <li><a href="https://www.vlab.co.in/broad-area-civil-engineering">
-                            📚&nbsp;Civil Engineering</a></li>
-                    <li><a href="https://www.vlab.co.in/broad-area-electrical-engineering">
-                            📚&nbsp;Electrical Engineering</a></li>
-                    <li><a href="https://www.vlab.co.in/broad-area-physical-sciences">
-                            📚&nbsp;Physical Sciences</a></li>
-                    <li><a href="https://www.vlab.co.in/broad-area-mechanical-engineering">
-                            📚&nbsp;Mechanical Engineering</a></li>
-                    <li><a href="https://www.vlab.co.in/broad-area-chemical-sciences">
-                            📚&nbsp;Chemical Sciences</a></li>
-                    <li><a href="https://www.vlab.co.in/broad-area-chemical-engineering">
-                            📚&nbsp;Chemical Engineering</a></li>
-                </ul>
-          </div>
-        </section>
-      </main>
-    </div>
-  );
+            <header>
+                <div className="header-head">
+                    <div className="left-head">
+                        <img className="vl-logo" src="/Sources/rbu-logo.jpg" alt="Virtual Labs logo" />
+                    </div>
+                    <div className="right-head">
+                        <form>
+                            <input type="search" name="search-bar" id="searching" placeholder="Search lab" />
+                        </form>
+                    </div>
+                </div>
+                <nav>
+                    <div className="nav">
+                        <ul>
+                            <li><a className="nav-link" href="#">Home</a></li>
+                            <li><a className="nav-link" href="#">About</a></li>
+                            <li><a className="nav-link" href="#">Experiments</a></li>
+                            <li><a className="nav-link" href="#">Contact Us</a></li>
+                            <li><a className="nav-link" href="#">Login</a></li>
+                            <li><a className="nav-link" href="#">Sign-up</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+
+            <main>
+                <section className="wrapper">
+                    <i className="fa-solid fa-arrow-left button" onClick={() => handleImageClick('prev')}></i>
+                    <div className="image-container">
+                        <div className="carousel" ref={carouselRef} style={{ transform: `translate(-${imageIndex * 100}%)` }}>
+                            <img src="/Album/lab1.jpg" alt="Image 1" />
+                            {/* Add more images here */}
+                        </div>
+                        <i className="fa-solid fa-arrow-right button" onClick={() => handleImageClick('next')}></i>
+                    </div>
+                </section>
+
+                <section className="two">
+                    <div className="contain-two">
+                        <div className="tab">
+                            <button onClick={() => handleContentToggle('philosophy')}>The AIM</button>
+                            <button onClick={() => handleContentToggle('objective')}>Objective</button>
+                        </div>
+                        <div className="below-div">
+                            {showObjective ? (
+                                <div id="objective-content">
+                                    <div className="topic-name">Objective</div>
+                                    <div className="topic-bio">
+                                        1. To enhance practical skills in designing, implementing, and analyzing data structures,
+                                        enabling students to optimize algorithms and improve computational efficiency.<br /><br />
+
+                                        2. To stay current with emerging trends and technologies in the field of data structures,
+                                        ensuring that students are well-prepared for evolving industry demands and innovations.<br /><br />
+
+                                        3. To develop critical thinking and analytical skills by evaluating the trade-offs and
+                                        performance implications of different data structures in various computational contexts.
+                                    </div>
+                                </div>
+                            ) : (
+                                <div id="philosophy-content">
+                                    <div className="topic-name">The Aim</div>
+                                    <div className="topic-bio">
+                                        Through this initiative, we aim to provide students with practical experience and innovative
+                                        insights into optimizing algorithms and solving complex problems<br /><br /><br />
+                                        Virtual labs are any place, any pace, any-time, any-type labs. It is a paradigm shift in
+                                        student-centric, online education.
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </section>
+
+                <section className="three">
+                    <div className="three-sec">
+                        <div className="labs">Introduction About Virtual Labs</div><br /><br />
+                        <iframe width="650" height="340" src="https://www.youtube.com/embed/Yhqyuv0336c?si=iLqOfWso36SXhScF"
+                            title="YouTube video player" frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+                    </div>
+                </section>
+            </main>
+
+            <footer>
+                <div className="footer-head">
+                    <div className="foot-one">
+                        <ul>
+                            <li><a href="#">Quick Links</a></li>
+                            <li><a href="#">Lab Feedback Form</a></li>
+                            <li><a href="#">FAQ</a></li>
+                        </ul>
+                    </div>
+                    <div className="foot-two">
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Contact</a></li>
+                            <li><a href="#">About RBU</a></li>
+                        </ul>
+                    </div>
+                    <div className="foot-three">
+                        Connect With US :
+                        <ul>
+                            <li>Email :- <a href="mailto:virtuallab2024@gmail.com">virtuallab2024@gmail.com</a></li>
+                            <li>Contact :- <a href="tel:1234567890">1234567890</a></li>
+                            <li>Address :- <a href="#">53G6+GCJ, Gittikhadan Rd,<br />BUPESHNAGAR, Nagpur,
+                                Maharashtra<br />440013</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <p>© 2024 Virtual Labs. All rights reserved.</p>
+            </footer>
+        </div>
+    );
 };
 
 export default App;

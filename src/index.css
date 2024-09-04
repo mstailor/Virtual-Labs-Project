@@ -1,7 +1,6 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 .top {
@@ -14,7 +13,7 @@
 }
 
 .top-head {
-  max-width: 70vw;
+  max-width: 80vw;
   margin: auto;
   display: flex;
   justify-content: space-between;
@@ -54,49 +53,12 @@ p {
 .vl-logo {
   height: 100px;
   width: auto;
-  border-right: 1px solid black;
-}
-
-.title {
-  line-height: 30px;
-  position: absolute;
-  top: 45px;
-  left: 410px;
-}
-
-.title::first-line {
-  font-weight: 500;
-  font-size: 16px;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-.title .sec-line {
-  font-weight: 600;
-  font-size: 20px;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-.title .third-line {
-  font-weight: 400;
-  font-size: 20px;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-.title .red {
-  color: red;
 }
 
 input[type=search] {
   border: 1px solid rgba(128, 128, 128, 0.9);
   padding: 6px 70px 6px 10px;
   border-radius: 15px;
-}
-
-.search-bar {
-  width: 16px;
-  position: absolute;
-  right: 245px;
-  top: 89px;
 }
 
 nav {
@@ -120,7 +82,7 @@ nav {
 
 .nav ul li a {
   display: inline-block;
-  padding-right: 20px;
+  padding: 5px 20px 5px 0px;
   color: #fff;
   font-size: 18px;
   text-decoration: none;
@@ -135,12 +97,24 @@ nav {
 
 .wrapper {
   display: flex;
-  max-width: 100vw;
+  max-width: 90vw;
+  width: 100%;
+  height: 400px;
+  margin: auto;
   align-items: center;
   justify-content: center;
   position: relative;
+  border-radius: 12px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
+.fa-arrow-left{
+  left: 45px;
+}
+
+.fa-arrow-right{
+  right: 45px;
+}
 .wrapper i.button {
   position: absolute;
   top: 50%;
@@ -157,45 +131,42 @@ nav {
   z-index: 100;
   cursor: pointer;
 }
-
 i.button:active {
   transform: scale(0.94) translateY(-50%);
 }
-
 i#prev {
   left: 25px;
 }
-
 i#next {
   right: 25px;
 }
-
 .image-container {
   height: 320px;
-  max-width: 100vw;
-  width: 100vw;
+  max-width: 90vw;
+  width: 100%;
   overflow: hidden;
 }
-
 .image-container .carousel {
   display: flex;
   height: 100%;
-  width: 100vw;
+  width: 100%;
   transition: all 0.4s ease;
 }
-
 .carousel img {
-  width: 100vw;
-  height: auto;
-  display: block;
+  height: 100%;
+  width: 100%;
+  border-radius: 18px;
+  border: 10px solid #fff;
+  object-fit: cover;
 }
+
 
 /* section two */
 .two {
   margin-top: 30px;
   color: black;
   width: 100vw;
-  height: 450px;
+  height: 300px;
 }
 
 .contain-two {
@@ -235,7 +206,7 @@ i#next {
 
 /* Section three */
 .three {
-  width: 100%;
+  width: 100vw;
   margin-top: 30px;
   background-color: #f1f1f1;
 }
@@ -246,7 +217,7 @@ i#next {
   font-family: Arial, Helvetica, sans-serif;
   color: rgb(0, 58, 104);
   padding-top: 50px;
-  margin-left: 600px;
+  margin-left: 400px;
 }
 
 .lab-link ul {
@@ -269,13 +240,48 @@ i#next {
   text-decoration: none;
 }
 
+footer{
+  width: 100vw;
+  background-color: #02263c;
+  color: white;
+  padding: 3px;
+  font-size: 14px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.footer-head{
+  width: 70vw;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: auto;
+  padding-top: 20px;
+}
+
+footer li,a{
+  color: white;
+  text-decoration: none;
+  padding-bottom: 20px;
+}
+
+footer p{
+  padding-top: 10px;
+  padding-left: 40%;
+  font-size: 17px;
+}
+
 /* Media Queries */
 @media screen and (max-width: 1100px) {
-  .search-bar {
-      width: 16px;
-      position: fixed;
-      right: 176px;
-      top: 89px;
+  .nav {
+      max-width: 100vw;
+  }
+
+  .nav ul li {
+      padding: 0;
+  }
+
+  .nav ul li a {
+      font-size: 12px;
+      padding-right: 0;
   }
 
   .header-head {
@@ -292,10 +298,22 @@ i#next {
   }
 }
 
-@media screen and (max-width: 800px) {
-  .search-bar {
-      right: 22px;
-      top: 89px;
+@media screen and (min-width:600)and (max-width: 1100px) {
+  .nav {
+      max-width: 80vw;
+      margin: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+
+  .nav ul li {
+      padding: 0px;
+  }
+
+  .nav ul li a {
+      font-size: 12px;
+      padding-right: 20px;
   }
 
   .title {
@@ -309,27 +327,36 @@ i#next {
 }
 
 @media screen and (max-width: 600px) {
+  .nav {
+      max-width: 100vw;
+  }
+
+  .nav ul li {
+      padding: 0;
+  }
+
+  .nav ul li a {
+      font-size: 12px;
+      padding-right: 0;
+  }
+
   .title {
       left: 10px;
-      font-size: 16px; 
+      font-size: 16px;
   }
 
   .three-sec {
       margin-left: 0;
-      text-align: center; 
+      text-align: center;
   }
 
   .nav ul li {
-      padding: 0 10px; 
+      padding: 0 10px;
   }
 
-  .search-bar {
-      right: 10px;
-      top: 10px; 
-  }
-
-  .image-container, .carousel img {
-      height: auto; 
+  .image-container,
+  .carousel img {
+      height: auto;
   }
 
   .wrapper i.button {
