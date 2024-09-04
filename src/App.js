@@ -59,8 +59,7 @@ const App = () => {
                         <span className="time">{currentTime.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true })}</span>
                     </div>
                     <div className="face-id">
-                        Visitors <span id="visitor-count">{visitorCount}</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <img src="/Sources/Face-logo.png" alt="Facebook logo" />
+                        Visitors <span id="visitor-count">{visitorCount}</span>
                     </div>
                 </div>
             </div>
