@@ -68,7 +68,7 @@ const App = () => {
             <header>
                 <div className="header-head">
                     <div className="left-head">
-                        <img className="vl-logo" src="/Sources/rbu-logo.jpg" alt="Virtual Labs logo" />
+                        <img className="vl-logo" src="/Sources/rbulogo.jpg" alt="Virtual Labs logo" />
                     </div>
                     <div className="right-head">
                         <form>
