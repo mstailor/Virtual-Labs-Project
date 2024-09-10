@@ -82,8 +82,6 @@ const App = () => {
                             <li><a className="nav-link" href="#">About</a></li>
                             <li><a className="nav-link" href="#">Experiments</a></li>
                             <li><a className="nav-link" href="#">Contact Us</a></li>
-                            <li><a className="nav-link" href="#">Login</a></li>
-                            <li><a className="nav-link" href="#">Sign-up</a></li>
                         </ul>
                     </div>
                 </nav>
