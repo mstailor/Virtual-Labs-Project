@@ -2,10 +2,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Home from './Home'; // Ensure this path is correct
-import About from './About'; // Ensure this path is correct
-import Contact from './Contact'; // Ensure this path is correct
-import './index.css'; // Ensure this path is correct
+import Home from './Home'; // Home path 
+import About from './About'; // About path 
+import Contact from './Contact'; // Contact path 
+import './index.css'; // Index.css path 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 

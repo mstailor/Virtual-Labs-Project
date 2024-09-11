@@ -1,6 +1,5 @@
-// About.js
 import React, { useState, useEffect } from 'react';
-import './about.css'; // Ensure this path is correct based on your project structure
+import './about.css'; 
 
 const About = () => {
     const [timeAndDate, setTimeAndDate] = useState({

@@ -1,6 +1,5 @@
-// Contact.js
 import React, { useState, useEffect } from 'react';
-import './contact.css'; // Ensure this path is correct based on your project structure
+import './contact.css'; 
 
 const Contact = () => {
     const [timeAndDate, setTimeAndDate] = useState({

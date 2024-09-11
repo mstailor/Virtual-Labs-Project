@@ -2,7 +2,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import './index.css';
-import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'; // Ensure you have react-icons installed
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'; 
 
 const App = () => {
     return (
