@@ -1,0 +1,155 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.top {
+    width: 100vw;
+    background-color: #02263c;
+    color: white;
+    padding: 10px;
+    font-size: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.top-head {
+    max-width: 80vw;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.face-id img {
+    height: 25px;
+}
+
+header {
+    width: 100vw;
+    height: 150px;
+}
+
+.header-head {
+    width: 70vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+    padding-top: 10px;
+}
+
+.left-head,
+.right-head {
+    display: inline-block;
+}
+
+.left-head,
+img,
+p {
+    display: inline-block;
+}
+
+.vl-logo {
+    height: 100px;
+    width: auto;
+}
+
+input[type=search] {
+    border: 1px solid rgba(128, 128, 128, 0.9);
+    padding: 6px 70px 6px 10px;
+    border-radius: 15px;
+}
+
+nav {
+    width: 100vw;
+    background-color: #00446d;
+    padding: 8px 0px;
+}
+
+.nav {
+    max-width: 70vw;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav ul li {
+    display: inline-block;
+    padding: 0px 15px;
+}
+
+.nav ul li a {
+    display: inline-block;
+    padding: 5px 20px 5px 0px;
+    color: #fff;
+    font-size: 18px;
+    text-decoration: none;
+    border-right: 1px solid #2b88c2;
+}
+
+.nav ul li a:hover {
+    color: red;
+}
+
+.sec-nav{
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 13px;
+    padding: 10px 0px 10px 250px;
+    background-color: #185d86;
+    color: white;
+    font-size: 20px;
+}
+
+.one{
+    width: 67vw;
+    margin: auto;
+    padding: 15px 20px;
+}
+
+.one .home-tab-add{
+    padding-bottom: 8px;
+}
+.one .home-tab-add a{
+    color: #249ce7;
+}
+.one .info-title h2{
+    padding: 8px 0px;
+    font-size: 24px;
+}
+.one .info-title p{
+    padding-top: 20px;
+    line-height: 20px;
+    letter-spacing: 1px;
+}
+
+footer {
+    width: 100vw;
+    background-color: #02263c;
+    color: white;
+    padding: 3px;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.footer-head {
+    width: 70vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin: auto;
+    padding-top: 20px;
+}
+
+footer li,
+a {
+    color: white;
+    text-decoration: none;
+    padding-bottom: 20px;
+}
+
+footer p {
+    padding-top: 10px;
+    padding-left: 40%;
+    font-size: 17px;
+}

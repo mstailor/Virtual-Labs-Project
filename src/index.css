@@ -108,13 +108,14 @@ nav {
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
-.fa-arrow-left{
+.fa-arrow-left {
   left: 45px;
 }
 
-.fa-arrow-right{
+.fa-arrow-right {
   right: 45px;
 }
+
 .wrapper i.button {
   position: absolute;
   top: 50%;
@@ -131,27 +132,33 @@ nav {
   z-index: 100;
   cursor: pointer;
 }
+
 i.button:active {
   transform: scale(0.94) translateY(-50%);
 }
+
 i#prev {
   left: 25px;
 }
+
 i#next {
   right: 25px;
 }
+
 .image-container {
   height: 320px;
   max-width: 90vw;
   width: 100%;
   overflow: hidden;
 }
+
 .image-container .carousel {
   display: flex;
   height: 100%;
   width: 100%;
   transition: all 0.4s ease;
 }
+
 .carousel img {
   height: 100%;
   width: 100%;
@@ -240,7 +247,7 @@ i#next {
   text-decoration: none;
 }
 
-footer{
+footer {
   width: 100vw;
   background-color: #02263c;
   color: white;
@@ -249,7 +256,7 @@ footer{
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.footer-head{
+.footer-head {
   width: 70vw;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -257,13 +264,14 @@ footer{
   padding-top: 20px;
 }
 
-footer li,a{
+footer li,
+a {
   color: white;
   text-decoration: none;
   padding-bottom: 20px;
 }
 
-footer p{
+footer p {
   padding-top: 10px;
   padding-left: 40%;
   font-size: 17px;
