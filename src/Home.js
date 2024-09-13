@@ -83,8 +83,8 @@ const Header = () => {
                     <ul>
                         <li><a className="nav-link" href="/">HOME</a></li>
                         <li><a className="nav-link" href="/about">ABOUT US</a></li>
-                        <li><a className="nav-link" href="#">EXPERIMENTS</a></li>
-                        <li><a className="nav-link" href="#">CONTACT US</a></li>
+                        <li><a className="nav-link" href="/experiments">EXPERIMENTS</a></li>
+                        <li><a className="nav-link" href="/contact">CONTACT US</a></li>
                     </ul>
                 </div>
             </nav>
@@ -206,23 +206,23 @@ const Footer = () => {
         <footer>
             <div className="footer-head">
                 <div className="foot-one">
-                    <ul>
-                        <li><a href="#">Quick Links</a></li>
+                    <ul type="none">
+                        <li>Quick Links</li>
                         <li><a href="#">Lab Feedback Form</a></li>
                         <li><a href="#">FAQ</a></li>
                     </ul>
                 </div>
                 <div className="foot-two">
-                    <ul>
+                    <ul type="none">
                         <li><a href="/">Home</a></li>
                         <li><a href="/about">About</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="/contact">Contact</a></li>
                         <li><a href="#">About RBU</a></li>
                     </ul>
                 </div>
                 <div className="foot-three">
                     Connect With US :
-                    <ul><br />
+                    <ul type="none"><br />
                         <li>Email :- <a href="#">virtuallab2024@gmail.com</a></li>
                         <li>Contact :- <a href="#">9999999999</a></li>
                         <li>Address :- <a href="#">53G6+GCJ, Gittikhadan Rd,<br />BUPESHNAGAR, Nagpur, Maharashtra<br />440013</a></li>
