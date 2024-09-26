@@ -63,7 +63,6 @@
 .toggle-section {
   font-size: large;
   color: black;
-  width: 600px;
   background-color: #e2e1e1;
   padding: 10px;
   margin: 0 10px;
@@ -100,8 +99,6 @@ progress {
 .intro {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   text-align: justify;
 }
 
@@ -114,4 +111,23 @@ progress {
   font-weight: 500;
   padding: 8px 20px;
   background-color: #e7e4e4;
+}
+
+.list-exp{
+  display: flex;
+  flex-direction: column;
+  text-align: justify;
+  margin-left: 50px;
+  line-height: 30px;
+}
+ul , ol {
+  font-size: 18px;
+  font-weight: 500;
+}
+ol li{
+  margin-left: 20px;
+}
+
+ol li a{
+  color: darkblue;
 }

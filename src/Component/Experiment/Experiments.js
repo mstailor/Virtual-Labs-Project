@@ -89,8 +89,6 @@ const MainContent = ({ activeContent }) => {
         );
 
       case 'Objective':
-
-      case 'List of Experiments':
         return (
           <>
             <div className='intro'>
@@ -100,6 +98,43 @@ const MainContent = ({ activeContent }) => {
               <p>
                 The Virtual Lab for Data Structures will focus on creating an environment where the student interactively explores data structures. The role of this Virtual Labs is to complement the lectures and reading material and the programming lab in three ways : 1. Present visual animations of data structures 2. Allow students to interactively execute algorithms in these data structures. 3. Allow students to interactively compute the cost of using these data structures with different algorithms.
               </p>
+            </div>
+          </>
+        );
+
+      case 'List of Experiments':
+        return (
+          <>
+            <div>
+              <h1 className='heading'> Data Structures Lab </h1>
+              <br />
+              <br />
+              <div className='list-exp'>
+                <ul>
+                  <li>Sorting</li>
+                  <ol>
+                    <li><a href='/list/merge' >Merge Sort</a></li>
+                  </ol>
+                </ul>
+                <ul>
+                  <li>Linked List</li>
+                  <ol>
+                    <li><a href='/list/linkedlist' >Linked List</a></li>
+                  </ol>
+                </ul>
+                <ul>
+                  <li>Stack</li>
+                  <ol>
+                    <li><a href='/list/stack' >Stack</a></li>
+                  </ol>
+                </ul>
+                <ul>
+                  <li>Hashing</li>
+                  <ol>
+                    <li><a href='/list/probing' >Quadratic Probing</a></li>
+                  </ol>
+                </ul>
+              </div>
             </div>
           </>
         );
@@ -129,7 +164,7 @@ const MainContent = ({ activeContent }) => {
                 <br />
                 <br />
                 <div className='feed'>
-                  <Link to='/feedback'>
+                  <Link to='/feedback/feedback-form'>
                     <input className='but-feedback' type='button' value={"Share your Feedback"} />
                   </Link>
                 </div>
