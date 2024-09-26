@@ -3,13 +3,19 @@
   flex-direction: column;
 }
 
+.top-bar-above{
+  width: 100vw;
+}
+
 .top-bar {
+  width: 100vw;
+  
+  margin: auto;
   height: 40px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   background-color: #2196F3;
-  padding: 5px;
   color: white;
 }
 
@@ -58,9 +64,10 @@
   font-size: large;
   color: black;
   width: 600px;
-  background-color: #ffffff;
+  background-color: #e2e1e1;
   padding: 10px;
   margin: 0 10px;
+  cursor: pointer;
 }
 
 .toggle-section a {
@@ -83,4 +90,28 @@
 progress {
   width: 100px;
   margin-right: 10px;
+}
+
+/* footer{
+  position: absolute;
+  bottom: 0;
+} */
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: justify;
+}
+
+.intro .heading {
+  color: #164063;
+}
+
+.feed .but-feedback{
+  cursor: pointer;
+  font-weight: 500;
+  padding: 8px 20px;
+  background-color: #e7e4e4;
 }

@@ -1,12 +1,11 @@
-// index.js or App.js
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Home from './Home'; // Home path 
-import About from './About'; // About path 
-import Contact from './Contact'; // Contact path 
-import './index.css'; // Index.css path 
-import Experiments from './Experiments';
+import About from './Component/About/About';
+import Contact from './Component/Contact/Contact';
+import Experiments from './Component/Experiment/Experiments'; 
+import Home from './Home';
+import './index.css'; 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 

@@ -74,20 +74,21 @@ const Header = () => {
                 </div>
                 <div className="right-head">
                     <form>
-                        <input type="search" name="search-bar" id="searching" placeholder="Search lab" />
+                        <input style={{paddingRight:"10px"}} type="search" name="search-bar" id="searching" placeholder="Search lab" />
                     </form>
                 </div>
             </div>
             <nav>
-                <div className="nav">
-                    <ul>
-                        <li><a className="nav-link" href="/">HOME</a></li>
-                        <li><a className="nav-link" href="/about">ABOUT US</a></li>
-                        <li><a className="nav-link" href="/experiments">EXPERIMENTS</a></li>
-                        <li><a className="nav-link" href="/contact">CONTACT US</a></li>
-                    </ul>
-                </div>
-            </nav>
+    <div className="nav">
+        <ul>
+            <li><a className="nav-link" href="/">HOME</a></li>
+            <li><a className="nav-link" href="/about">ABOUT US</a></li> 
+            <li><a className="nav-link" href="/experiments">EXPERIMENTS</a></li>
+            <li><a className="nav-link" href="/contact">CONTACT US</a></li>
+        </ul>
+    </div>
+</nav>
+
         </header>
     );
 };
