@@ -1,6 +1,73 @@
 import React, { useState, useEffect } from 'react'; 
-import axios from 'axios';
-import './Probing.css'; // Ensure your CSS file is included for styling
+import './Exp.css'; // Ensure your CSS file is included for styling
+
+// Predefined quizzes
+const quizzesData = {
+  pretest: [
+    {
+      id: 1,
+      question: "1. What is result of 29 mod(5) ?",
+      options: [" 1", " 4", " 5"," 9"],
+      answer: " 4",
+    },
+    {
+      id: 2,
+      question: "2. What is primary purpose of hash function ?",
+      options: [" To multiply the keys with a constant value", " To map a given key to a specific index in an array", " To sort the keys", " T compress the data for storage"],
+      answer: " To map a given key to a specific index in an array",
+    },
+    {
+      id: 3,
+      question: "3. Which of the following is a characteristic of a good hash function ?",
+      options: [" It minimizes collision", " It generates shorter hashes for shorter inputs", " It always produces large hash values for larger inputs", " It ensures that all hash values are sequential"],
+      answer: " It minimizes collision",
+    },
+    {
+      id: 4,
+      question: "4. In which scenarios are you more likely to encounter collisions in a hash table ?",
+      options: [" When hash table is empty or nearly empty", " When table size is a prime number", " When a simple hash function like h(k) = k mod(10) is used", " When each key is assigned a unique hash value"],
+      answer: " When a simple hash function like h(k) = k mod(10) is used",
+    },
+    {
+      id: 5,
+      question: "5. For a hash table with a size of 12, is a key 94 is hashed using h(k) = k mod(12), what is the resulting index ?",
+      options: [" 10", " 8", " 6", " 3"],
+      answer: " 10",
+    },
+  ],
+  posttest: [
+    {
+      id: 1,
+      question: "",
+      options: ["", "", "", ""],
+      answer: "",
+    },
+    {
+      id: 2,
+      question: "",
+      options: ["", "", "", ""],
+      answer: "",
+    },
+    {
+      id: 3,
+      question: "",
+      options: ["", "", "", ""],
+      answer: "",
+    },
+    {
+      id: 4,
+      question: "",
+      options: ["", "", "", ""],
+      answer: "",
+    },
+    {
+      id: 5,
+      question: "",
+      options: ["", "", "", ""],
+      answer: "",
+    },
+  ],
+};
 
 // Header Component
 const Header = ({ toggleSidebar, toggleProgressBar }) => (
@@ -23,9 +90,6 @@ const Header = ({ toggleSidebar, toggleProgressBar }) => (
         <a href="/" className="home-link">Home</a>
       </div>
       <h1>DATA STRUCTURE 1</h1>
-      <button className="course-progress-btn" onClick={toggleProgressBar}>
-        Course Progress
-      </button>
     </div>
   </div>
 );
@@ -41,88 +105,48 @@ const Sidebar = ({ setActiveContent }) => (
       <li onClick={() => setActiveContent('Practice')}>Practice</li>
       <li onClick={() => setActiveContent('Exercise')}>Exercise</li>
       <li onClick={() => setActiveContent('Posttest')}>Posttest</li>
+      <li onClick={() => setActiveContent('Applications')}>Real Life Applications</li>
     </ul>
   </div>
 );
 
-// ProgressBar Component
-const ProgressBar = ({ progress }) => (
-  <div className="toggle-section">
-    {Object.keys(progress).map((experiment, index) => (
-      <div key={index}>
-        <h5>{experiment.replace(/^\w/, (c) => c.toUpperCase())}</h5>
-        <div className="progress-section">
-          <p>Lecture progress:</p>
-          <progress value={progress[experiment].lecture} max="100" />
-          <span>{progress[experiment].lecture}%</span>
-        </div>
-        <div className="progress-section">
-          <p>Assignment progress:</p>
-          <progress value={progress[experiment].assignment} max="100" />
-          <span>{progress[experiment].assignment}%</span>
-        </div>
-      </div>
-    ))}
-  </div>
-);
+
+
 
 // Main Content Component
-const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore, setProgress }) => {
+const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) => {
   const [quizzes, setQuizzes] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [activeTestType, setActiveTestType] = useState('Pretest');
+  const [activeTestType, setActiveTestType] = useState('pretest');
+  const [submitted, setSubmitted] = useState(false);
+  const [correctAnswers, setCorrectAnswers] = useState(0);
 
   useEffect(() => {
-    const fetchQuizzes = async () => {
-      try {
-        const endpoint = `http://127.0.0.1:8000/api/quiz/${activeTestType.toLowerCase()}/probing`;
-        const response = await axios.get(endpoint);
-        setQuizzes(response.data);
-      } catch (err) {
-        setError(err.message);
-        console.error('Error fetching data:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchQuizzes();
+    setQuizzes(quizzesData[activeTestType]);
+    setSubmitted(false);
+    setUserAnswers({});
   }, [activeTestType]);
 
   const handleAnswerChange = (questionId, answer) => {
-    setUserAnswers({
-      ...userAnswers,
-      [questionId]: answer,
-    });
-  };
-
-  const handleSubmit = () => {
-    let correctAnswers = 0;
-    quizzes.forEach(quiz => {
-      if (userAnswers[quiz.id] === quiz.answer) {
-        correctAnswers++;
-      }
-    });
-    setScore(correctAnswers);
-
-    const progress = {
-      score: correctAnswers,
-      total: quizzes.length,
-    };
-    localStorage.setItem('quizProgress', JSON.stringify(progress));
-
-    setProgress(prev => ({
+    setUserAnswers(prev => ({
       ...prev,
-      experiment1: { 
-        lecture: Math.min((correctAnswers / quizzes.length) * 100, 100),
-        assignment: prev.experiment1.assignment 
-      }
+      [questionId]: answer,
     }));
   };
 
+  const handleSubmit = () => {
+    let correctCount = 0;
+    quizzes.forEach(quiz => {
+      if (userAnswers[quiz.id] === quiz.answer) {
+        correctCount++;
+      }
+    });
+    setCorrectAnswers(correctCount);
+    setScore(correctCount);
+    setSubmitted(true);
+  };
+
   const toggleTestType = () => {
-    setActiveTestType(prevType => (prevType === 'Pretest' ? 'Posttest' : 'Pretest'));
+    setActiveTestType(prevType => (prevType === 'pretest' ? 'posttest' : 'pretest'));
   };
 
   const renderContent = () => {
@@ -149,15 +173,13 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore, set
 
       case 'Pretest':
       case 'Posttest':
-        if (loading) return <div>Loading...</div>;
-        if (error) return <div>Error: {error}</div>;
         return (
           <div className='intro'>
-            <h1 className='heading'>{activeTestType} Quiz</h1>
+            <h1 className='heading'>{activeTestType.charAt(0).toUpperCase() + activeTestType.slice(1)} Quiz</h1>
             {quizzes.map(quiz => (
-              <div key={quiz.id}>
-                <h2>{quiz.question}</h2>
-                <div>
+              <div key={quiz.id}><br></br>
+                <h3>{quiz.question}</h3><br></br>
+                <div className='indent'>
                   {quiz.options.map(option => (
                     <label key={option}>
                       <input
@@ -165,16 +187,18 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore, set
                         name={quiz.id}
                         onChange={() => handleAnswerChange(quiz.id, option)}
                       />
-                      {option}
+                      {option}<br></br>
                     </label>
                   ))}
                 </div>
               </div>
             ))}
-            <button onClick={handleSubmit}>Submit</button>
-            <button onClick={toggleTestType}>
-              Switch to {activeTestType === 'Pretest' ? 'Posttest' : 'Pretest'}
-            </button>
+            <button className='SubmitButton' onClick={handleSubmit}>Submit</button>
+            {submitted && (
+              <div className="score-display">
+                <h3>Your Score: {correctAnswers} / {quizzes.length}</h3>
+              </div>
+            )}
           </div>
         );
 
@@ -185,16 +209,6 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore, set
             <h2 className='sub-heading'>Quadratic Probing Concept and Algorithm</h2>
             <h2 className='sub-heading'>What is Quadratic Probing?</h2>
             <p>Quadratic probing is an open addressing scheme which operates by taking the original hash index and adding successive square of c (where, c is the number of collisions occurred) until an open slot is found.</p>
-            <h2 className='sub-heading'>Quadratic Probing Demonstration</h2>
-            <img className='image' src="/Sources/prob.jpeg" alt="Quadratic Probing Demo" />
-          </div>
-        );
-
-      case 'Practice':
-      case 'Exercise':
-        return (
-          <div className='intro'>
-            <h1 className='heading'>Quadratic Probing</h1>
           </div>
         );
 
@@ -226,7 +240,6 @@ const Footer = () => (
           <li><a href="/">Home</a></li>
           <li><a href="/about">About</a></li>
           <li><a href="/contact">Contact</a></li>
-          <li><a href="#">About RBU</a></li>
         </ul>
       </div>
       <div className="foot-three">
@@ -247,18 +260,13 @@ const Experiments = () => {
   const [activeContent, setActiveContent] = useState('Aim');
   const [userAnswers, setUserAnswers] = useState({});
   const [score, setScore] = useState(0);
-  const [progress, setProgress] = useState({
-    experiment1: { lecture: 50, assignment: 50 },
-    experiment2: { lecture: 30, assignment: 30 },
-    experiment3: { lecture: 70, assignment: 70 },
-    experiment4: { lecture: 50, assignment: 60 }
-  });
   const [showSidebar, setShowSidebar] = useState(true);
-  const [showProgressBar, setShowProgressBar] = useState(true);
+
+  const toggleSidebar = () => setShowSidebar(!showSidebar);
 
   return (
     <div className="App">
-      <Header toggleSidebar={() => setShowSidebar(!showSidebar)} toggleProgressBar={() => setShowProgressBar(!showProgressBar)} />
+      <Header toggleSidebar={toggleSidebar} />
       <div className="content">
         {showSidebar && <Sidebar setActiveContent={setActiveContent} />}
         <MainContent
@@ -266,13 +274,10 @@ const Experiments = () => {
           setUserAnswers={setUserAnswers}
           userAnswers={userAnswers}
           setScore={setScore}
-          setProgress={setProgress}
         />
-        {showProgressBar && <ProgressBar progress={progress} />}
       </div>
       <Footer />
     </div>
   );
 };
-
 export default Experiments;

@@ -1,6 +1,73 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import './Probing.css';
+import React, { useState, useEffect } from 'react'; 
+import './Exp.css'; // Ensure your CSS file is included for styling
+
+// Predefined quizzes
+const quizzesData = {
+  pretest: [
+    {
+      id: 1,
+      question: "",
+      options: ["", "", "", ""],
+      answer: "",
+    },
+    {
+      id: 2,
+      question: "",
+      options: ["", "", "", ""],
+      answer: "",
+    },
+    {
+      id: 3,
+      question: "",
+      options: ["", "", "", ""],
+      answer: "",
+    },
+    {
+      id: 4,
+      question: "",
+      options: ["", "", "", ""],
+      answer: "",
+    },
+    {
+      id: 5,
+      question: "",
+      options: ["", "", "", ""],
+      answer: "",
+    },
+  ],
+  posttest: [
+    {
+      id: 1,
+      question: "",
+      options: ["", "", "", ""],
+      answer: "",
+    },
+    {
+      id: 2,
+      question: "",
+      options: ["", "", "", ""],
+      answer: "",
+    },
+    {
+      id: 3,
+      question: "",
+      options: ["", "", "", ""],
+      answer: "",
+    },
+    {
+      id: 4,
+      question: "",
+      options: ["", "", "", ""],
+      answer: "",
+    },
+    {
+      id: 5,
+      question: "",
+      options: ["", "", "", ""],
+      answer: "",
+    },
+  ],
+};
 
 // Header Component
 const Header = ({ toggleSidebar, toggleProgressBar }) => (
@@ -23,9 +90,6 @@ const Header = ({ toggleSidebar, toggleProgressBar }) => (
         <a href="/" className="home-link">Home</a>
       </div>
       <h1>DATA STRUCTURE 1</h1>
-      <button className="course-progress-btn" onClick={toggleProgressBar}>
-        Course Progress
-      </button>
     </div>
   </div>
 );
@@ -34,90 +98,91 @@ const Header = ({ toggleSidebar, toggleProgressBar }) => (
 const Sidebar = ({ setActiveContent }) => (
   <div className="toggle-section">
     <ul type="none">
-      <br /><br />
       <li onClick={() => setActiveContent('Aim')}>Aim</li>
-      <br />
       <li onClick={() => setActiveContent('Overview')}>Overview</li>
-      <br />
       <li onClick={() => setActiveContent('Pretest')}>Pretest</li>
-      <br />
       <li onClick={() => setActiveContent('Concept')}>Concept</li>
-      <br />
       <li onClick={() => setActiveContent('Practice')}>Practice</li>
-      <br />
       <li onClick={() => setActiveContent('Exercise')}>Exercise</li>
-      <br />
       <li onClick={() => setActiveContent('Posttest')}>Posttest</li>
+      <li onClick={() => setActiveContent('Applications')}>Real Life Applications</li>
     </ul>
   </div>
 );
 
-// ProgressBar Component
-const ProgressBar = ({ progress }) => (
-  <div className="toggle-section">
-    {Object.keys(progress).map((experiment, index) => (
-      <div key={index}>
-        <h5>{experiment.replace(/^\w/, (c) => c.toUpperCase())}</h5>
-        <div className="progress-section">
-          <p>Lecture progress:</p>
-          <progress value={progress[experiment].lecture} max="100" />
-          <span>{progress[experiment].lecture}%</span>
-        </div>return <p>The objectives of this lab are... (Objectives content)</p>;
-        <div className="progress-section">
-          <p>Assignment progress:</p>
-          <progress value={progress[experiment].assignment} max="100" />
-          <span>{progress[experiment].assignment}%</span>
-        </div>
-      </div>
-    ))}
-  </div>
-);
 
-// Main Content Component 
-const MainContent = ({ activeContent }) => {
+
+
+// Main Content Component
+const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) => {
+  const [quizzes, setQuizzes] = useState([]);
+  const [activeTestType, setActiveTestType] = useState('pretest');
+  const [submitted, setSubmitted] = useState(false);
+  const [correctAnswers, setCorrectAnswers] = useState(0);
+
+  useEffect(() => {
+    setQuizzes(quizzesData[activeTestType]);
+    setSubmitted(false);
+    setUserAnswers({});
+  }, [activeTestType]);
+
+  const handleAnswerChange = (questionId, answer) => {
+    setUserAnswers(prev => ({
+      ...prev,
+      [questionId]: answer,
+    }));
+  };
+
+  const handleSubmit = () => {
+    let correctCount = 0;
+    quizzes.forEach(quiz => {
+      if (userAnswers[quiz.id] === quiz.answer) {
+        correctCount++;
+      }
+    });
+    setCorrectAnswers(correctCount);
+    setScore(correctCount);
+    setSubmitted(true);
+  };
+
+  const toggleTestType = () => {
+    setActiveTestType(prevType => (prevType === 'pretest' ? 'posttest' : 'pretest'));
+  };
+
   const renderContent = () => {
     switch (activeContent) {
       case 'Aim':
 
-        return (
-          <>
-            <div className='intro'>
-              <h1 className='heading'> Stack </h1>
-              <br />
-              <br />
-              <h2 className='sub-heading'>Estimated Time</h2>
-              <p></p>
-              <br />
-              <br/>
-              <h2 className='sub-heading'>Learning Objectives of this Module</h2>
-              <ul>
-                <li>Gain basic understanding of stacks</li>
-                <li>Understand Stack operations and associated time complexities</li>
-                <li>Understand applications of Stacks</li>
-              </ul>
-            </div>
-          </>
-        );
-
-        case 'Overview' :
-        return(
+      return (
         <>
-        <div className='intro'>
+          <div className='intro'>
             <h1 className='heading'> Stack </h1>
-        </div>
+            <br />
+            <br />
+            <h2 className='sub-heading'>Estimated Time</h2>
+            <p></p>
+            <br />
+            <br/>
+            <h2 className='sub-heading'>Learning Objectives of this Module</h2>
+            <ul>
+              <li>Gain basic understanding of stacks</li>
+              <li>Understand Stack operations and associated time complexities</li>
+              <li>Understand applications of Stacks</li>
+            </ul>
+          </div>
         </>
-        );
-      case 'Pretest':
-        return (
-          <>
-            <div className='intro'>
-              <h1 className='heading'> Stack </h1>
-              <br />
-              <br />
-            </div>
-          </>
-        );
+      );
 
+      case 'Overview' :
+      return(
+      <>
+      <div className='intro'>
+          <h1 className='heading'> Stack </h1>
+      </div>
+      </>
+      );
+
+      
       case 'Concept':
         return (
           <>
@@ -144,6 +209,7 @@ const MainContent = ({ activeContent }) => {
             </div>
           </>
         );
+
       case 'Practice':
         return (
           <>
@@ -164,16 +230,49 @@ const MainContent = ({ activeContent }) => {
             </div>
           </>
         );
-        case 'Posttest':
+        
+    case 'Pretest':
+      return (
+        <>
+          <div className='intro'>
+            <h1 className='heading'> Stack </h1>
+            <br />
+            <br />
+          </div>
+        </>
+      );
+
+      case 'Pretest':
+      case 'Posttest':
         return (
-          <>
-            <div className='intro'>
-              <h1 className='heading'> Stack </h1>
-              <br />
-              <br />
-            </div>
-          </>
+          <div className='intro'>
+            <h1 className='heading'>{activeTestType.charAt(0).toUpperCase() + activeTestType.slice(1)} Quiz</h1>
+            {quizzes.map(quiz => (
+              <div key={quiz.id}><br></br>
+                <h3>{quiz.question}</h3><br></br>
+                <div className='indent'>
+                  {quiz.options.map(option => (
+                    <label key={option}>
+                      <input
+                        type="radio"
+                        name={quiz.id}
+                        onChange={() => handleAnswerChange(quiz.id, option)}
+                      />
+                      {option}<br></br>
+                    </label>
+                  ))}
+                </div>
+              </div>
+            ))}
+            <button className='SubmitButton' onClick={handleSubmit}>Submit</button>
+            {submitted && (
+              <div className="score-display">
+                <h3>Your Score: {correctAnswers} / {quizzes.length}</h3>
+              </div>
+            )}
+          </div>
         );
+
       default:
         return <p>Select an option from the sidebar.</p>;
     }
@@ -187,91 +286,59 @@ const MainContent = ({ activeContent }) => {
 };
 
 // Footer Component
-const Footer = () => {
-  return (
-    <footer>
-      <div className="footer-head">
-        <div className="foot-one">
-          <ul type="none">
-            <li>Quick Links</li>
-            <li><a href="#">Lab Feedback Form</a></li>
-            <li><a href="#">FAQ</a></li>
-          </ul>
-        </div>
-        <div className="foot-two">
-          <ul type="none">
-            <li><a href="/">Home</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/contact">Contact</a></li>
-            <li><a href="#">About RBU</a></li>
-          </ul>
-        </div>
-        <div className="foot-three">
-          Connect With US :
-          <ul type="none"><br />
-            <li>Email :- <a href="#">virtuallab2024@gmail.com</a></li>
-            <li>Contact :- <a href="#">9999999999</a></li>
-            <li>Address :- <a href="#">53G6+GCJ, Gittikhadan Rd,<br />BUPESHNAGAR, Nagpur, Maharashtra<br />440013</a></li>
-          </ul>
-        </div>
+const Footer = () => (
+  <footer>
+    <div className="footer-head">
+      <div className="foot-one">
+        <ul type="none">
+          <li>Quick Links</li>
+          <li><a href="#">Lab Feedback Form</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
       </div>
-      <p>© 2024 Virtual Labs. All rights reserved.</p>
-    </footer>
-  );
-};
+      <div className="foot-two">
+        <ul type="none">
+          <li><a href="/">Home</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+      <div className="foot-three">
+        Connect With Us:
+        <ul type="none"><br />
+          <li>Email: <a href="#">virtuallab2024@gmail.com</a></li>
+          <li>Contact: <a href="#">9999999999</a></li>
+          <li>Address: <a href="#">53G6+GCJ, Gittikhadan Rd,<br />BUPESHNAGAR, Nagpur, Maharashtra<br />440013</a></li>
+        </ul>
+      </div>
+    </div>
+    <p>© 2024 Virtual Labs. All rights reserved.</p>
+  </footer>
+);
 
 // Main App Component
 const Experiments = () => {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [progressBarOpen, setProgressBarOpen] = useState(false);
-  const [activeContent, setActiveContent] = useState('Introduction');
+  const [activeContent, setActiveContent] = useState('Aim');
+  const [userAnswers, setUserAnswers] = useState({});
+  const [score, setScore] = useState(0);
+  const [showSidebar, setShowSidebar] = useState(true);
 
-  const [progress, setProgress] = useState({
-    experiment1: { lecture: 50, assignment: 50 },
-    experiment2: { lecture: 30, assignment: 30 },
-    experiment3: { lecture: 70, assignment: 70 },
-    experiment4: { lecture: 50, assignment: 60 }
-  });
-
-  // Load progress from localStorage on mount
-  useEffect(() => {
-    const storedProgress = localStorage.getItem('courseProgress');
-    if (storedProgress) {
-      setProgress(JSON.parse(storedProgress));
-    }
-  }, []);
-
-  // Update localStorage when progress changes
-  useEffect(() => {
-    localStorage.setItem('courseProgress', JSON.stringify(progress));
-  }, [progress]);
-
-  // Toggle Sidebar
-  const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
-
-  // Toggle Progress Bar
-  const toggleProgressBar = () => setProgressBarOpen(!progressBarOpen);
+  const toggleSidebar = () => setShowSidebar(!showSidebar);
 
   return (
-    <div className="container">
-      {/* Header */}
-      <Header toggleSidebar={toggleSidebar} toggleProgressBar={toggleProgressBar} />
-
+    <div className="App">
+      <Header toggleSidebar={toggleSidebar} />
       <div className="content">
-        {/* Sidebar */}
-        {sidebarOpen && <Sidebar setActiveContent={setActiveContent} />}
-
-        {/* Main Content */}
-        <MainContent activeContent={activeContent} />
-
-        {/* Progress Bar */}
-        {progressBarOpen && <ProgressBar progress={progress} />}
+        {showSidebar && <Sidebar setActiveContent={setActiveContent} />}
+        <MainContent
+          activeContent={activeContent}
+          setUserAnswers={setUserAnswers}
+          userAnswers={userAnswers}
+          setScore={setScore}
+        />
       </div>
-
-      {/* Footer */}
       <Footer />
     </div>
   );
 };
-
 export default Experiments;
