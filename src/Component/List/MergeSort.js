@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'; 
-import './Exp.css'; // Ensure your CSS file is included for styling
+import './MergeSort.css'; // Ensure your CSS file is included for styling
 
 // Predefined quizzes
 const quizzesData = {

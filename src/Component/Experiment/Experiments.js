@@ -23,9 +23,7 @@ const Header = ({ toggleSidebar, toggleProgressBar }) => (
         <a href="/" className="home-link">Home</a>
       </div>
       <h1>DATA STRUCTURE 1</h1>
-      <button className="course-progress-btn" onClick={toggleProgressBar}>
-        Course Progress
-      </button>
+      <a href='/contact'>Contact Us</a>
     </div>
   </div>
 );

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'; 
-import './Exp.css'; // Ensure your CSS file is included for styling
+import './LinkedList.css'; // Ensure your CSS file is included for styling
 
 // Predefined quizzes
 const quizzesData = {
@@ -90,6 +90,7 @@ const Header = ({ toggleSidebar, toggleProgressBar }) => (
         <a href="/" className="home-link">Home</a>
       </div>
       <h1>DATA STRUCTURE 1</h1>
+      <a href='/experiments'>Experiments List</a>
     </div>
   </div>
 );
