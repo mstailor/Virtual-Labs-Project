@@ -6,71 +6,25 @@ const quizzesData = {
   pretest: [
     {
       id: 1,
-      question: "",
-      options: ["", "", "", ""],
-      answer: "",
+      question: "What is Merge Sort?",
+      options: ["A sorting algorithm", "A searching algorithm", "A graph algorithm", "None of the above"],
+      answer: "A sorting algorithm",
     },
     {
       id: 2,
-      question: "",
-      options: ["", "", "", ""],
-      answer: "",
+      question: "What is the time complexity of Merge Sort?",
+      options: ["O(n log n)", "O(n^2)", "O(n)", "O(log n)"],
+      answer: "O(n log n",
     },
-    {
-      id: 3,
-      question: "",
-      options: ["", "", "", ""],
-      answer: "",
-    },
-    {
-      id: 4,
-      question: "",
-      options: ["", "", "", ""],
-      answer: "",
-    },
-    {
-      id: 5,
-      question: "",
-      options: ["", "", "", ""],
-      answer: "",
-    },
+    // Add more quiz questions as needed
   ],
   posttest: [
-    {
-      id: 1,
-      question: "",
-      options: ["", "", "", ""],
-      answer: "",
-    },
-    {
-      id: 2,
-      question: "",
-      options: ["", "", "", ""],
-      answer: "",
-    },
-    {
-      id: 3,
-      question: "",
-      options: ["", "", "", ""],
-      answer: "",
-    },
-    {
-      id: 4,
-      question: "",
-      options: ["", "", "", ""],
-      answer: "",
-    },
-    {
-      id: 5,
-      question: "",
-      options: ["", "", "", ""],
-      answer: "",
-    },
+    // Add posttest questions similarly
   ],
 };
 
 // Header Component
-const Header = ({ toggleSidebar, toggleProgressBar }) => (
+const Header = ({ toggleSidebar }) => (
   <div>
     <div className="header-head">
       <div className="left-head">
@@ -87,25 +41,26 @@ const Header = ({ toggleSidebar, toggleProgressBar }) => (
         <button className="hamburger" onClick={toggleSidebar}>
           &#9776;
         </button>
-        <a href="/" className="home-link">Home</a>
+        <a href="/">Home</a>
       </div>
       <h1>DATA STRUCTURE 1</h1>
+      <a href="/experiments">Experiments List</a>
     </div>
   </div>
 );
 
 // Sidebar Component
-const Sidebar = ({ setActiveContent }) => (
+const Sidebar = ({ handleOptionClick }) => (
   <div className="toggle-section">
     <ul type="none">
-      <li onClick={() => setActiveContent('Aim')}>Aim</li>
-      <li onClick={() => setActiveContent('Overview')}>Overview</li>
-      <li onClick={() => setActiveContent('Pretest')}>Pretest</li>
-      <li onClick={() => setActiveContent('Concept')}>Concept</li>
-      <li onClick={() => setActiveContent('Practice')}>Practice</li>
-      <li onClick={() => setActiveContent('Exercise')}>Exercise</li>
-      <li onClick={() => setActiveContent('Posttest')}>Posttest</li>
-      <li onClick={() => setActiveContent('Applications')}>Real Life Applications</li>
+      <li onClick={() => handleOptionClick('Aim')}>Aim</li>
+      <li onClick={() => handleOptionClick('Overview')}>Overview</li>
+      <li onClick={() => handleOptionClick('Pretest')}>Pretest</li>
+      <li onClick={() => handleOptionClick('Concept')}>Concept</li>
+      <li onClick={() => handleOptionClick('Practice')}>Practice</li>
+      <li onClick={() => handleOptionClick('Exercise')}>Exercise</li>
+      <li onClick={() => handleOptionClick('Posttest')}>Posttest</li>
+      <li onClick={() => handleOptionClick('Applications')}>Real Life Applications</li>
     </ul>
   </div>
 );
@@ -149,67 +104,25 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
   const renderContent = () => {
     switch (activeContent) {
       case 'Aim':
-
         return (
-          <>
-            <div className='intro'>
-              <h1 className='heading'> Merge Sort
-                 </h1>
-              <br />
-              <br />
-              <h2 className='sub-heading'>Estimated Time</h2>
-              <p></p>
-              <br />
-              <br/>
-              <h2 className='sub-heading'>Learning Objectives of this Module</h2>
-              <ul>
-                <li>Learn about Merge Sort
-
-                </li>
-                <li>Understanding Merge Sort operations :<br />
-                <div className='indent'>
-                <ul type='none'>
-                    <li>1. Splitting</li>
-                    <li>2. Merging</li>
-                </ul>
-                </div>
-                </li>
-              </ul>
-            </div>
-          </>
+          <div className='intro'>
+            <h1 className='heading'> Merge Sort</h1>
+            <h2 className='sub-heading'>Estimated Time</h2>
+            <p>...</p>
+            <h2 className='sub-heading'>Learning Objectives of this Module</h2>
+            <ul>
+              <li>Learn about Merge Sort</li>
+              <li>Understanding Merge Sort operations: <div className='indent'><ul type='none'><li>1. Splitting</li><li>2. Merging</li></ul></div></li>
+            </ul>
+          </div>
         );
 
-        case 'Overview' :
-        return(
-        <>
-        <div className='intro'>
-            <h1 className='heading'> Merge Sort
-                 </h1>
-        </div>
-        </>
+      case 'Overview':
+        return (
+          <div className='intro'>
+            <h1 className='heading'> Merge Sort</h1>
+          </div>
         );
-
-        case 'Practice':
-          return (
-            <>
-              <div className='intro'>
-                <h1 className='heading'> Merge Sort </h1>
-                <br />
-                <br />
-              </div>
-            </>
-          );
-
-        case 'Exercise':
-          return (
-            <>
-              <div className='intro'>
-                <h1 className='heading'> Merge Sort </h1>
-                <br />
-                <br />
-              </div>
-            </>
-          );
 
       case 'Pretest':
       case 'Posttest':
@@ -217,8 +130,8 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
           <div className='intro'>
             <h1 className='heading'>{activeTestType.charAt(0).toUpperCase() + activeTestType.slice(1)} Quiz</h1>
             {quizzes.map(quiz => (
-              <div key={quiz.id}><br></br>
-                <h3>{quiz.question}</h3><br></br>
+              <div key={quiz.id}>
+                <h3>{quiz.question}</h3>
                 <div className='indent'>
                   {quiz.options.map(option => (
                     <label key={option}>
@@ -227,7 +140,7 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
                         name={quiz.id}
                         onChange={() => handleAnswerChange(quiz.id, option)}
                       />
-                      {option}<br></br>
+                      {option}
                     </label>
                   ))}
                 </div>
@@ -242,34 +155,22 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
           </div>
         );
 
-        case 'Concept':
-          return (
-            <>
-              <div className='intro'>
-                <h1 className='heading'> Merge Sort </h1>
-                <br />
-                <br />
-                <h2 className='sub-heading'> Merge Sort Concept and Algorithm </h2>
-                <br/>
-                <h2 className='sub-heading'> What is Merge Sort
-                  ? </h2>
-                <br />
-                <p>
-                Merge sort is a sorting algorithm that follows the divide-and-conquer approach.<br/>
-                It works by recursively dividing the input array into smaller subarrays and <br/>
-                sorting those subarrays then merging them back together to obtain the sorted array.<br/><br/>
-                In simple terms, we can say that the process of merge sort is to divide the array <br/>
-                into two halves, sort each half, and then merge the sorted halves back together. <br/>
-                This process is repeated until the entire array is sorted.
-                </p>
-                <br />
-                <br />
-                <h2 className='sub-heading'> Merge Sort Demonstration </h2>
-                <img className='image' src="/Sources/.jpeg"></img>
-                <br />
-              </div>
-            </>
-          );
+      case 'Concept':
+        return (
+          <div className='intro'>
+            <h1 className='heading'> Merge Sort </h1>
+            <h2 className='sub-heading'> Merge Sort Concept and Algorithm </h2>
+            <h2 className='sub-heading'> What is Merge Sort?</h2>
+            <p>
+              Merge sort is a sorting algorithm that follows the divide-and-conquer approach.
+              It works by recursively dividing the input array into smaller subarrays and
+              sorting those subarrays then merging them back together to obtain the sorted array.
+            </p>
+            <h2 className='sub-heading'> Merge Sort Demonstration </h2>
+            <img className='image' src="/Sources/yourImage.jpeg" alt="Merge Sort Illustration" />
+          </div>
+        );
+
       default:
         return <p>Select an option from the sidebar.</p>;
     }
@@ -302,7 +203,7 @@ const Footer = () => (
       </div>
       <div className="foot-three">
         Connect With Us:
-        <ul type="none"><br />
+        <ul type="none">
           <li>Email: <a href="#">virtuallab2024@gmail.com</a></li>
           <li>Contact: <a href="#">9999999999</a></li>
           <li>Address: <a href="#">53G6+GCJ, Gittikhadan Rd,<br />BUPESHNAGAR, Nagpur, Maharashtra<br />440013</a></li>
@@ -318,15 +219,20 @@ const Experiments = () => {
   const [activeContent, setActiveContent] = useState('Aim');
   const [userAnswers, setUserAnswers] = useState({});
   const [score, setScore] = useState(0);
-  const [showSidebar, setShowSidebar] = useState(true);
+  const [showSidebar, setShowSidebar] = useState(false);
 
   const toggleSidebar = () => setShowSidebar(!showSidebar);
+
+  const handleOptionClick = (content) => {
+    setActiveContent(content);  // Set the selected content
+    setShowSidebar(false);      // Automatically close the sidebar
+  };
 
   return (
     <div className="App">
       <Header toggleSidebar={toggleSidebar} />
       <div className="content">
-        {showSidebar && <Sidebar setActiveContent={setActiveContent} />}
+        {showSidebar && <Sidebar handleOptionClick={handleOptionClick} />}
         <MainContent
           activeContent={activeContent}
           setUserAnswers={setUserAnswers}
@@ -338,4 +244,5 @@ const Experiments = () => {
     </div>
   );
 };
+
 export default Experiments;
