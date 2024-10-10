@@ -20,7 +20,7 @@ const Header = ({ toggleSidebar, toggleProgressBar }) => (
         <button className="hamburger" onClick={toggleSidebar}>
           &#9776;
         </button>
-        <a href="/" className="home-link">Home</a>
+        <a href="/">Home</a>
       </div>
       <h1>DATA STRUCTURE 1</h1>
       <a href='/contact'>Contact Us</a>
@@ -29,19 +29,19 @@ const Header = ({ toggleSidebar, toggleProgressBar }) => (
 );
 
 // Sidebar Component
-const Sidebar = ({ setActiveContent }) => (
+const Sidebar = ({ handleOptionClick }) => (
   <div className="toggle-section">
     <ul type="none">
       <br /><br />
-      <li onClick={() => setActiveContent('Introduction')}>Introduction</li>
+      <li onClick={() => handleOptionClick('Introduction')}>Introduction</li>
       <br />
-      <li onClick={() => setActiveContent('Objective')}>Objective</li>
+      <li onClick={() => handleOptionClick('Objective')}>Objective</li>
       <br />
-      <li onClick={() => setActiveContent('List of Experiments')}>List of Experiments</li>
+      <li onClick={() => handleOptionClick('List of Experiments')}>List of Experiments</li>
       <br />
-      <li onClick={() => setActiveContent('Course Outcome')}>Course Outcome</li>
+      <li onClick={() => handleOptionClick('Course Outcome')}>Course Outcome</li>
       <br />
-      <li onClick={() => setActiveContent('Feedback')}>Feedback</li>
+      <li onClick={() => handleOptionClick('Feedback')}>Feedback</li>
     </ul>
   </div>
 );
@@ -227,34 +227,22 @@ const Experiments = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [progressBarOpen, setProgressBarOpen] = useState(false);
   const [activeContent, setActiveContent] = useState('Introduction');
+  const [showSidebar, setShowSidebar] = useState(false);
+  const toggleSidebar = () => setShowSidebar(!showSidebar);
 
-  const [progress, setProgress] = useState({
-    experiment1: { lecture: 50, assignment: 50 },
-    experiment2: { lecture: 30, assignment: 30 },
-    experiment3: { lecture: 70, assignment: 70 },
-    experiment4: { lecture: 50, assignment: 60 },
-  });
-
-  // Toggle Sidebar
-  const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
-
-  // Toggle Progress Bar
-  const toggleProgressBar = () => setProgressBarOpen(!progressBarOpen);
+  const handleOptionClick = (content) => {
+    setActiveContent(content);  // Set the selected content
+    setShowSidebar(false);      // Automatically close the sidebar
+  };
 
   return (
     <div className="container">
       {/* Header */}
-      <Header toggleSidebar={toggleSidebar} toggleProgressBar={toggleProgressBar} />
-
+      <Header toggleSidebar={toggleSidebar} />
       <div className="content">
-        {/* Sidebar */}
-        {sidebarOpen && <Sidebar setActiveContent={setActiveContent} />}
-
-        {/* Main Content */}
+        {showSidebar && <Sidebar handleOptionClick={handleOptionClick} />}
         <MainContent activeContent={activeContent} sidebarOpen={sidebarOpen} progressBarOpen={progressBarOpen} />
 
-        {/* Progress Bar */}
-        {progressBarOpen && <ProgressBar progress={progress} />}
       </div>
 
       {/* Footer */}

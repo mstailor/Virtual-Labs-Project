@@ -19,12 +19,18 @@
     color: white;
   }
   
+  .top-bar a {
+    font-size: 25px;
+    padding: 3px;
+  }
+
   .left-section {
     display: flex;
     align-items: center;
   }
   
   .hamburger {
+    padding-bottom: 3px;
     width: 50px;
     background: none;
     border: none;
@@ -40,6 +46,7 @@
     font-size: 27px;
     cursor: pointer;
     margin-top: 20px;
+    padding: 3px;
   }
   
   .home-link:hover {
@@ -61,16 +68,21 @@
   }
   
   .toggle-section {
+    left: 0;
     font-size: large;
     color: black;
     background-color: #e2e1e1;
-    padding: 10px;
-    margin: 0 10px;
+    display: contain;
     cursor: pointer;
+    width: 200px;
   }
   
-  .toggle-section a {
+  .toggle-section li {
     color: black;
+    padding: 5px;
+    padding-bottom: 10px;
+    /*border: 1px solid black;*/
+    
   }
   
   .main-content {
@@ -143,8 +155,10 @@
   }
   ol li{
     margin-left: 20px;
+    
   }
   
   ol li a{
     color: darkblue;
+    
   }

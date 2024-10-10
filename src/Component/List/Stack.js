@@ -87,31 +87,29 @@ const Header = ({ toggleSidebar, toggleProgressBar }) => (
         <button className="hamburger" onClick={toggleSidebar}>
           &#9776;
         </button>
-        <a href="/" className="home-link">Home</a>
+        <a href="/">Home</a>
       </div>
       <h1>DATA STRUCTURE 1</h1>
+      <a href="/experiments">Experiments List</a>
     </div>
   </div>
 );
 
 // Sidebar Component
-const Sidebar = ({ setActiveContent }) => (
+const Sidebar = ({ handleOptionClick }) => (
   <div className="toggle-section">
     <ul type="none">
-      <li onClick={() => setActiveContent('Aim')}>Aim</li>
-      <li onClick={() => setActiveContent('Overview')}>Overview</li>
-      <li onClick={() => setActiveContent('Pretest')}>Pretest</li>
-      <li onClick={() => setActiveContent('Concept')}>Concept</li>
-      <li onClick={() => setActiveContent('Practice')}>Practice</li>
-      <li onClick={() => setActiveContent('Exercise')}>Exercise</li>
-      <li onClick={() => setActiveContent('Posttest')}>Posttest</li>
-      <li onClick={() => setActiveContent('Applications')}>Real Life Applications</li>
+      <li onClick={() => handleOptionClick('Aim')}>Aim</li>
+      <li onClick={() => handleOptionClick('Overview')}>Overview</li>
+      <li onClick={() => handleOptionClick('Pretest')}>Pretest</li>
+      <li onClick={() => handleOptionClick('Concept')}>Concept</li>
+      <li onClick={() => handleOptionClick('Practice')}>Practice</li>
+      <li onClick={() => handleOptionClick('Exercise')}>Exercise</li>
+      <li onClick={() => handleOptionClick('Posttest')}>Posttest</li>
+      <li onClick={() => handleOptionClick('Applications')}>Real Life Applications</li>
     </ul>
   </div>
 );
-
-
-
 
 // Main Content Component
 const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) => {
@@ -321,15 +319,20 @@ const Experiments = () => {
   const [activeContent, setActiveContent] = useState('Aim');
   const [userAnswers, setUserAnswers] = useState({});
   const [score, setScore] = useState(0);
-  const [showSidebar, setShowSidebar] = useState(true);
+  const [showSidebar, setShowSidebar] = useState(false);
 
   const toggleSidebar = () => setShowSidebar(!showSidebar);
+
+  const handleOptionClick = (content) => {
+    setActiveContent(content);  // Set the selected content
+    setShowSidebar(false);      // Automatically close the sidebar
+  };
 
   return (
     <div className="App">
       <Header toggleSidebar={toggleSidebar} />
       <div className="content">
-        {showSidebar && <Sidebar setActiveContent={setActiveContent} />}
+      {showSidebar && <Sidebar handleOptionClick={handleOptionClick} />}
         <MainContent
           activeContent={activeContent}
           setUserAnswers={setUserAnswers}

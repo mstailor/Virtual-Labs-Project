@@ -28,6 +28,12 @@ body{
   color: white;
 }
 
+.top-bar a {
+  font-size: 25px;
+  padding: 3px;
+}
+
+
 .left-section {
   display: flex;
   align-items: center;

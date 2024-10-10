@@ -1,76 +1,68 @@
 import React, { useState, useEffect } from 'react'; 
 import './Probing.css'; // Ensure your CSS file is included for styling
 
-// Predefined quizzes
+// Predefined quizzes data
 const quizzesData = {
   pretest: [
     {
       id: 1,
-      question: "1. What is result of 29 mod(5) ?",
-      options: [" 1", " 4", " 5"," 9"],
-      answer: " 4",
+      question: "1. What is result of 29 mod(5)?",
+      options: ["1", "4", "5", "9"],
+      answer: "4",
     },
     {
       id: 2,
-      question: "2. What is primary purpose of hash function ?",
-      options: [" To multiply the keys with a constant value", " To map a given key to a specific index in an array", " To sort the keys", " T compress the data for storage"],
-      answer: " To map a given key to a specific index in an array",
+      question: "2. What is the primary purpose of a hash function?",
+      options: [
+        "To multiply the keys with a constant value",
+        "To map a given key to a specific index in an array",
+        "To sort the keys",
+        "To compress the data for storage",
+      ],
+      answer: "To map a given key to a specific index in an array",
     },
     {
       id: 3,
-      question: "3. Which of the following is a characteristic of a good hash function ?",
-      options: [" It minimizes collision", " It generates shorter hashes for shorter inputs", " It always produces large hash values for larger inputs", " It ensures that all hash values are sequential"],
-      answer: " It minimizes collision",
+      question: "3. Which of the following is a characteristic of a good hash function?",
+      options: [
+        "It minimizes collision",
+        "It generates shorter hashes for shorter inputs",
+        "It always produces large hash values for larger inputs",
+        "It ensures that all hash values are sequential",
+      ],
+      answer: "It minimizes collision",
     },
     {
       id: 4,
-      question: "4. In which scenarios are you more likely to encounter collisions in a hash table ?",
-      options: [" When hash table is empty or nearly empty", " When table size is a prime number", " When a simple hash function like h(k) = k mod(10) is used", " When each key is assigned a unique hash value"],
-      answer: " When a simple hash function like h(k) = k mod(10) is used",
+      question: "4. In which scenarios are you more likely to encounter collisions in a hash table?",
+      options: [
+        "When hash table is empty or nearly empty",
+        "When table size is a prime number",
+        "When a simple hash function like h(k) = k mod(10) is used",
+        "When each key is assigned a unique hash value",
+      ],
+      answer: "When a simple hash function like h(k) = k mod(10) is used",
     },
     {
       id: 5,
-      question: "5. For a hash table with a size of 12, is a key 94 is hashed using h(k) = k mod(12), what is the resulting index ?",
-      options: [" 10", " 8", " 6", " 3"],
-      answer: " 10",
+      question: "5. For a hash table with a size of 12, if a key 94 is hashed using h(k) = k mod(12), what is the resulting index?",
+      options: ["10", "8", "6", "3"],
+      answer: "10",
     },
   ],
   posttest: [
     {
       id: 1,
-      question: "",
-      options: ["", "", "", ""],
-      answer: "",
+      question: "1. What is ...?",
+      options: ["Option 1", "Option 2", "Option 3", "Option 4"],
+      answer: "Option 1",
     },
-    {
-      id: 2,
-      question: "",
-      options: ["", "", "", ""],
-      answer: "",
-    },
-    {
-      id: 3,
-      question: "",
-      options: ["", "", "", ""],
-      answer: "",
-    },
-    {
-      id: 4,
-      question: "",
-      options: ["", "", "", ""],
-      answer: "",
-    },
-    {
-      id: 5,
-      question: "",
-      options: ["", "", "", ""],
-      answer: "",
-    },
+    // Add more questions for posttest here
   ],
 };
 
 // Header Component
-const Header = ({ toggleSidebar, toggleProgressBar }) => (
+const Header = ({ toggleSidebar }) => (
   <div>
     <div className="header-head">
       <div className="left-head">
@@ -87,31 +79,29 @@ const Header = ({ toggleSidebar, toggleProgressBar }) => (
         <button className="hamburger" onClick={toggleSidebar}>
           &#9776;
         </button>
-        <a href="/" className="home-link">Home</a>
+        <a href="/">Home</a>
       </div>
       <h1>DATA STRUCTURE 1</h1>
+      <a href="/experiments">Experiments List</a>
     </div>
   </div>
 );
 
 // Sidebar Component
-const Sidebar = ({ setActiveContent }) => (
+const Sidebar = ({ handleOptionClick }) => (
   <div className="toggle-section">
     <ul type="none">
-      <li onClick={() => setActiveContent('Aim')}>Aim</li>
-      <li onClick={() => setActiveContent('Overview')}>Overview</li>
-      <li onClick={() => setActiveContent('Pretest')}>Pretest</li>
-      <li onClick={() => setActiveContent('Concept')}>Concept</li>
-      <li onClick={() => setActiveContent('Practice')}>Practice</li>
-      <li onClick={() => setActiveContent('Exercise')}>Exercise</li>
-      <li onClick={() => setActiveContent('Posttest')}>Posttest</li>
-      <li onClick={() => setActiveContent('Applications')}>Real Life Applications</li>
+      <li onClick={() => handleOptionClick('Aim')}>Aim</li>
+      <li onClick={() => handleOptionClick('Overview')}>Overview</li>
+      <li onClick={() => handleOptionClick('Pretest')}>Pretest</li>
+      <li onClick={() => handleOptionClick('Concept')}>Concept</li>
+      <li onClick={() => handleOptionClick('Practice')}>Practice</li>
+      <li onClick={() => handleOptionClick('Exercise')}>Exercise</li>
+      <li onClick={() => handleOptionClick('Posttest')}>Posttest</li>
+      <li onClick={() => handleOptionClick('Applications')}>Real Life Applications</li>
     </ul>
   </div>
 );
-
-
-
 
 // Main Content Component
 const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) => {
@@ -145,41 +135,35 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
     setSubmitted(true);
   };
 
-  const toggleTestType = () => {
-    setActiveTestType(prevType => (prevType === 'pretest' ? 'posttest' : 'pretest'));
-  };
-
   const renderContent = () => {
     switch (activeContent) {
       case 'Aim':
         return (
-          <div className='intro'>
-            <h1 className='heading'>Quadratic Probing</h1>
-            <h2 className='sub-heading'>Estimated Time</h2>
-            <h2 className='sub-heading'>Learning Objectives of this Module</h2>
+          <div className="intro">
+            <h1 className="heading">Quadratic Probing</h1>
+            <h2 className="sub-heading">Estimated Time</h2>
+            <h2 className="sub-heading">Learning Objectives of this Module</h2>
             <ul>
               <li>Learn about quadratic probing</li>
               <li>Understand the differences between linear and quadratic probing</li>
             </ul>
           </div>
         );
-
       case 'Overview':
         return (
-          <div className='intro'>
-            <h1 className='heading'>Quadratic Probing</h1>
+          <div className="intro">
+            <h1 className="heading">Quadratic Probing Overview</h1>
           </div>
         );
-
       case 'Pretest':
       case 'Posttest':
         return (
-          <div className='intro'>
-            <h1 className='heading'>{activeTestType.charAt(0).toUpperCase() + activeTestType.slice(1)} Quiz</h1>
+          <div className="intro">
+            <h1 className="heading">{activeTestType.charAt(0).toUpperCase() + activeTestType.slice(1)} Quiz</h1>
             {quizzes.map(quiz => (
               <div key={quiz.id}><br></br>
                 <h3>{quiz.question}</h3><br></br>
-                <div className='indent'>
+                <div className="indent">
                   {quiz.options.map(option => (
                     <label key={option}>
                       <input
@@ -193,7 +177,7 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
                 </div>
               </div>
             ))}
-            <button className='SubmitButton' onClick={handleSubmit}>Submit</button>
+            <button className="SubmitButton" onClick={handleSubmit}>Submit</button>
             {submitted && (
               <div className="score-display">
                 <h3>Your Score: {correctAnswers} / {quizzes.length}</h3>
@@ -201,17 +185,15 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
             )}
           </div>
         );
-
       case 'Concept':
         return (
-          <div className='intro'>
-            <h1 className='heading'>Quadratic Probing</h1>
-            <h2 className='sub-heading'>Quadratic Probing Concept and Algorithm</h2>
-            <h2 className='sub-heading'>What is Quadratic Probing?</h2>
+          <div className="intro">
+            <h1 className="heading">Quadratic Probing</h1>
+            <h2 className="sub-heading">Quadratic Probing Concept and Algorithm</h2>
+            <h2 className="sub-heading">What is Quadratic Probing?</h2>
             <p>Quadratic probing is an open addressing scheme which operates by taking the original hash index and adding successive square of c (where, c is the number of collisions occurred) until an open slot is found.</p>
           </div>
         );
-
       default:
         return <p>Select an option from the sidebar.</p>;
     }
@@ -260,15 +242,20 @@ const Experiments = () => {
   const [activeContent, setActiveContent] = useState('Aim');
   const [userAnswers, setUserAnswers] = useState({});
   const [score, setScore] = useState(0);
-  const [showSidebar, setShowSidebar] = useState(true);
+  const [showSidebar, setShowSidebar] = useState(false);
 
   const toggleSidebar = () => setShowSidebar(!showSidebar);
+
+  const handleOptionClick = (content) => {
+    setActiveContent(content);  // Set the selected content
+    setShowSidebar(false);      // Automatically close the sidebar
+  };
 
   return (
     <div className="App">
       <Header toggleSidebar={toggleSidebar} />
       <div className="content">
-        {showSidebar && <Sidebar setActiveContent={setActiveContent} />}
+        {showSidebar && <Sidebar handleOptionClick={handleOptionClick} />}
         <MainContent
           activeContent={activeContent}
           setUserAnswers={setUserAnswers}
@@ -280,4 +267,5 @@ const Experiments = () => {
     </div>
   );
 };
+
 export default Experiments;
