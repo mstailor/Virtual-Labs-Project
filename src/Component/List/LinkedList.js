@@ -1,70 +1,106 @@
-import React, { useState, useEffect } from 'react'; 
-import './LinkedList.css'; // Ensure your CSS file is included for styling
+import React, { useState, useEffect } from 'react';
+import './LinkedList.css';
 
 // Predefined quizzes
 const quizzesData = {
   pretest: [
     {
       id: 1,
-      question: "",
-      options: ["", "", "", ""],
-      answer: "",
+      question: "1. What is the primary difference between an array and a linked list?",
+      options: [
+        "Arrays are dynamic, linked lists are static.",
+        "Arrays store elements in contiguous memory locations, linked lists store elements in non-contiguous memory locations.",
+        "Arrays are faster for insertion and deletion, linked lists are slower.",
+        "Arrays can hold heterogeneous data, linked lists cannot."
+      ],
+      answer: "Arrays store elements in contiguous memory locations, linked lists store elements in non-contiguous memory locations.",
     },
     {
       id: 2,
-      question: "",
-      options: ["", "", "", ""],
-      answer: "",
+      question: "2. Which of the following data structures allows random access to its elements?",
+      options: ["Array", "Stack", "Queue", "Linked List"],
+      answer: "Array",
     },
     {
       id: 3,
-      question: "",
-      options: ["", "", "", ""],
-      answer: "",
+      question: "3. Which of the following operations takes O(1) time in an array?",
+      options: [
+        "Insertion at the beginning",
+        "Deletion at the end",
+        "Accessing an element by index",
+        "Insertion at the end"
+      ],
+      answer: "Accessing an element by index",
     },
     {
       id: 4,
-      question: "",
-      options: ["", "", "", ""],
-      answer: "",
+      question: "4. What is the time complexity to insert an element at the beginning of an array of size n?",
+      options: ["O(1)", "O(n)", "O(log n)", "O(n²)"],
+      answer: "O(n)",
+      explanation: "Shifting all the elements to make space for the new element takes linear time."
     },
     {
       id: 5,
-      question: "",
-      options: ["", "", "", ""],
-      answer: "",
+      question: "5. What is a pointer in programming?",
+      options: [
+        "A variable that stores the address of another variable",
+        "A function used to manipulate arrays",
+        "A type of loop in C programming",
+        "A value that stores the data type"
+      ],
+      answer: "A variable that stores the address of another variable",
     },
   ],
   posttest: [
     {
       id: 1,
-      question: "",
-      options: ["", "", "", ""],
-      answer: "",
+      question: "1. Which of the following is NOT a type of Linked List?",
+      options: [
+        "Singly Linked List",
+        "Doubly Linked List",
+        "Circular Linked List",
+        "Sequential Linked List"],
+      answer: "Sequential Linked List",
     },
     {
       id: 2,
-      question: "",
-      options: ["", "", "", ""],
-      answer: "",
+      question: "2. What is the time complexity for inserting an element at the beginning of a singly linked list?",
+      options: [
+        "O(n)",
+        "O(log n)",
+        "O(1)",
+        "O(n log n)"],
+      answer: " O(1)",
     },
     {
       id: 3,
-      question: "",
-      options: ["", "", "", ""],
-      answer: "",
+      question: "3. In a doubly linked list, how many pointers does each node contain?",
+      options: [
+        "1",
+        "2",
+        "3",
+        "4"],
+      answer: "3",
     },
     {
       id: 4,
-      question: "",
-      options: ["", "", "", ""],
-      answer: "",
+      question: "4. What is the advantage of using a circular linked list over a linear linked list?",
+      options: [
+        "It uses less memory.",
+        "It allows quick access to the middle element.",
+        "It allows easy traversal from the last node to the first node.",
+        "It does not require any pointer to traverse."],
+      answer: "It allows easy traversal from the last node to the first node.",
     },
     {
       id: 5,
-      question: "",
-      options: ["", "", "", ""],
-      answer: "",
+      question: "5. Which of the following operations cannot be performed in constant time in a singly linked list?",
+      options: [
+        "Insert at the beginning",
+        "Insert at the end",
+        "Delete at the beginning",
+        "Search for an element"],
+      answer: "Search for an element",
     },
   ],
 };
@@ -119,13 +155,21 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
   const [correctAnswers, setCorrectAnswers] = useState(0);
 
   useEffect(() => {
+    if (activeContent === 'Pretest') {
+      setActiveTestType('pretest');
+    } else if (activeContent === 'Posttest') {
+      setActiveTestType('posttest');
+    }
+  }, [activeContent]);
+
+  useEffect(() => {
     setQuizzes(quizzesData[activeTestType]);
     setSubmitted(false);
     setUserAnswers({});
   }, [activeTestType]);
 
   const handleAnswerChange = (questionId, answer) => {
-    setUserAnswers(prev => ({
+    setUserAnswers((prev) => ({
       ...prev,
       [questionId]: answer,
     }));
@@ -133,7 +177,7 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
 
   const handleSubmit = () => {
     let correctCount = 0;
-    quizzes.forEach(quiz => {
+    quizzes.forEach((quiz) => {
       if (userAnswers[quiz.id] === quiz.answer) {
         correctCount++;
       }
@@ -144,121 +188,194 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
   };
 
   const toggleTestType = () => {
-    setActiveTestType(prevType => (prevType === 'pretest' ? 'posttest' : 'pretest'));
+    setActiveTestType((prevType) => (prevType === 'pretest' ? 'posttest' : 'pretest'));
+  };
+
+  const getOptionClass = (quiz, option) => {
+    if (!submitted) return '';
+    if (userAnswers[quiz.id] === option) {
+      return option === quiz.answer ? 'correct' : 'incorrect';
+    }
+    return '';
   };
 
   const renderContent = () => {
     switch (activeContent) {
       case 'Aim':
 
-      return (
-        <>
-          <div className='intro'>
-            <h1 className='heading'> Linked List </h1>
-            <br />
-            <br />
-            <h2 className='sub-heading'>Estimated Time</h2>
-            <p></p>
-            <br />
-            <br/>
-            <h2 className='sub-heading'>Learning Objectives of this Module</h2>
-            <ul>
-              <li>Learn about Linked List</li>
-              <li>Understand how is Linked List stored in memory</li>
-            </ul>
-          </div>
-        </>
-      );
+        return (
+          <>
+            <h3 className='intro-out'>Aim : </h3>
+            <div className='intro'>
+              <h1 className='heading'>Linked List</h1>
+              <br />
+              <br />
+              <h2 className='sub-heading'>Estimated Time</h2>
+              <p>Approximately 45-60 minutes</p>
+              <br />
+              <br />
+              <h2 className='sub-heading'>About</h2>
+              <p>
+                A linked list is a linear data structure where each element is a separate object, known as a node. Each node contains two components: the data and a reference (or pointer) to the next node in the sequence. Linked lists are dynamic and can grow and shrink in size efficiently. They are used in various applications such as memory management, real-time processing, and maintaining ordered collections of elements.
+              </p>
+              <br />
+              <br />
+              <h2 className='sub-heading'>Learning Objectives of this Module</h2>
+              <ul>
+                <li>Learn about Linked List</li>
+                <li>Understand how Linked List is stored in memory</li>
+                <li>Explore the types of Linked Lists (Singly, Doubly, Circular)</li>
+                <li>Analyze common operations like insertion, deletion, and traversal</li>
+                <li>Understand the advantages and disadvantages of Linked Lists</li>
+              </ul>
+            </div>
+          </>
+        );
 
-      case 'Overview' :
-      return(
-      <>
-      <div className='intro'>
-          <h1 className='heading'> Linked List </h1>
-      </div>
-      </>
-      );
+      case 'Overview':
+        return (
+          <>
+            <div className='intro'>
+              <h1 className='heading'>Linked List Overview</h1>
+              <br />
+              <p className='description'>
+                A linked list is a fundamental data structure used in computer science to store a collection of elements.
+                Unlike arrays, where elements are stored in contiguous memory locations, linked lists consist of nodes that
+                are connected using pointers. Each node contains data and a reference to the next node in the sequence,
+                allowing for dynamic memory allocation and efficient insertion and deletion operations.
+              </p>
+              <br />
+              <h2 className='sub-heading'>Key Features of Linked List:</h2>
+              <ul className='list'>
+                <li>Dynamic in size: Can grow or shrink as needed.</li>
+                <li>Efficient insertions/deletions: Especially at the beginning or middle of the list.</li>
+                <li>Sequential access: Traversal happens one element at a time.</li>
+              </ul>
+              <br />
+              <p className='description'>
+                Linked lists are widely used in scenarios where dynamic memory allocation is needed, such as in operating
+                systems, file systems, and real-time applications. In this module, we will explore various types of linked
+                lists, their structures, and common operations like insertion, deletion, and traversal.
+              </p>
+            </div>
+          </>
+        );
 
-        case 'Practice':
-          return (
-            <>
-              <div className='intro'>
-                <h1 className='heading'> Linked List </h1>
-                <br />
-                <br />
-              </div>
-            </>
-          );
+      case 'Practice':
+        return (
+          <>
+            <div className='intro'>
+              <h1 className='heading'>Linked List Practice</h1>
+              <br />
+              <br />
+            </div>
+          </>
+        );
 
-        case 'Exercise':
-          return (
-            <>
-              <div className='intro'>
-                <h1 className='heading'> Linked List </h1>
-                <br />
-                <br />
-              </div>
-            </>
-          );
+      case 'Exercise':
+        return (
+          <>
+            <div className='intro'>
+              <h1 className='heading'>Linked List Exercise</h1>
+              <br />
+              <br />
+            </div>
+          </>
+        );
 
       case 'Pretest':
       case 'Posttest':
+
         return (
           <div className='intro'>
             <h1 className='heading'>{activeTestType.charAt(0).toUpperCase() + activeTestType.slice(1)} Quiz</h1>
-            {quizzes.map(quiz => (
-              <div key={quiz.id}><br></br>
-                <h3>{quiz.question}</h3><br></br>
+            {quizzes.map((quiz) => (
+              <div key={quiz.id}>
+                <br />
+                <h3>{quiz.question}</h3>
+                <br />
                 <div className='indent'>
-                  {quiz.options.map(option => (
-                    <label key={option}>
+                  {quiz.options.map((option) => (
+                    <label key={option} className={`option-label ${getOptionClass(quiz, option)}`}>
                       <input
                         type="radio"
                         name={quiz.id}
                         onChange={() => handleAnswerChange(quiz.id, option)}
+                        disabled={submitted} // Disable inputs after submission
                       />
-                      {option}<br></br>
+                      {option}
+                      <br />
                     </label>
                   ))}
                 </div>
               </div>
             ))}
-            <button className='SubmitButton' onClick={handleSubmit}>Submit</button>
+            <button className='SubmitButton' onClick={handleSubmit} disabled={submitted}>
+              Submit
+            </button>
             {submitted && (
-              <div className="score-display">
+              <div className='score-display'>
                 <h3>Your Score: {correctAnswers} / {quizzes.length}</h3>
               </div>
             )}
           </div>
         );
 
-        case 'Concept':
-          return (
-            <>
-              <div className='intro'>
-                <h1 className='heading'> Linked List </h1>
-                <br />
-                <br />
-                <h2 className='sub-heading'> Linked List Concept and Algorithm </h2>
-                <br/>
-                <h2 className='sub-heading'> What is Linked List? </h2>
-                <br />
-                <p>
+      case 'Concept':
+        return (
+          <>
+            <div className='intro'>
+              <h1 className='heading'> Linked List Concept</h1>
+              <br />
+              <br />
+              <h2 className='sub-heading'> Linked List Concept and Algorithm </h2>
+              <br />
+              <h2 className='sub-heading'> What is Linked List? </h2>
+              <br />
+              <p>
                 A linked list is a linear data structure that consists of a series
                 of nodes connected by<br /> pointers (in C or C++) or references (in Java,
-                Python and JavaScript). Each node contains<br/> data and a pointer/reference
-                 to the next node in the list. Unlike arrays, linked lists <br/> allow for
-                 efficient insertion or removal of elements from any position in the list,
-                 as the<br/> nodes are not stored contiguously in memory.
-                </p>
-                <br />
-                <br />
-                <h2 className='sub-heading'> Linked List Demonstration </h2>
-                <img className='image' src="/Sources/.jpeg"></img>
-                <br />
-              </div>
-            </>
-          );
+                Python and JavaScript). Each node contains<br /> data and a pointer/reference
+                to the next node in the list. Unlike arrays, linked lists <br /> allow for
+                efficient insertion or removal of elements from any position in the list,
+                as the<br /> nodes are not stored contiguously in memory.
+              </p>
+              <br />
+              <br />
+              <h2 className='sub-heading'> Linked List Demonstration </h2>
+              <img className='image' src="https://media.geeksforgeeks.org/wp-content/uploads/20240410135517/linked-list.webp"></img>
+              <br />
+            </div>
+          </>
+        );
+
+      case 'Applications':
+        return (
+          <div className='intro'>
+            <h1 className='heading'>Linked List Applications</h1>
+            <br />
+            <h2 className='sub-heading'>Real-Life Applications of Linked Lists</h2>
+            <br />
+            <ul className='list'>
+              <li>
+                <strong>Music Playlists:</strong> Many music players implement linked lists to organize and play songs in a playlist. Each song is a node, and the next song in the queue is the next node in the linked list. This allows for easy insertion or deletion of songs from the playlist.
+              </li>
+              <li>
+                <strong>Web Browsers:</strong> The forward and backward navigation feature in web browsers is often implemented using a doubly linked list. Each webpage you visit is a node, and you can move forward or backward using the browser's history stored in a linked list.
+              </li>
+              <li>
+                <strong>Image Viewers:</strong> Image viewer applications often use linked lists to navigate between images. The viewer loads one image at a time, and each image points to the next and/or previous one in the sequence.
+              </li>
+              <li>
+                <strong>Undo/Redo Operations:</strong> Many text editors or applications with undo/redo functionalities use linked lists to track actions. Each action is stored as a node, allowing users to easily go back (undo) or forward (redo) through previous actions.
+              </li>
+              <li>
+                <strong>Memory Management:</strong> Operating systems use linked lists to manage free memory blocks. When a memory block is freed, it is added to a linked list of available memory. This makes it efficient to allocate and deallocate memory dynamically.
+              </li>
+            </ul>
+          </div>
+        );
+
       default:
         return <p>Select an option from the sidebar.</p>;
     }
@@ -320,7 +437,7 @@ const Experiments = () => {
     <div className="App">
       <Header toggleSidebar={toggleSidebar} />
       <div className="content">
-      {showSidebar && <Sidebar handleOptionClick={handleOptionClick} />}
+        {showSidebar && <Sidebar handleOptionClick={handleOptionClick} />}
         <MainContent
           activeContent={activeContent}
           setUserAnswers={setUserAnswers}

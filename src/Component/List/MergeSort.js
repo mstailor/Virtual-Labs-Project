@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'; 
+import React, { useState, useEffect } from 'react';
 import './MergeSort.css'; // Ensure your CSS file is included for styling
 
 // Predefined quizzes
@@ -78,6 +78,14 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
     setUserAnswers({});
   }, [activeTestType]);
 
+  useEffect(() => {
+    if (activeContent === 'Pretest') {
+      setActiveTestType('pretest');
+    } else if (activeContent === 'Posttest') {
+      setActiveTestType('posttest');
+    }
+  }, [activeContent]);
+
   const handleAnswerChange = (questionId, answer) => {
     setUserAnswers(prev => ({
       ...prev,
@@ -98,7 +106,15 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
   };
 
   const toggleTestType = () => {
-    setActiveTestType(prevType => (prevType === 'pretest' ? 'posttest' : 'pretest'));
+    setActiveTestType((prevType) => (prevType === 'pretest' ? 'posttest' : 'pretest'));
+  };
+
+  const getOptionClass = (quiz, option) => {
+    if (!submitted) return '';
+    if (userAnswers[quiz.id] === option) {
+      return option === quiz.answer ? 'correct' : 'incorrect';
+    }
+    return '';
   };
 
   const renderContent = () => {
@@ -126,29 +142,36 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
 
       case 'Pretest':
       case 'Posttest':
+
         return (
           <div className='intro'>
             <h1 className='heading'>{activeTestType.charAt(0).toUpperCase() + activeTestType.slice(1)} Quiz</h1>
-            {quizzes.map(quiz => (
+            {quizzes.map((quiz) => (
               <div key={quiz.id}>
+                <br />
                 <h3>{quiz.question}</h3>
+                <br />
                 <div className='indent'>
-                  {quiz.options.map(option => (
-                    <label key={option}>
+                  {quiz.options.map((option) => (
+                    <label key={option} className={`option-label ${getOptionClass(quiz, option)}`}>
                       <input
                         type="radio"
                         name={quiz.id}
                         onChange={() => handleAnswerChange(quiz.id, option)}
+                        disabled={submitted} // Disable inputs after submission
                       />
                       {option}
+                      <br />
                     </label>
                   ))}
                 </div>
               </div>
             ))}
-            <button className='SubmitButton' onClick={handleSubmit}>Submit</button>
+            <button className='SubmitButton' onClick={handleSubmit} disabled={submitted}>
+              Submit
+            </button>
             {submitted && (
-              <div className="score-display">
+              <div className='score-display'>
                 <h3>Your Score: {correctAnswers} / {quizzes.length}</h3>
               </div>
             )}

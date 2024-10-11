@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'; 
+import React, { useState, useEffect } from 'react';
 import './Stack.css'; // Ensure your CSS file is included for styling
 
 // Predefined quizzes
@@ -124,6 +124,14 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
     setUserAnswers({});
   }, [activeTestType]);
 
+  useEffect(() => {
+    if (activeContent === 'Pretest') {
+      setActiveTestType('pretest');
+    } else if (activeContent === 'Posttest') {
+      setActiveTestType('posttest');
+    }
+  }, [activeContent]);
+
   const handleAnswerChange = (questionId, answer) => {
     setUserAnswers(prev => ({
       ...prev,
@@ -147,40 +155,48 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
     setActiveTestType(prevType => (prevType === 'pretest' ? 'posttest' : 'pretest'));
   };
 
+  const getOptionClass = (quiz, option) => {
+    if (!submitted) return '';
+    if (userAnswers[quiz.id] === option) {
+      return option === quiz.answer ? 'correct' : 'incorrect';
+    }
+    return '';
+  };
+
   const renderContent = () => {
     switch (activeContent) {
       case 'Aim':
 
-      return (
-        <>
-          <div className='intro'>
-            <h1 className='heading'> Stack </h1>
-            <br />
-            <br />
-            <h2 className='sub-heading'>Estimated Time</h2>
-            <p></p>
-            <br />
-            <br/>
-            <h2 className='sub-heading'>Learning Objectives of this Module</h2>
-            <ul>
-              <li>Gain basic understanding of stacks</li>
-              <li>Understand Stack operations and associated time complexities</li>
-              <li>Understand applications of Stacks</li>
-            </ul>
-          </div>
-        </>
-      );
+        return (
+          <>
+            <div className='intro'>
+              <h1 className='heading'> Stack </h1>
+              <br />
+              <br />
+              <h2 className='sub-heading'>Estimated Time</h2>
+              <p></p>
+              <br />
+              <br />
+              <h2 className='sub-heading'>Learning Objectives of this Module</h2>
+              <ul>
+                <li>Gain basic understanding of stacks</li>
+                <li>Understand Stack operations and associated time complexities</li>
+                <li>Understand applications of Stacks</li>
+              </ul>
+            </div>
+          </>
+        );
 
-      case 'Overview' :
-      return(
-      <>
-      <div className='intro'>
-          <h1 className='heading'> Stack </h1>
-      </div>
-      </>
-      );
+      case 'Overview':
+        return (
+          <>
+            <div className='intro'>
+              <h1 className='heading'> Stack </h1>
+            </div>
+          </>
+        );
 
-      
+
       case 'Concept':
         return (
           <>
@@ -189,15 +205,15 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
               <br />
               <br />
               <h2 className='sub-heading'> Stack Concept and Algorithm </h2>
-              <br/>
+              <br />
               <h2 className='sub-heading'> What is Stack? </h2>
               <br />
               <p>
-              A Stack is a linear data structure that follows a particular
-               order in which the operations<br/> are performed. The order may be 
-               LIFO(Last In First Out) or FILO(First In Last Out).<br/> LIFO implies 
-               that the element that is inserted last, comes out first and FILO
-               implies<br/> that the element that is inserted first, comes out last.
+                A Stack is a linear data structure that follows a particular
+                order in which the operations<br /> are performed. The order may be
+                LIFO(Last In First Out) or FILO(First In Last Out).<br /> LIFO implies
+                that the element that is inserted last, comes out first and FILO
+                implies<br /> that the element that is inserted first, comes out last.
               </p>
               <br />
               <br />
@@ -228,43 +244,39 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
             </div>
           </>
         );
-        
-    case 'Pretest':
-      return (
-        <>
-          <div className='intro'>
-            <h1 className='heading'> Stack </h1>
-            <br />
-            <br />
-          </div>
-        </>
-      );
 
       case 'Pretest':
       case 'Posttest':
+
         return (
           <div className='intro'>
             <h1 className='heading'>{activeTestType.charAt(0).toUpperCase() + activeTestType.slice(1)} Quiz</h1>
-            {quizzes.map(quiz => (
-              <div key={quiz.id}><br></br>
-                <h3>{quiz.question}</h3><br></br>
+            {quizzes.map((quiz) => (
+              <div key={quiz.id}>
+                <br />
+                <h3>{quiz.question}</h3>
+                <br />
                 <div className='indent'>
-                  {quiz.options.map(option => (
-                    <label key={option}>
+                  {quiz.options.map((option) => (
+                    <label key={option} className={`option-label ${getOptionClass(quiz, option)}`}>
                       <input
                         type="radio"
                         name={quiz.id}
                         onChange={() => handleAnswerChange(quiz.id, option)}
+                        disabled={submitted} // Disable inputs after submission
                       />
-                      {option}<br></br>
+                      {option}
+                      <br />
                     </label>
                   ))}
                 </div>
               </div>
             ))}
-            <button className='SubmitButton' onClick={handleSubmit}>Submit</button>
+            <button className='SubmitButton' onClick={handleSubmit} disabled={submitted}>
+              Submit
+            </button>
             {submitted && (
-              <div className="score-display">
+              <div className='score-display'>
                 <h3>Your Score: {correctAnswers} / {quizzes.length}</h3>
               </div>
             )}
@@ -332,7 +344,7 @@ const Experiments = () => {
     <div className="App">
       <Header toggleSidebar={toggleSidebar} />
       <div className="content">
-      {showSidebar && <Sidebar handleOptionClick={handleOptionClick} />}
+        {showSidebar && <Sidebar handleOptionClick={handleOptionClick} />}
         <MainContent
           activeContent={activeContent}
           setUserAnswers={setUserAnswers}
