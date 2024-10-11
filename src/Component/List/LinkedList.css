@@ -213,3 +213,172 @@ ol li a{
   padding: 5px;
   border-radius: 5px;
 }
+
+.linked-list-diagram {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.head, .null {
+  font-size: 24px;
+  color: #1E90FF;
+  margin: 0 20px;
+}
+
+.node {
+  display: flex;
+  align-items: center;
+  margin: 0 10px;
+}
+
+.node p {
+  font-size: 20px;
+  color: #333;
+  padding: 5px 15px;
+  background-color: #f0f8ff;
+  border-radius: 5px;
+  border: 1px solid #1E90FF;
+}
+
+.arrow-right {
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 15px solid #1E90FF;
+  margin-left: 5px;
+}
+
+.observations {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px;
+}
+
+input {
+  padding: 8px;
+  margin: 5px;
+  width: 150px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.intro button {
+  padding: 8px 15px;
+  margin: 5px;
+  background-color: #1E90FF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.intro button:hover {
+  background-color: #1C86EE;
+}
+
+h3 {
+  margin-top: 30px;
+  font-size: 24px;
+  color: #333;
+}
+
+.question {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.linked-list-diagram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.head, .null {
+  font-size: 22px;
+  margin: 0 10px;
+}
+
+.node {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e0f7fa;
+  border: 2px solid #00acc1;
+  border-radius: 20px;
+  width: 50px;
+  height: 40px;
+  margin: 0 5px;
+  font-size: 18px;
+}
+
+.arrow-right {
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 10px solid gray;
+}
+
+.inputs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.inputs input {
+  padding: 5px 25px;
+  margin: 0 10px;
+  width: 100px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.inputs button {
+  padding: 8px 12px;
+  background-color: #00acc1;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+.controls button {
+  padding: 8px 12px;
+  background-color: #00acc1;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.inputs button:hover {
+  background-color: #00838f;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.message {
+  font-size: 18px;
+  color: green;
+  margin-left: 20px;
+}

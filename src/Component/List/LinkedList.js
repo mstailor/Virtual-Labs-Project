@@ -1,6 +1,375 @@
 import React, { useState, useEffect } from 'react';
 import './LinkedList.css';
 
+
+
+// Node class for Linked List
+// For Practice
+class Node {
+  constructor(value, next = null) {
+    this.value = value;
+    this.next = next;
+  }
+}
+
+// Linked List class
+class SinglyLinkedList {
+  constructor() {
+    this.head = null;
+  }
+
+  // Insert at head
+  insertAtHead(value) {
+    const newNode = new Node(value);
+    newNode.next = this.head;
+    this.head = newNode;
+  }
+
+  // Insert at tail
+  insertAtTail(value) {
+    const newNode = new Node(value);
+    if (!this.head) {
+      this.head = newNode;
+      return;
+    }
+    let current = this.head;
+    while (current.next) {
+      current = current.next;
+    }
+    current.next = newNode;
+  }
+
+  // Insert at a specific index
+  insertAtNode(index, value) {
+    if (index === 0) {
+      this.insertAtHead(value);
+      return;
+    }
+
+    const newNode = new Node(value);
+    let current = this.head;
+    let prev = null;
+    let i = 0;
+
+    while (current && i < index) {
+      prev = current;
+      current = current.next;
+      i++;
+    }
+
+    if (i === index) {
+      newNode.next = current;
+      prev.next = newNode;
+    } else {
+      console.log('Index out of bounds');
+    }
+  }
+
+  // Search for a node
+  search(value) {
+    let current = this.head;
+    let index = 0;
+    while (current) {
+      if (current.value === value) {
+        return index;
+      }
+      current = current.next;
+      index++;
+    }
+    return -1; // Node not found
+  }
+
+  // Remove node by value
+  remove(value) {
+    if (!this.head) return;
+
+    // If head is the node to be deleted
+    if (this.head.value === value) {
+      this.head = this.head.next;
+      return;
+    }
+
+    let current = this.head;
+    let prev = null;
+
+    while (current) {
+      if (current.value === value) {
+        prev.next = current.next;
+        return;
+      }
+      prev = current;
+      current = current.next;
+    }
+  }
+
+  printList() {
+    const nodes = [];
+    let current = this.head;
+    while (current) {
+      nodes.push(current.value);
+      current = current.next;
+    }
+    return nodes;
+  }
+}
+
+const Practice = () => {
+  const [linkedList] = useState(new SinglyLinkedList());
+  const [listState, setListState] = useState([]);
+  const [inputValue, setInputValue] = useState('');
+  const [inputTailValue, setInputTailValue] = useState('');
+  const [searchValue, setSearchValue] = useState('');
+  const [nodeIndex, setNodeIndex] = useState('');
+  const [nodeValue, setNodeValue] = useState('');
+  const [removeValue, setRemoveValue] = useState('');
+
+  // Update list display
+  const updateList = () => {
+    setListState(linkedList.printList());
+  };
+
+  // Insert at head
+  const handleInsertAtHead = () => {
+    if (inputValue) {
+      linkedList.insertAtHead(inputValue);
+      setInputValue('');
+      updateList();
+    }
+  };
+
+  // Insert at tail
+  const handleInsertAtTail = () => {
+    if (inputTailValue) {
+      linkedList.insertAtTail(inputTailValue);
+      setInputTailValue('');
+      updateList();
+    }
+  };
+
+  // Insert at node
+  const handleInsertAtNode = () => {
+    if (nodeIndex && nodeValue) {
+      linkedList.insertAtNode(parseInt(nodeIndex), nodeValue);
+      setNodeIndex('');
+      setNodeValue('');
+      updateList();
+    }
+  };
+
+  // Remove node
+  const handleRemove = () => {
+    if (removeValue) {
+      linkedList.remove(removeValue);
+      setRemoveValue('');
+      updateList();
+    }
+  };
+
+  // Search node
+  const handleSearch = () => {
+    if (searchValue) {
+      const index = linkedList.search(searchValue);
+      if (index !== -1) {
+        alert(`Value found at index: ${index}`);
+      } else {
+        alert('Value not found in the list');
+      }
+      setSearchValue('');
+    }
+  };
+
+  return (
+    <>
+      <div className="intro">
+        <h1 className="heading">Singly Linked List Practice</h1>
+        <div className="linked-list-diagram">
+          <p className="head">Head</p>
+          {listState.map((node, index) => (
+            <div key={index} className="node">
+              <p>{node}</p>
+              <div className="arrow-right"></div>
+            </div>
+          ))}
+          <p className="null">Null</p>
+        </div>
+
+        <div className="observations">
+          <div className="inputs">
+            <input
+              type="text"
+              placeholder="at head"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+            />
+            <button className="btn-insert" onClick={handleInsertAtHead}>
+              Insert At Head
+            </button>
+            <input
+              type="text"
+              placeholder="at tail"
+              value={inputTailValue}
+              onChange={(e) => setInputTailValue(e.target.value)}
+            />
+            <button className="btn-insert" onClick={handleInsertAtTail}>
+              Insert At Tail
+            </button>
+            <input
+              type="text"
+              placeholder="search"
+              value={searchValue}
+              onChange={(e) => setSearchValue(e.target.value)}
+            />
+            <button className="btn-search" onClick={handleSearch}>
+              Search
+            </button>
+          </div>
+
+          <div className="inputs">
+            <input
+              type="text"
+              placeholder="index"
+              value={nodeIndex}
+              onChange={(e) => setNodeIndex(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="at node"
+              value={nodeValue}
+              onChange={(e) => setNodeValue(e.target.value)}
+            />
+            <button className="btn-insert" onClick={handleInsertAtNode}>
+              Insert At Node
+            </button>
+            <input
+              type="text"
+              placeholder="remove"
+              value={removeValue}
+              onChange={(e) => setRemoveValue(e.target.value)}
+            />
+            <button className="btn-remove" onClick={handleRemove}>
+              Remove
+            </button>
+          </div>
+        </div>
+
+        <h3>Linked List: {listState.join(' -> ')}</h3>
+      </div>
+    </>
+  );
+};
+
+
+
+
+// For Exercise
+const Exercise = () => {
+  const [list, setList] = useState([]); 
+  const [inputValue, setInputValue] = useState('');
+  const [indexValue, setIndexValue] = useState('');
+  const [question, setQuestion] = useState(generateQuestion()); 
+  const [message, setMessage] = useState(''); 
+
+  function generateQuestion() {
+    const randomList = Array.from({ length: 5 }, () => Math.floor(Math.random() * 100) + 1);
+    return randomList;
+  }
+
+  // Insert at head
+  const insertAtHead = () => {
+    if (inputValue) {
+      setList([parseInt(inputValue), ...list]);
+      setInputValue('');
+    }
+  };
+
+  // Insert at tail
+  const insertAtTail = () => {
+    if (inputValue) {
+      setList([...list, parseInt(inputValue)]);
+      setInputValue('');
+    }
+  };
+
+  // Insert at index
+  const insertAtIndex = () => {
+    const index = parseInt(indexValue);
+    if (inputValue && !isNaN(index) && index >= 0 && index <= list.length) {
+      const newList = [...list];
+      newList.splice(index, 0, parseInt(inputValue));
+      setList(newList);
+      setInputValue('');
+      setIndexValue('');
+    }
+  };
+
+  const resetList = () => {
+    setList([]);
+    setMessage('');
+  };
+
+  // Validate the list
+  const handleSubmit = () => {
+    if (list.join(', ') === question.join(', ')) {
+      setMessage('Correct!');
+    } else {
+      setMessage('Wrong! Try again.');
+    }
+
+    setTimeout(() => {
+      setList([]); 
+      setQuestion(generateQuestion()); 
+      setMessage(''); 
+    }, 2000); 
+  };
+
+  return (
+    <>
+      <div className="intro">
+        <h1 className="heading">Singly Linked List Practice</h1>
+        <p className="question">Convert to: {question.join(', ')}</p>
+      </div>
+
+      <div className="linked-list-diagram">
+        <span className="head">Head</span>
+        {list.map((node, index) => (
+          <div key={index} className="node">
+            {node}
+            {index < list.length - 1 && <div className="arrow-right"></div>}
+          </div>
+        ))}
+        <span className="null">Null</span>
+      </div>
+
+      <div className="inputs">
+        <input
+          type="number"
+          value={inputValue}
+          onChange={e => setInputValue(e.target.value)}
+          placeholder="Enter value"
+        />
+        <input
+          type="number"
+          value={indexValue}
+          onChange={e => setIndexValue(e.target.value)}
+          placeholder="At index"
+        />
+        <button onClick={insertAtHead}>Insert At Head</button>
+        <button onClick={insertAtTail}>Insert At Tail</button>
+        <button onClick={insertAtIndex}>Insert At Index</button>
+      </div>
+
+      <div className="controls">
+        <button onClick={handleSubmit}>Submit</button>
+        <button onClick={resetList}>Reset</button>
+        {message && <p className="message">{message}</p>}
+      </div>
+    </>
+  );
+};
+
+
+
+
 // Predefined quizzes
 const quizzesData = {
   pretest: [
@@ -207,11 +576,11 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
           <>
             <h3 className='intro-out'>Aim : </h3>
             <div className='intro'>
-              <h1 className='heading'>Linked List</h1>
+              <h1 className='heading'>Singly Linked List</h1>
               <br />
               <br />
               <h2 className='sub-heading'>Estimated Time</h2>
-              <p>Approximately 45-60 minutes</p>
+              <p>Approximately 20 minutes</p>
               <br />
               <br />
               <h2 className='sub-heading'>About</h2>
@@ -236,7 +605,7 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
         return (
           <>
             <div className='intro'>
-              <h1 className='heading'>Linked List Overview</h1>
+              <h1 className='heading'>Singly Linked List Overview</h1>
               <br />
               <p className='description'>
                 A linked list is a fundamental data structure used in computer science to store a collection of elements.
@@ -264,22 +633,14 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
       case 'Practice':
         return (
           <>
-            <div className='intro'>
-              <h1 className='heading'>Linked List Practice</h1>
-              <br />
-              <br />
-            </div>
+            <Practice />
           </>
         );
 
       case 'Exercise':
         return (
           <>
-            <div className='intro'>
-              <h1 className='heading'>Linked List Exercise</h1>
-              <br />
-              <br />
-            </div>
+            <Exercise />
           </>
         );
 
@@ -325,7 +686,7 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
         return (
           <>
             <div className='intro'>
-              <h1 className='heading'> Linked List Concept</h1>
+              <h1 className='heading'>Singly Linked List Concept</h1>
               <br />
               <br />
               <h2 className='sub-heading'> Linked List Concept and Algorithm </h2>
@@ -352,7 +713,7 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
       case 'Applications':
         return (
           <div className='intro'>
-            <h1 className='heading'>Linked List Applications</h1>
+            <h1 className='heading'>Singly Linked List Applications</h1>
             <br />
             <h2 className='sub-heading'>Real-Life Applications of Linked Lists</h2>
             <br />
