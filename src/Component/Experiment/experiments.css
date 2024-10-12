@@ -24,7 +24,7 @@ body{
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: #2196F3;
+  background-color:   #07385e;
   color: white;
 }
 
@@ -47,6 +47,7 @@ body{
   font-size: 33px;
   cursor: pointer;
   margin-right: 10px;
+  margin-bottom: 13px;
 }
 
 .home-link {

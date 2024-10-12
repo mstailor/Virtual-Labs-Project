@@ -324,8 +324,8 @@ const Exercise = () => {
 
   return (
     <>
-      <div className="intro">
-        <h1 className="heading">Singly Linked List Practice</h1>
+      <div className="intro intro-2">
+        <h1 className="heading">Singly Linked List Exercise</h1>
         <p className="question">Convert to: {question.join(', ')}</p>
       </div>
 
