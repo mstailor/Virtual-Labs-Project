@@ -213,3 +213,16 @@ ol li a{
   padding: 5px;
   border-radius: 5px;
 }
+
+.sub-heads {
+  text-align: left;
+}
+
+.video-container {
+  display: flex;
+  justify-content: center;
+}
+
+.url {
+  color: blue;
+}

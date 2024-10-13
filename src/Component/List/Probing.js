@@ -162,19 +162,36 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
           <div className="intro">
             <h1 className="heading">Quadratic Probing</h1>
             <h2 className="sub-heading">Estimated Time</h2>
-            <h2 className="sub-heading">Learning Objectives of this Module</h2>
+            <p>45 minutes</p><br></br>
+            <h2 className="sub-heading">Learning Objectives</h2>
             <ul>
-              <li>Learn about quadratic probing</li>
-              <li>Understand the differences between linear and quadratic probing</li>
+              <li>To demonstrate the mechanism of quadratic probing.</li>
+              <li>To effectively address collision issues in hash tables using the quadratic probing technique.</li>
+              <li>To analyze the performance of quadratic probing compared to linear probing. </li>
+              <li>To explore the practical applications of quadratic probing.</li>
             </ul>
           </div>
         );
-      case 'Overview':
-        return (
-          <div className="intro">
-            <h1 className="heading">Quadratic Probing Overview</h1>
-          </div>
-        );
+        case 'Overview':
+          return (
+            <div className="intro">
+              <h1 className="heading">Quadratic Probing</h1>
+              <h2 className='sub-heads'>Conceptual Video</h2>
+              <div className='video-container'>
+              <video width="600" controls className='video'>
+              <source src="/Probing_Overview.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+              </video>
+              </div>
+              <h2 className='sub-heads'>Prerequisites</h2>
+              <p>This experiment requires you to have basic knowledge about :</p>
+              <ul>
+                <li><a href='https://www.geeksforgeeks.org/introduction-to-arrays-data-structure-and-algorithm-tutorials/' className='url'>Arrays</a></li>
+                <li><a href='https://www.geeksforgeeks.org/what-is-linked-list/' className='url'>Linked List</a></li>
+                <li><a href='https://www.geeksforgeeks.org/time-complexity-and-space-complexity/' className='url'>Time and space complexity</a></li>
+                </ul>
+            </div>
+          );
 
       case 'Pretest':
       case 'Posttest':
@@ -215,15 +232,23 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
         );
 
 
-      case 'Concept':
-        return (
-          <div className="intro">
-            <h1 className="heading">Quadratic Probing</h1>
-            <h2 className="sub-heading">Quadratic Probing Concept and Algorithm</h2>
-            <h2 className="sub-heading">What is Quadratic Probing?</h2>
-            <p>Quadratic probing is an open addressing scheme which operates by taking the original hash index and adding successive square of c (where, c is the number of collisions occurred) until an open slot is found.</p>
-          </div>
-        );
+        case 'Concept':
+          return (
+            <div className="intro">
+              <h1 className="heading">Quadratic Probing</h1>
+              <h2 className="sub-heading">Conceptual Video</h2>
+              <div className='video-container'>
+                <video width="600" controls className='video'>
+                <source src="/Probing_Concept.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+                </video>
+                </div>
+              <h2 className="sub-heading">What is Quadratic Probing</h2>
+              <p>Quadratic probing is an open addressing scheme which operates by taking the original hash index and adding successive square of c (where, c is the number of collisions occurred) until an open slot is found.</p><br></br>
+              <h2 className='sub-heading'>Quadratic Probing Demonstration</h2>
+              <img src='/Probing.png' className='image' alt='Description of the Probing' />
+              </div>
+          );
       default:
         return <p>Select an option from the sidebar.</p>;
     }
