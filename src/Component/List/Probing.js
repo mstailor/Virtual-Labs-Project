@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Probing.css'; // Ensure your CSS file is included for styling
+import QuadraticProbing from './PracticeProbing';
 
 // Predefined quizzes data
 const quizzesData = {
@@ -249,6 +250,10 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
               <img src='/Probing.png' className='image' alt='Description of the Probing' />
               </div>
           );
+
+          case 'Practice':
+          return <QuadraticProbing />;
+
       default:
         return <p>Select an option from the sidebar.</p>;
     }

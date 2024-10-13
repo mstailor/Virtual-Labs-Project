@@ -1,0 +1,87 @@
+.quadratic-probing {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    text-align: center;
+  }
+  
+  .hash-table {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  
+  .hash-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+  }
+  
+  .cell {
+    width: 50px; /* Adjust width as needed */
+    height: 50px; /* Adjust height as needed */
+    border: 2px solid #2196F3;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    background-color: #f9f9f9; /* Light background for cells */
+  }
+  
+  .cell.filled {
+    background-color: #2196F3; /* Color for filled cells */
+    color: white;
+  }
+  
+  .index {
+    margin-top: 5px; /* Space between cell and index */
+  }
+  
+  .controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .input-bar {
+    padding: 10px;
+    width: 200px; /* Adjust input width as needed */
+    margin-bottom: 10px;
+    border: 2px solid #2196F3;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Space between buttons */
+  }
+  
+  .Practice {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #2196F3;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .Practice:hover {
+    background-color: darkblue; /* Change color on hover */
+  }
+  
+  .message {
+    margin-top: 20px;
+  }
+
+  .message ul {
+    list-style-type: none; /* Remove bullet points */
+    padding: 0;           /* Remove default padding */
+    margin: 0;            /* Remove default margin */
+  }
+  
