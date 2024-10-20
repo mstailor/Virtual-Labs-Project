@@ -3,8 +3,34 @@
   flex-direction: column;
 }
 
+.two .contain-two button{
+  color: black;
+  font-weight: 700;
+  margin-right: 10px;
+  padding: 10px 15px;
+  border: 1px solid black;
+}
+.two .contain-two button:hover{
+  color: white;
+  background-color: black;
+}
+
 .top-bar-above{
   width: 100vw;
+}
+
+.intro .topicForLL{
+  margin-left: 40px;
+}
+
+.intro .topicForLL li a{
+  color: rgb(58, 5, 249);
+  line-height: 1.5;
+}
+
+.intro .topicForLL li a:hover{
+  color: red;
+  line-height: 1.5;
 }
 
 .top-bar {
@@ -149,6 +175,8 @@ progress {
 
 .list li {
   margin-bottom: 10px;
+  font-size: 1.5rem;
+  line-height: 1.5;
 }
 
 .feed .but-feedback{
@@ -379,6 +407,7 @@ button:hover {
 .controls {
   text-align: center;
   margin-top: 20px;
+  gap: 10px;
 }
 
 .controls button {

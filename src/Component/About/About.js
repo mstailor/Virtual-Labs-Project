@@ -1,5 +1,37 @@
 import React, { useState, useEffect } from 'react';
-import './about.css'; 
+import './about.css';
+
+import mohdImage from '../../Images/Mohd.png';
+// import kanakImage from '../../Images/Kanak.png';
+import netalImage from '../../Images/Netal.jpg';
+// import himanshuImage from '../../Images/Himanshu.png';
+
+const authors = [
+    {
+        name: "Kanak Meshram",
+        image: "",
+        description: "Web Developer focusing on creating modern, responsive websites using React and Node.js.",
+        linkedin: "https://www.linkedin.com/in/kanak-meshram-7a875332a/",
+    },
+    {
+        name: "Mohammed Tailor",
+        image: mohdImage,
+        description: "2nd-Year Engineering Student at Shri Ramdeobaba College | Learning Java, DSA, and Front-end Development | Aspiring in AIML.",
+        linkedin: "https://www.linkedin.com/in/mohammed-tailor-002968288/",
+    },
+    {
+        name: "Netal Sharma",
+        image: netalImage,
+        description: "UI/UX Designer who builds intuitive and user-friendly interfaces for web and mobile applications.",
+        linkedin: "https://www.linkedin.com/in/emily-johnson",
+    },
+    {
+        name: "Himanshu Thakur",
+        image: "",
+        description: "AI/ML Engineer specializing in building predictive models for healthcare and finance.",
+        linkedin: "https://www.linkedin.com/in/mark-wilson",
+    },
+];
 
 const About = () => {
     const [timeAndDate, setTimeAndDate] = useState({
@@ -33,6 +65,14 @@ const About = () => {
         };
 
         updateVisitorCount();
+    }, []);
+
+    const [fadeIn, setFadeIn] = useState(false);
+
+    useEffect(() => {
+        setTimeout(() => {
+            setFadeIn(true);
+        }, 500); // Delay for the fade-in effect
     }, []);
 
     return (
@@ -102,10 +142,33 @@ const About = () => {
                         </p>
                     </div>
                     <br /><br />
-                    <div className="about-img">
-                        <img src="/about-img.jpg" alt="Image" />
+                </section>
+
+                <section className={`about-section ${fadeIn ? "fade-in" : ""}`}>
+                    <h1 className="about-main-title">About the Creators</h1>
+                    <div className="author-grid">
+                        {authors.map((author, index) => (
+                            <div key={index} className="author-card">
+                                <div className="author-image">
+                                    <img src={author.image} alt={author.name} />
+                                </div>
+                                <div className="author-details">
+                                    <h2 className="author-name">{author.name}</h2>
+                                    <p className="author-description">{author.description}</p>
+                                    <a
+                                        href={author.linkedin}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="contact-button"
+                                    >
+                                        Connect on LinkedIn
+                                    </a>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 </section>
+
             </main>
 
             <footer>

@@ -581,10 +581,10 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
               <br />
               <br />
               <h2 className='sub-heading'>Estimated Time</h2>
-              <p>Approximately 20 minutes</p>
+              <p>Approximately 30 minutes</p>
               <br />
               <br />
-              <h2 className='sub-heading'>About</h2>
+              <h2 className='sub-heading new-sub'>About</h2>
               <p>
                 A linked list is a linear data structure where each element is a separate object, known as a node. Each node contains two components: the data and a reference (or pointer) to the next node in the sequence. Linked lists are dynamic and can grow and shrink in size efficiently. They are used in various applications such as memory management, real-time processing, and maintaining ordered collections of elements.
               </p>
@@ -592,7 +592,7 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
               <br />
               <h2 className='sub-heading'>Learning Objectives of this Module</h2>
               <ul>
-                <li>Learn about Linked List</li>
+                <li>Learn about Linked List (Singly LinkedList)</li>
                 <li>Understand how Linked List is stored in memory</li>
                 <li>Explore the types of Linked Lists (Singly, Doubly, Circular)</li>
                 <li>Analyze common operations like insertion, deletion, and traversal</li>
@@ -622,6 +622,12 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
                 <li>Sequential access: Traversal happens one element at a time.</li>
               </ul>
               <br />
+              <h4>Explore Topic Like:</h4>
+              <ul className='topicForLL'>
+                  <li><a href='https://www.geeksforgeeks.org/c-pointers/' target='_blank' >Pointers</a></li>
+                  <li><a href='https://www.geeksforgeeks.org/structures-c/' target='_blank' >Structure</a></li>
+                  <li><a href='https://www.w3schools.com/c/c_memory_allocate.php' target='_blank' >Dynamic Memory Allocation (malloc and free)</a></li>
+              </ul>
               <p className='description'>
                 Linked lists are widely used in scenarios where dynamic memory allocation is needed, such as in operating
                 systems, file systems, and real-time applications. In this module, we will explore various types of linked
