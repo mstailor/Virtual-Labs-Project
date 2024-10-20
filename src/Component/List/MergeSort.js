@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import jsPDF from 'jspdf';
 import './MergeSort.css'; // Ensure your CSS file is included for styling
 
 // Predefined quizzes
@@ -167,12 +168,21 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
                 </div>
               </div>
             ))}
-            <button className='SubmitButton' onClick={handleSubmit} disabled={submitted}>
-              Submit
-            </button>
+            <div className="Button-container">
+  <button className="SubmitButton" onClick={handleSubmit} disabled={submitted}>
+    Submit
+  </button>
+  {submitted && (
+    <button onClick={downloadPDF} className="pdfButton">
+      Download Results as PDF
+    </button>
+  )}
+</div>
+
             {submitted && (
               <div className='score-display'>
                 <h3>Your Score: {correctAnswers} / {quizzes.length}</h3>
+                
               </div>
             )}
           </div>
@@ -199,6 +209,81 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
     }
   };
 
+  const downloadPDF = () => {
+    const doc = new jsPDF();
+    const startY = 20; // Starting Y position for the first element
+    let currentY = startY; // Keep track of current Y position
+  
+    // Title Section
+    doc.setFontSize(15);
+    doc.setFont("helvetica", "bold");
+    doc.text('Quiz Results', 20, currentY);
+    
+    // Add a thicker Line Below Title
+    doc.setLineWidth(1);
+    doc.line(20, currentY + 6, 190, currentY + 6); // Adjusted line position
+    <br></br>
+  
+    // Reset Color and Font for Answers Section
+    currentY += 10; // Move down for answers heading
+    doc.setTextColor(0);
+    doc.setFontSize(10);
+  
+    // Move down for answers section
+    currentY += 5; 
+  
+    // Loop through quizzes to display questions and options
+    quizzes.forEach((quiz, index) => {
+      // Question
+      const questionText = `${quiz.question}`;
+      doc.setFont("helvetica", "bold");
+      doc.text(questionText, 20, currentY);
+      
+      // Move down for options
+      currentY += 8; 
+  
+      // Options
+      doc.setFont("helvetica", "normal"); 
+      quiz.options.forEach((option, optionIndex) => {
+        const userAnswer = userAnswers[quiz.id];
+        const isCorrect = option === quiz.answer;
+        const isUserAnswer = option === userAnswer;
+  
+        // Color Logic
+        if (isUserAnswer && !isCorrect) {
+          // Wrong answer in red
+          doc.setTextColor(255, 0, 0); // Red
+        } else if (isCorrect) {
+          // Correct answer in green
+          doc.setTextColor(0, 128, 0); // Green
+        } else {
+          doc.setTextColor(0); // Default color for other options
+        }
+  
+        // Print the option
+        doc.text(`${String.fromCharCode(65 + optionIndex)}. ${option}`, 20, currentY);
+        
+        // Move down for the next option
+        currentY += 8; // Adjust spacing as needed
+      });
+  
+      // Reset color for the next question
+      doc.setTextColor(0);
+      
+      // Add extra space after each question block
+      currentY += 5; // Additional spacing between questions
+    });
+
+        // Score Section
+        currentY += 10; // Move down for score
+        doc.setTextColor(0, 102, 204); // Blue color
+        doc.setFontSize(15);
+        doc.text(`Your Score: ${correctAnswers} / ${quizzes.length}`, 20, currentY);
+      
+  
+    // Save the PDF
+    doc.save('quiz-results.pdf');
+  };
   return (
     <div className="main-content">
       {renderContent()}

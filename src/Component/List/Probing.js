@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import jsPDF from 'jspdf';
 import './Probing.css'; // Ensure your CSS file is included for styling
-import QuadraticProbing from './PracticeProbing';
+import { QuadraticProbing, Exercise } from './PracticeProbing';
+
 
 // Predefined quizzes data
 const quizzesData = {
@@ -55,9 +56,33 @@ const quizzesData = {
   posttest: [
     {
       id: 1,
-      question: "1. What is ...?",
-      options: ["Option 1", "Option 2", "Option 3", "Option 4"],
-      answer: "Option 1",
+      question: "1. Explain how quadratic probing resolves collisions.",
+      options: ["It uses the formula h(k) = h(k) + i*i  to find the next index for collisions, where i is the number of attempts", "It always uses the next index regardless of the value of i", " It only allows one collision per entry, otherwise it gives an error", "It uses a linear function to calculate the next index after a collision"],
+      answer: "It uses the formula h(k) = h(k) + i*i  to find the next index for collisions, where i is the number of attempts",
+    },
+    {
+      id: 2,
+      question: "2. Given a hash table of size 11, and the following hash function: h(k) = k % 11, insert the keys 20, 21, 31, and 42.",
+      options: ["The keys will collide at index 1 and stay there", "The final placement is 20 at index 9, 21 at index 10, 31 at index 9, and 42 at index 8", "All keys will be placed sequentially in the table without any collisions", "All keys will be placed at random index"],
+      answer: "The final placement is 20 at index 9, 21 at index 10, 31 at index 9, and 42 at index 8",
+    },
+    {
+      id: 3,
+      question: "3. What is a significant limitation of quadratic probing?",
+      options: ["It only works with a hash table size that is a prime number", "It is slower than separate chaining in all cases", "It can lead to secondary clustering, where sequences of occupied slots can form", "It can only handle small datasets"],
+      answer: "It can lead to secondary clustering, where sequences of occupied slots can form",
+    },
+    {
+      id: 4,
+      question: "4. How does quadratic probing affect memory usage in a hash table?",
+      options: ["It always uses less memory than linear probing", " It guarantees that all entries are stored consecutively in memory", " It requires additional memory for each entry", "It can lead to inefficient memory use when the load factor is high"],
+      answer: "It can lead to inefficient memory use when the load factor is high",
+    },
+    {
+      id: 5,
+      question: "5. How is the load factor of a hash table calculated?",
+      options: ["Load factor = number of empty slots / total slots", " Load factor = size of the table / number of entries", "Load factor = number of entries / size of the table", "Load factor = total slots / number of collisions"],
+      answer: "Load factor = number of entries / size of the table",
     },
     // Add more questions for posttest here
   ],
@@ -100,7 +125,7 @@ const Sidebar = ({ handleOptionClick }) => (
       <li onClick={() => handleOptionClick('Practice')}>Practice</li>
       <li onClick={() => handleOptionClick('Exercise')}>Exercise</li>
       <li onClick={() => handleOptionClick('Posttest')}>Posttest</li>
-      <li onClick={() => handleOptionClick('Applications')}>Real Life Applications</li>
+      <li onClick={() => handleOptionClick('Real Life Applications')}>Real Life Applications</li>
     </ul>
   </div>
 );
@@ -157,6 +182,9 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
     return '';
   };
 
+  const videoId = "0WzhEhhKb9o";
+  const videoId2 = "VzAPaX0zU90";
+  
   const renderContent = () => {
     switch (activeContent) {
       case 'Aim':
@@ -179,12 +207,17 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
             <div className="intro">
               <h1 className="heading">Quadratic Probing</h1>
               <h2 className='sub-heads'>Conceptual Video</h2>
-              <div className='video-container'>
-              <video width="600" controls className='video'>
-              <source src="/Probing_Overview.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-              </video>
-              </div>
+              <div style={{ display: 'flex', justifyContent: 'center', padding: '20px' }}>
+      <iframe
+        width="560"
+        height="315"
+        src={`https://www.youtube.com/embed/${videoId}`}
+        title="YouTube video player"
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      ></iframe>
+    </div>
               <h2 className='sub-heads'>Prerequisites</h2>
               <p>This experiment requires you to have basic knowledge about :</p>
               <ul>
@@ -248,12 +281,17 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
             <div className="intro">
               <h1 className="heading">Quadratic Probing</h1>
               <h2 className="sub-heading">Conceptual Video</h2>
-              <div className='video-container'>
-                <video width="600" controls className='video'>
-                <source src="/Probing_Concept.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-                </video>
-                </div>
+              <div style={{ display: 'flex', justifyContent: 'center', padding: '20px' }}>
+      <iframe
+        width="560"
+        height="315"
+        src={`https://www.youtube.com/embed/${videoId2}`}
+        title="YouTube video player"
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      ></iframe>
+    </div>
               <h2 className="sub-heading">What is Quadratic Probing</h2>
               <p>Quadratic probing is an open addressing scheme which operates by taking the original hash index and adding successive square of c (where, c is the number of collisions occurred) until an open slot is found.</p><br></br>
               <h2 className='sub-heading'>Quadratic Probing Demonstration</h2>
@@ -263,6 +301,30 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
 
           case 'Practice':
           return <QuadraticProbing />;
+
+          case 'Exercise':
+            return <Exercise />;
+
+            case 'Real Life Applications':
+              return(
+                <div className='intro'>
+                <h1 className='heading'>Real Life Applications</h1>
+                <ul>
+                  <li><h2 className='sub-heading'>Databases and Caches: </h2>
+                  <p> Hash tables employing quadratic probing are used in in-memory databases and caches,<br></br> 
+                  where rapid lookups are necessary, such as indexing frequently accessed records.</p></li>
+                  <li><h2 className='sub-heading'>Compilers and Symbol Tables:</h2>
+                  <p>Compilers often rely on hash tables to store symbol tables, which track variables, function names,<br></br> and constants.
+                     Using quadratic probing helps manage collisions and ensures quicker access during code parsing.</p></li>
+                     <li><h2 className='sub-heading'>Routers and Network Systems:</h2>
+                     <p>Hash tables are utilized to manage routing tables or track network flows. With quadratic probing, routers efficiently<br></br>
+                       resolve collisions in hash-based data structures, contributing to network performance optimization.</p></li>
+                  <li><h2 className='sub-heading'>Gaming and Real-Time Systems:</h2>
+                  <p>Some video games use hash tables for managing in-game assets like textures or entities. Quadratic probing <br></br>
+                    can ensure fast and predictable access times, which is crucial for real-time systems.</p></li>
+                </ul>
+              </div>
+              );
 
       default:
         return <p>Select an option from the sidebar.</p>;
