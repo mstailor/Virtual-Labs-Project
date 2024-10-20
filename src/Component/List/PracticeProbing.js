@@ -223,13 +223,13 @@ elements.forEach(num => {
       const userValue = parseInt(hashTable[correctIndex], 10);  // User's input at that index
   
       if (userValue === num) {
-        newColors[correctIndex] = 'correct'; // If correct, mark it as correct (no cross)
+        newColors[correctIndex] = 'correct1'; // If correct, mark it as correct (no cross)
       }
     });
   
     // Cross out all remaining boxes that are not marked as correct
     for (let i = 0; i < newColors.length; i++) {
-      if (newColors[i] !== 'correct') {
+      if (newColors[i] !== 'correct1') {
         newColors[i] = 'crossed'; // Cross out all boxes that are not correct
       }
     }
@@ -282,10 +282,6 @@ elements.forEach(num => {
 
       <div className="legend">
         <p><span className="box correct"></span> Correctly Filled Boxes</p>
-      </div>
-
-      <div className="steps">
-        <p>Steps:</p>
       </div>
     </div>
   );
