@@ -173,3 +173,223 @@ footer p {
     margin: 10px 0;
   }
 }
+
+/* responsive code start from here */
+/* for header  */
+header {
+  width: 100vw;
+  height: 150px;
+}
+
+.header-head {
+  width: 70vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+  padding-top: 10px;
+}
+
+.left-head,
+.right-head {
+  display: inline-block;
+}
+
+.left-head,
+img,
+p {
+  display: inline-block;
+}
+
+.vl-logo {
+  height: 100px;
+  width: auto;
+}
+
+input[type=search] {
+  border: 1px solid rgba(128, 128, 128, 0.9);
+  padding: 6px 70px 6px 10px;
+  border-radius: 15px;
+}
+
+/* Media Queries for Responsive Header */
+
+/* For tablet devices (width <= 768px) */
+@media (max-width: 768px) {
+  .header-head {
+      width: 90vw;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 5px;
+  }
+
+  .vl-logo {
+      height: 80px;
+  }
+
+  .right-head {
+      margin-top: 10px;
+  }
+
+  input[type=search] {
+      width: 100%;
+      padding: 6px 10px;
+  }
+}
+
+/* For mobile devices (width <= 480px) */
+@media (max-width: 480px) {
+  .header-head {
+      width: 95vw;
+      flex-direction: column;
+      justify-content: center;
+  }
+
+  .vl-logo {
+      height: 60px;
+  }
+
+  input[type=search] {
+      width: 100%;
+      padding: 6px 10px;
+  }
+
+  .nav ul li a {
+      font-size: 16px;
+      padding: 5px 10px;
+  }
+
+  .nav ul li {
+      padding: 0px 10px;
+  }
+}
+
+/* For very small mobile devices (width <= 320px) */
+@media (max-width: 320px) {
+  .vl-logo {
+      height: 50px;
+  }
+
+  .header-head {
+      width: 100vw;
+      flex-direction: column;
+  }
+
+  input[type=search] {
+      width: 100%;
+      padding: 5px 10px;
+  }
+
+  .nav ul li a {
+      font-size: 14px;
+      padding: 5px 8px;
+  }
+
+  .nav ul li {
+      padding: 0px 5px;
+  }
+}
+
+
+/* for MQ of footer  */
+footer {
+  width: 100vw;
+  background-color: #02263c;
+  color: white;
+  font-size: 14px;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 20px 0;
+}
+
+.footer-head {
+  width: 70vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: auto;
+  flex-wrap: wrap; /* To handle responsiveness */
+}
+
+footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+footer li,
+a {
+  color: white;
+  text-decoration: none;
+  padding-bottom: 10px;
+  display: block;
+}
+
+footer p {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 15px;
+}
+
+/* Flexbox columns for each section */
+.foot-one,
+.foot-two,
+.foot-three {
+  flex: 1;
+  margin: 10px;
+  min-width: 200px; 
+}
+
+@media (max-width: 768px) {
+  .footer-head {
+      width: 90vw;
+      flex-direction: column;
+      text-align: center;
+  }
+
+  .foot-one,
+  .foot-two,
+  .foot-three {
+      margin: 20px 0;
+  }
+
+  footer p {
+      font-size: 14px;
+  }
+}
+
+/* For mobile devices (width <= 480px) */
+@media (max-width: 480px) {
+  .footer-head {
+      width: 95vw;
+      flex-direction: column;
+      text-align: center;
+  }
+
+  .foot-one,
+  .foot-two,
+  .foot-three {
+      margin: 15px 0;
+  }
+
+  footer p {
+      font-size: 13px;
+  }
+}
+
+/* For very small mobile devices (width <= 320px) */
+@media (max-width: 320px) {
+  .footer-head {
+      width: 100vw;
+      flex-direction: column;
+      text-align: center;
+  }
+
+  footer p {
+      font-size: 12px;
+  }
+
+  .foot-one,
+  .foot-two,
+  .foot-three {
+      margin: 10px 0;
+  }
+}

@@ -373,3 +373,395 @@ footer p {
       font-size: 12px;
   }
 }
+
+/* responsive code start from here */
+/* for header  */
+header {
+  width: 100vw;
+  height: 150px;
+}
+
+.header-head {
+  width: 70vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+  padding-top: 10px;
+}
+
+.left-head,
+.right-head {
+  display: inline-block;
+}
+
+.left-head,
+img,
+p {
+  display: inline-block;
+}
+
+.vl-logo {
+  height: 100px;
+  width: auto;
+}
+
+input[type=search] {
+  border: 1px solid rgba(128, 128, 128, 0.9);
+  padding: 6px 70px 6px 10px;
+  border-radius: 15px;
+}
+
+/* Media Queries for Responsive Header */
+
+/* For tablet devices (width <= 768px) */
+@media (max-width: 768px) {
+  .header-head {
+      width: 90vw;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 5px;
+  }
+
+  .vl-logo {
+      height: 80px;
+  }
+
+  .right-head {
+      margin-top: 10px;
+  }
+
+  input[type=search] {
+      width: 100%;
+      padding: 6px 10px;
+  }
+}
+
+/* For mobile devices (width <= 480px) */
+@media (max-width: 480px) {
+  .header-head {
+      width: 95vw;
+      flex-direction: column;
+      justify-content: center;
+  }
+
+  .vl-logo {
+      height: 60px;
+  }
+
+  input[type=search] {
+      width: 100%;
+      padding: 6px 10px;
+  }
+
+  .nav ul li a {
+      font-size: 16px;
+      padding: 5px 10px;
+  }
+
+  .nav ul li {
+      padding: 0px 10px;
+  }
+}
+
+/* For very small mobile devices (width <= 320px) */
+@media (max-width: 320px) {
+  .vl-logo {
+      height: 50px;
+  }
+
+  .header-head {
+      width: 100vw;
+      flex-direction: column;
+  }
+
+  input[type=search] {
+      width: 100%;
+      padding: 5px 10px;
+  }
+
+  .nav ul li a {
+      font-size: 14px;
+      padding: 5px 8px;
+  }
+
+  .nav ul li {
+      padding: 0px 5px;
+  }
+}
+
+
+/* for MQ of footer  */
+footer {
+  width: 100vw;
+  background-color: #02263c;
+  color: white;
+  font-size: 14px;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 20px 0;
+}
+
+.footer-head {
+  width: 70vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: auto;
+  flex-wrap: wrap; /* To handle responsiveness */
+}
+
+footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+footer li,
+a {
+  color: white;
+  text-decoration: none;
+  padding-bottom: 10px;
+  display: block;
+}
+
+footer p {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 15px;
+}
+
+/* Flexbox columns for each section */
+.foot-one,
+.foot-two,
+.foot-three {
+  flex: 1;
+  margin: 10px;
+  min-width: 200px; 
+}
+
+@media (max-width: 768px) {
+  .footer-head {
+      width: 90vw;
+      flex-direction: column;
+      text-align: center;
+  }
+
+  .foot-one,
+  .foot-two,
+  .foot-three {
+      margin: 20px 0;
+  }
+
+  footer p {
+      font-size: 14px;
+  }
+}
+
+/* For mobile devices (width <= 480px) */
+@media (max-width: 480px) {
+  .footer-head {
+      width: 95vw;
+      flex-direction: column;
+      text-align: center;
+  }
+
+  .foot-one,
+  .foot-two,
+  .foot-three {
+      margin: 15px 0;
+  }
+
+  footer p {
+      font-size: 13px;
+  }
+}
+
+/* For very small mobile devices (width <= 320px) */
+@media (max-width: 320px) {
+  .footer-head {
+      width: 100vw;
+      flex-direction: column;
+      text-align: center;
+  }
+
+  footer p {
+      font-size: 12px;
+  }
+
+  .foot-one,
+  .foot-two,
+  .foot-three {
+      margin: 10px 0;
+  }
+}
+
+/* General styling */
+.two {
+  padding: 20px;
+  background-color: #f8f9fa;
+  font-family: Arial, sans-serif;
+}
+
+.contain-two {
+  width: 70vw;
+  margin: auto;
+  text-align: center;
+}
+
+/* Styling for tab buttons */
+.tab {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.tab button {
+  color: black;
+  padding: 10px 20px;
+  margin: 0 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.tab button:hover {
+  background-color: #0056b3;
+}
+
+.below-div {
+  text-align: left;
+  margin-top: 20px;
+}
+
+.topic-name {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.topic-bio {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #555;
+}
+
+/* Responsive Media Queries */
+
+/* For Tablets (width <= 768px) */
+@media (max-width: 768px) {
+  .contain-two {
+      width: 90vw;
+  }
+
+  .tab button {
+      margin: 10px 0;
+      width: 100%;  /* Full width for buttons on smaller screens */
+  }
+
+  .topic-bio {
+      font-size: 16px;
+  }
+
+  .topic-name {
+      font-size: 22px;
+  }
+}
+
+/* For Mobile Devices (width <= 480px) */
+@media (max-width: 480px) {
+  .contain-two {
+      width: 95vw;
+  }
+
+  .tab button {
+      padding: 12px;
+      font-size: 14px;
+  }
+
+  .topic-bio {
+      font-size: 15px;
+  }
+
+  .topic-name {
+      font-size: 20px;
+  }
+}
+
+/* For very small devices (width <= 320px) */
+@media (max-width: 320px) {
+  .tab button {
+      padding: 10px;
+      font-size: 12px;
+  }
+
+  .topic-bio {
+      font-size: 14px;
+  }
+
+  .topic-name {
+      font-size: 18px;
+  }
+}
+
+
+/* General styles for the VideoSection */
+.three {
+  padding: 40px 0;
+  background-color: #f4f4f4;
+  font-family: Arial, sans-serif;
+}
+
+.three-sec {
+  width: 70vw;
+  margin: auto;
+  text-align: center;
+}
+
+.labs {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Make the iframe responsive */
+.three-sec iframe {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9; /* Maintain 16:9 ratio for video */
+  max-width: 100%;
+  border: none;
+}
+
+/* Responsive adjustments */
+
+/* For Tablets (width <= 768px) */
+@media (max-width: 768px) {
+  .three-sec {
+      width: 90vw; /* Adjust container width for tablets */
+  }
+
+  .labs {
+      font-size: 24px;
+  }
+
+  .three-sec iframe {
+      height: 280px; /* Slightly smaller video height for tablets */
+  }
+}
+
+/* For Mobile Devices (width <= 480px) */
+@media (max-width: 480px) {
+  .three-sec {
+      width: 95vw; /* Use almost full width of the screen */
+  }
+
+  .labs {
+      font-size: 20px;
+  }
+
+  .three-sec iframe {
+      height: 200px; /* Smaller video height for mobile */
+  }
+}
