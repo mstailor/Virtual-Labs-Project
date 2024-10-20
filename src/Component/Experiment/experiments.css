@@ -1,10 +1,6 @@
 *{
   margin: 0;
   padding: 0;
-  box-sizing: content-box;
-}
-
-body{
   overflow-x: hidden;
 }
 
@@ -391,5 +387,222 @@ footer p {
   .foot-two,
   .foot-three {
       margin: 10px 0;
+  }
+}
+
+/* new css for responsive  */
+/* Sidebar Styling */
+.toggle-section {
+  font-size: large;
+  color: black;
+  background-color: #e2e1e1;
+  padding: 10px;
+  margin: 0 10px;
+  cursor: pointer;
+  width: 200px;
+  min-width: 200px;
+}
+
+.toggle-section ul {
+  padding-left: 0;
+}
+
+.toggle-section li {
+  list-style-type: none;
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+.toggle-section li:hover {
+  font-weight: bold;
+}
+
+/* Main Content Styling */
+.main-content {
+  font-size: large;
+  flex-grow: 1;
+  padding: 20px;
+  background-color: #ffffff;
+  transition: transform 0.3s ease, margin-right 0.3s ease;
+  width: calc(100% - 220px);
+}
+
+/* For tablets and mobile */
+@media (max-width: 768px) {
+  .main-content {
+      width: 100%; /* Expand main content to full width */
+      padding: 10px; /* Adjust padding for smaller screens */
+      transform: translateX(0); /* Ensure content is aligned */
+  }
+
+  .toggle-section {
+      width: 100%;
+      min-width: auto;
+      font-size: 16px; /* Smaller font size for mobile */
+  }
+
+  .content {
+      flex-direction: column; /* Stack content on top of each other */
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content {
+      padding: 8px; /* Even smaller padding for very small screens */
+  }
+
+  .toggle-section {
+      font-size: 14px; /* Smaller font for tiny screens */
+      padding: 8px;
+  }
+}
+
+/* Progress Bar Styling */
+.progress-bar {
+  width: 300px;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border-left: 1px solid #e2e1e1;
+}
+
+.progress-section {
+  margin-bottom: 20px;
+}
+
+progress {
+  width: 100%;
+  margin-right: 10px;
+}
+
+@media (max-width: 768px) {
+  .progress-bar {
+      width: 100%; /* Full width for smaller screens */
+      padding: 15px;
+      margin: 10px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .progress-bar {
+      padding: 10px;
+  }
+
+  .progress-section {
+      font-size: 14px;
+  }
+}
+
+/* Responsive List of Experiments */
+.list-exp ul {
+  padding-left: 0;
+  margin-bottom: 20px;
+}
+
+.list-exp li {
+  list-style-type: none;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.list-exp ol {
+  margin-left: 20px;
+}
+
+.list-exp a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.list-exp a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .list-exp li {
+      font-size: 18px; /* Slightly smaller for tablet */
+  }
+
+  .list-exp ol {
+      margin-left: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .list-exp li {
+      font-size: 16px; /* Smaller for mobile */
+  }
+
+  .list-exp ol {
+      margin-left: 5px;
+  }
+}
+
+/* Responsive Styling for Introduction, Objective, and Course Outcome Sections */
+.intro {
+  padding: 20px;
+  line-height: 1.6;
+}
+
+.intro h1 {
+  font-size: 30px;
+  color: #07385e;
+}
+
+.intro p {
+  font-size: 18px;
+  color: #333;
+  text-align: justify;
+}
+
+@media (max-width: 768px) {
+  .intro h1 {
+      font-size: 26px; /* Adjust heading size */
+  }
+
+  .intro p {
+      font-size: 16px; /* Adjust paragraph size */
+  }
+}
+
+@media (max-width: 480px) {
+  .intro h1 {
+      font-size: 22px; /* Even smaller heading size for mobile */
+  }
+
+  .intro p {
+      font-size: 14px; /* Smaller paragraph size for mobile */
+  }
+}
+
+/* Feedback Section */
+.feed {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.but-feedback {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.but-feedback:hover {
+  background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+  .but-feedback {
+      padding: 8px 16px;
+      font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .but-feedback {
+      padding: 6px 12px;
+      font-size: 14px;
   }
 }
