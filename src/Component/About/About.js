@@ -4,7 +4,7 @@ import './about.css';
 import mohdImage from '../../Images/Mohd.png';
 // import kanakImage from '../../Images/Kanak.png';
 import netalImage from '../../Images/Netal.jpg';
-// import himanshuImage from '../../Images/Himanshu.png';
+import himanshuImage from '../../Images/Himanshu.png';
 
 const authors = [
     {
@@ -27,8 +27,8 @@ const authors = [
     },
     {
         name: "Himanshu Thakur",
-        image: "",
-        description: "AI/ML Engineer specializing in building predictive models for healthcare and finance.",
+        image: himanshuImage,
+        description: "AI Student, which manage all event of Virtual lab , work on a team tu build a great product",
         linkedin: "https://www.linkedin.com/in/mark-wilson",
     },
 ];
