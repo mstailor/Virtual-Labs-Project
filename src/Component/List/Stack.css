@@ -198,13 +198,15 @@ ol li a{
 }
 
 .correct {
-  background-color: lightgreen;
-  color: darkgreen;
+  background-color: white;
+  color: green;
+  font-weight: bold;
 }
 
 .incorrect {
-  background-color: lightcoral;
-  color: darkred;
+  color: red;
+  background-color: white;
+  font-weight: bold;
 }
 
 .option-label {
