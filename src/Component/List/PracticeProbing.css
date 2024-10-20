@@ -1,87 +1,209 @@
-.quadratic-probing {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    text-align: center;
-  }
-  
-  .hash-table {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
-  }
-  
-  .hash-cell {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 10px;
-  }
-  
-  .cell {
-    width: 50px; /* Adjust width as needed */
-    height: 50px; /* Adjust height as needed */
-    border: 2px solid #2196F3;
-    border-radius: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 18px;
-    background-color: #f9f9f9; /* Light background for cells */
-  }
-  
-  .cell.filled {
-    background-color: #2196F3; /* Color for filled cells */
-    color: white;
-  }
-  
-  .index {
-    margin-top: 5px; /* Space between cell and index */
-  }
-  
-  .controls {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .input-bar {
-    padding: 10px;
-    width: 200px; /* Adjust input width as needed */
-    margin-bottom: 10px;
-    border: 2px solid #2196F3;
-    border-radius: 5px;
-    font-size: 16px;
-  }
-  
-  .button-group {
-    display: flex;
-    justify-content: center;
-    gap: 10px; /* Space between buttons */
-  }
-  
-  .Practice {
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    background-color: #2196F3;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .Practice:hover {
-    background-color: darkblue; /* Change color on hover */
-  }
-  
-  .message {
-    margin-top: 20px;
-  }
+.common-container {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  text-align: center;
+}
 
-  .message ul {
-    list-style-type: none; /* Remove bullet points */
-    padding: 0;           /* Remove default padding */
-    margin: 0;            /* Remove default margin */
-  }
-  
+.hash-table {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.hash-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+}
+
+.cell {
+  width: 50px;
+  height: 50px;
+  border: 2px solid #2196F3;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  background-color: #f9f9f9;
+}
+
+.cell.filled {
+  background-color: #2196F3;
+  color: white;
+}
+
+.index {
+  margin-top: 5px;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.input-bar {
+  padding: 10px;
+  width: 200px;
+  margin-bottom: 10px;
+  border: 2px solid #2196F3;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.Practice {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: #2196F3;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.Practice:hover {
+  background-color: darkblue;
+}
+
+.message {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.message ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+/* 
+New code starts here
+/*
+
+/* Main Container */
+.Exercise {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+
+/* Instructions Text */
+p {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+/* Hash Table Layout */
+.hash-table {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.hash-table .box {
+  width: 50px;
+  height: 50px;
+  border: 2px solid #007bff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 5px;
+  border-radius: 4px;
+}
+
+.hash-table .box input {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-weight: bold;
+  color: #000000;
+}
+
+.hash-table .index-label {
+  margin-top: 5px;
+  font-size: 14px;
+  color: #000;
+}
+
+/* Control Buttons */
+.controls2 {
+  margin-top: 20px;
+}
+
+.controls2 button {
+  padding: 10px 20px;
+  font-size: 16px;
+  margin: 0 10px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+}
+
+.controls2 button:hover {
+  background-color: #0056b3;
+}
+
+/* Legend */
+.legend {
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.legend p {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.legend .box {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #000;
+  margin-right: 5px;
+}
+
+/* Crossed-out effect */
+.crossed {
+  position: relative;
+  color: #ff0000; /* Red color for the strike-through */
+}
+
+.crossed::after {
+  content: 'X'; /* Overlay an 'X' over the box */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  font-size: 20px;
+  color: red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* Steps */
+.steps {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #000;
+}
