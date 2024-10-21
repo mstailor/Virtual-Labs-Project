@@ -6,68 +6,189 @@ const quizzesData = {
   pretest: [
     {
       id: 1,
-      question: "",
-      options: ["", "", "", ""],
-      answer: "",
+      question: "Which of the following data structures follows the Last In First Out (LIFO) principle?",
+      options: ["Queue", "Stack", "Array", "Linked List"],
+      answer: "Stack"
     },
     {
       id: 2,
-      question: "",
-      options: ["", "", "", ""],
-      answer: "",
+      question: "What is the time complexity of the push operation in a stack implemented using an array?",
+      options: ["O(1)", "O(n)", "O(log n)", "O(n^2)"],
+      answer: "O(1)"
     },
     {
       id: 3,
-      question: "",
-      options: ["", "", "", ""],
-      answer: "",
+      question: "In a stack, which operation is used to remove the top element?",
+      options: ["Insert", "Delete", "Pop", "Push"],
+      answer: "Pop"
     },
     {
       id: 4,
-      question: "",
-      options: ["", "", "", ""],
-      answer: "",
+      question: "If a stack is implemented using a linked list, where is the new element added?",
+      options: ["At the head", "At the tail", "In the middle", "Random position"],
+      answer: "At the head"
     },
     {
       id: 5,
-      question: "",
-      options: ["", "", "", ""],
-      answer: "",
-    },
-  ],
-  posttest: [
-    {
-      id: 1,
-      question: "",
-      options: ["", "", "", ""],
-      answer: "",
-    },
-    {
-      id: 2,
-      question: "",
-      options: ["", "", "", ""],
-      answer: "",
-    },
-    {
-      id: 3,
-      question: "",
-      options: ["", "", "", ""],
-      answer: "",
-    },
-    {
-      id: 4,
-      question: "",
-      options: ["", "", "", ""],
-      answer: "",
-    },
-    {
-      id: 5,
-      question: "",
-      options: ["", "", "", ""],
-      answer: "",
-    },
-  ],
+      question: "Which of the following operations can be performed on a stack?",
+      options: ["Enqueue and Dequeue", "Push and Pop", "Insert and Delete", "Search and Sort"],
+      answer: "Push and Pop"
+    }
+],
+posttest: [
+  {
+    id: 1,
+    question: "What happens when you try to pop from an empty stack?",
+    options: ["Underflow", "Overflow", "Segmentation fault", "No effect"],
+    answer: "Underflow"
+  },
+  {
+    id: 2,
+    question: "Which of the following applications use stacks?",
+    options: ["Function call management in recursion", "CPU scheduling", "Breadth-First Search (BFS)", "Memory management in heap"],
+    answer: "Function call management in recursion"
+  },
+  {
+    id: 3,
+    question: "A stack can be implemented using which two data structures?",
+    options: ["Arrays and Queues", "Linked List and Arrays", "Queues and Trees", "Heaps and Graphs"],
+    answer: "Linked List and Arrays"
+  },
+  {
+    id: 4,
+    question: "In a stack, if the PUSH operation is performed on a full stack, what is the result?",
+    options: ["Underflow", "Overflow", "Element is ignored", "Segmentation fault"],
+    answer: "Overflow"
+  },
+  {
+    id: 5,
+    question: "Which of the following is a valid postfix expression for the infix expression (A + B) * (C - D)?",
+    options: ["A B + C D - *", "A B C D + - *", "A + B * C - D", "A B * C D + -"],
+    answer: "A B + C D - *"
+  }
+],
 };
+
+
+// stack visual 
+
+const Stack = () => {
+    const [stack, setStack] = useState([]);
+    const [inputValue, setInputValue] = useState('');
+    const [message, setMessage] = useState('');
+    const [lastPushedItem, setLastPushedItem] = useState('');
+    const [lastPoppedItem, setLastPoppedItem] = useState('');
+
+    // Disable all buttons during operations
+    const [isDisabled, setIsDisabled] = useState(false);
+
+    // Handle Push Button Click
+    const handlePush = () => {
+        if (!inputValue) {
+            setMessage("Please enter a value.");
+            return;
+        }
+        if (stack.length >= 5) {
+            setInputValue('');
+            setMessage("Stack Overflow");
+            return;
+        }
+
+        const newStack = [...stack, inputValue];
+        setStack(newStack);
+        setLastPushedItem(inputValue);
+        setMessage(`Item ${inputValue} is pushed.`);
+        setInputValue('');
+        disableButtonsTemporarily();
+    };
+
+    // Handle Pop Button Click
+    const handlePop = () => {
+        if (stack.length === 0) {
+            setMessage("Stack Underflow");
+            return;
+        }
+
+        const newStack = [...stack];
+        const poppedItem = newStack.pop();
+        setStack(newStack);
+        setLastPoppedItem(poppedItem);
+        setMessage(`Item ${poppedItem} is popped.`);
+        disableButtonsTemporarily();
+    };
+
+    // Handle Reset Button Click
+    const handleReset = () => {
+        setStack([]);
+        setLastPushedItem('');
+        setLastPoppedItem('');
+        setMessage('');
+    };
+
+    // Disable buttons temporarily to simulate the delay in animation
+    const disableButtonsTemporarily = () => {
+        setIsDisabled(true);
+        setTimeout(() => {
+            setIsDisabled(false);
+        }, 1500); // Simulate delay
+    };
+
+    return (
+        <div className="stack-body">
+            <header className="stack-header">
+                <h1 className="heading">Stack Visualizer</h1>
+            </header>
+            <div className="stack-container">
+                <div className="stack-container-header">
+                    <input 
+                        type="number" 
+                        className="text" 
+                        value={inputValue} 
+                        onChange={(e) => setInputValue(e.target.value)} 
+                        disabled={isDisabled}
+                    />
+                    <button className="push" onClick={handlePush} disabled={isDisabled}>Push</button>
+                    <button className="pop" onClick={handlePop} disabled={isDisabled}>Pop</button>
+                    <button className="reset" onClick={handleReset} disabled={isDisabled}>Reset</button>
+                </div>
+                <div className="stack-container-body">
+                    <div className="stack">
+                        <div className="main-stack-bucket">
+                            {stack.map((item, index) => (
+                                <div key={index} className="ele">{item}</div>
+                            ))}
+                        </div>
+                    </div>
+                    <div className="info">
+                        <div className="sec1">
+                            <h3>Top of the Stack:</h3>
+                            <button className="box">{stack[stack.length - 1] || ''}</button>
+                        </div>
+                        <div className="sec2">
+                            <h3>Last Pushed Item:</h3>
+                            <button className="box">{lastPushedItem}</button>
+                        </div>
+                        <div className="sec3">
+                            <h3>Last Popped Item:</h3>
+                            <button className="box">{lastPoppedItem}</button>
+                        </div>
+                        <div className="sec3">
+                            <h3>Size of the Stack:</h3>
+                            <button className="box">5</button>
+                        </div>
+                        <div className="message-box">
+                            <h2>Message Box</h2>
+                            <div className="message">{message}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+
+
 
 // Header Component
 const Header = ({ toggleSidebar, toggleProgressBar }) => (
@@ -196,6 +317,9 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
           <>
             <div className='intro'>
               <h1 className='heading'> Stack </h1>
+              <p>
+              A stack is a linear data structure that operates on the Last In, First Out (LIFO) principle, where the last element added is the first one to be removed. It supports essential operations like push (to add an element), pop (to remove an element), and peek (to view the top element without removing it). Stacks can be implemented using arrays or linked lists and are widely used in programming for various purposes. Key applications include managing function calls during recursion, expression evaluation, backtracking algorithms, undo mechanisms in software, and checking for balanced parentheses in code. Despite its simplicity and efficiency, the stack has limitations such as access restrictions (only the top element can be directly accessed) and potential overflow or underflow errors when working with fixed-size implementations.
+              </p>
             </div>
           </>
         );
@@ -288,7 +412,9 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
           <>
             <div className='intro'>
               <h1 className='heading'> Stack </h1>
-              <h2>Stack Visualisation Here</h2>
+              <div>
+                <Stack />
+              </div>
               <p><a href="https://google.com/" target="_blank" rel="noopener noreferrer">Click here</a></p>
               <br />
               <br />
