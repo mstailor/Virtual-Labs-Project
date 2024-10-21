@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react';
 import './about.css';
 
 import mohdImage from '../../Images/Mohd.png';
-// import kanakImage from '../../Images/Kanak.png';
+import kanakImage from '../../Images/Kanak.png';
 import netalImage from '../../Images/Netal.jpg';
 import himanshuImage from '../../Images/Himanshu.png';
 
 const authors = [
     {
         name: "Kanak Meshram",
-        image: "",
-        description: "Web Developer focusing on creating modern, responsive websites using React and Node.js.",
+        image: kanakImage,
+        description: "Second-year web development student in learning, focusing on creating modern, responsive websites with React and Node.js.",
         linkedin: "https://www.linkedin.com/in/kanak-meshram-7a875332a/",
     },
     {
@@ -22,13 +22,13 @@ const authors = [
     {
         name: "Netal Sharma",
         image: netalImage,
-        description: "UI/UX Designer who builds intuitive and user-friendly interfaces for web and mobile applications.",
+        description: "Second-year UI/UX Designer who builds intuitive and user-friendly interfaces for web and mobile applications.",
         linkedin: "https://www.linkedin.com/in/emily-johnson",
     },
     {
         name: "Himanshu Thakur",
         image: himanshuImage,
-        description: "AI Student, which manage all event of Virtual lab , work on a team tu build a great product",
+        description: "2nd year AI Student, which manage all event of Virtual lab , work on a team tu build a great product",
         linkedin: "https://www.linkedin.com/in/mark-wilson",
     },
 ];
