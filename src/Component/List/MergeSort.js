@@ -15,14 +15,352 @@ const quizzesData = {
       id: 2,
       question: "What is the time complexity of Merge Sort?",
       options: ["O(n log n)", "O(n^2)", "O(n)", "O(log n)"],
-      answer: "O(n log n",
+      answer: "O(n log n)",
     },
-    // Add more quiz questions as needed
+    {
+      id: 3,
+      question: "Why is Divide and Conquer important in Merge Sort?",
+      options: [
+        "It helps to reduce the problem size recursively",
+        "It increases the time complexity",
+        "It is not relevant to Merge Sort",
+        "It only applies to quicksort"
+      ],
+      answer: "It helps to reduce the problem size recursively"
+    },
+    {
+      id: 4,
+      question: "Which of the following is true about Merge Sort?",
+      options: [
+        "It is an in-place sorting algorithm",
+        "It requires additional memory for merging",
+        "It does not use recursion",
+        "It sorts elements in O(n^2) time"
+      ],
+      answer: "It requires additional memory for merging"
+    },
+    {
+      id: 5,
+      question: "What is the best case time complexity of Merge Sort?",
+      options: ["O(n log n)", "O(n)", "O(n^2)", "O(log n)"],
+      answer: "O(n log n)"
+    }
   ],
   posttest: [
-    // Add posttest questions similarly
+    {
+      id: 1,
+      question: "What is the primary difference between Merge Sort and Quick Sort?",
+      options: [
+        "Merge Sort is faster than Quick Sort",
+        "Quick Sort is stable while Merge Sort is not",
+        "Merge Sort is stable, while Quick Sort is not",
+        "Both have the same time complexity in all cases"
+      ],
+      answer: "Merge Sort is stable, while Quick Sort is not"
+    },
+    {
+      id: 2,
+      question: "Why does Merge Sort require additional space?",
+      options: [
+        "To store intermediate results of recursion",
+        "To merge subarrays",
+        "To keep track of pivot elements",
+        "It doesn't require additional space"
+      ],
+      answer: "To merge subarrays"
+    },
+    {
+      id: 3,
+      question: "In what scenario would you prefer Merge Sort over Quick Sort?",
+      options: [
+        "When working with limited memory",
+        "When stability is required",
+        "When the data is mostly sorted",
+        "When the data is small"
+      ],
+      answer: "When stability is required"
+    },
+    {
+      id: 4,
+      question: "What is the recurrence relation for Merge Sort?",
+      options: [
+        "T(n) = T(n/2) + O(n)",
+        "T(n) = 2T(n/2) + O(n)",
+        "T(n) = 2T(n/2) + O(1)",
+        "T(n) = T(n) + O(log n)"
+      ],
+      answer: "T(n) = 2T(n/2) + O(n)"
+    },
+    {
+      id: 5,
+      question: "What is the auxiliary space complexity of Merge Sort?",
+      options: ["O(n)", "O(log n)", "O(n log n)", "O(1)"],
+      answer: "O(n)"
+    }
   ],
+
 };
+
+// Practice Part
+const mergeSortSteps = (arr) => {
+  let steps = [];
+
+  const merge = (left, right) => {
+    let sorted = [], i = 0, j = 0;
+
+    steps.push({ 
+      array: [...left, ...right], 
+      message: `Merging arrays: [${left.join(', ')}] and [${right.join(', ')}]`,
+      status: "merging"
+    });
+
+    while (i < left.length && j < right.length) {
+      if (left[i] < right[j]) {
+        sorted.push(left[i++]);
+      } else {
+        sorted.push(right[j++]);
+      }
+    }
+
+    const merged = [...sorted, ...left.slice(i), ...right.slice(j)];
+    steps.push({
+      array: merged,
+      message: `Merged array: [${merged.join(', ')}]`,
+      status: "sorted"
+    });
+
+    return merged;
+  };
+
+  const mergeSort = (arr) => {
+    if (arr.length <= 1) {
+      steps.push({ 
+        array: arr, 
+        message: `An array of length 1 cannot be split, ready for merge`,
+        status: "ready"
+      });
+      return arr;
+    }
+
+    const mid = Math.floor(arr.length / 2);
+    const left = mergeSort(arr.slice(0, mid));
+    const right = mergeSort(arr.slice(mid));
+
+    return merge(left, right);
+  };
+
+  mergeSort(arr);
+  steps.push({
+    array: arr.sort((a, b) => a - b),
+    message: `Final sorted array: [${arr.join(', ')}]`,
+    status: "final"
+  });
+  return steps;
+};
+
+const MergeSortSimulator = () => {
+  const [array, setArray] = useState([77, 47, 12, 67, 39, 21]);
+  const [steps, setSteps] = useState([]);
+  const [currentStep, setCurrentStep] = useState(0);
+
+  const setup = () => {
+    const newSteps = mergeSortSteps(array);
+    setSteps(newSteps);
+    setCurrentStep(0);
+  };
+
+  const nextStep = () => {
+    if (currentStep < steps.length - 1) {
+      setCurrentStep(currentStep + 1);
+    }
+  };
+
+  const reset = () => {
+    setCurrentStep(0);
+  };
+
+  return (
+    <div className="merge-sort-container">
+      <h1 className="title">Merge Sort Practice</h1>
+      <div className="controls">
+        <select
+          className="array-select"
+          onChange={(e) => setArray(e.target.value.split(',').map(Number))}
+        >
+          <option value={[77, 47, 12, 67, 39, 21]}>Array: [77, 47, 12, 67, 39, 21]</option>
+          <option value={[5, 3, 8, 6, 2, 1]}>Array: [5, 3, 8, 6, 2, 1]</option>
+        </select>
+        <div className='new-but-merge-sort'>
+        <button className="btn" onClick={setup}>Setup</button>
+        <button className="btn" onClick={reset}>Reset</button>
+        <button className="btn" onClick={nextStep}>Next</button>
+        </div>
+      </div>
+
+      <div className="visualization">
+        <h2>Array Visualization</h2>
+        {steps.length > 0 && (
+          <div className="array-display">
+            {steps[currentStep].array.map((num, index) => (
+              <div key={index} className={`array-box ${steps[currentStep].status}`}>
+                {num}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <div className="observation">
+        <h2>Observations</h2>
+        {steps.length > 0 && (
+          <div>
+            <p>{steps[currentStep].message}</p>
+          </div>
+        )}
+      </div>
+
+      {currentStep === steps.length - 1 && (
+        <div className="final-message">
+          <h2>Sorted Array: [{steps[steps.length - 1].array.join(", ")}]</h2>
+        </div>
+      )}
+    </div>
+  );
+};
+
+
+// Exercise Part of Merge Sort
+const generateRandomArray = (size) => {
+  const arr = [];
+  for (let i = 0; i < size; i++) {
+    arr.push(Math.floor(Math.random() * 100));
+  }
+  return arr;
+};
+
+const checkMergeOrder = (left, right, result) => {
+  let merged = [];
+  let i = 0, j = 0;
+  while (i < left.length && j < right.length) {
+    if (left[i] < right[j]) {
+      merged.push(left[i++]);
+    } else {
+      merged.push(right[j++]);
+    }
+  }
+  merged = [...merged, ...left.slice(i), ...right.slice(j)];
+  return JSON.stringify(merged) === JSON.stringify(result);
+};
+
+const MergeSortDragDrop = () => {
+  const [array, setArray] = useState(generateRandomArray(6));
+  const [leftArray, setLeftArray] = useState([]);
+  const [rightArray, setRightArray] = useState([]);
+  const [mergedArray, setMergedArray] = useState([]);
+  const [feedback, setFeedback] = useState("");
+
+  const handleDrop = (arr, setArr, item) => {
+    if (!arr.includes(item)) {
+      setArr([...arr, item]);
+    }
+  };
+
+  const handleMergeSubmit = () => {
+    if (checkMergeOrder(leftArray, rightArray, mergedArray)) {
+      setFeedback("Well done! You have successfully merged the arrays!");
+    } else {
+      setFeedback("Incorrect merge. Try again.");
+    }
+  };
+
+  const resetExercise = () => {
+    setArray(generateRandomArray(6));
+    setLeftArray([]);
+    setRightArray([]);
+    setMergedArray([]);
+    setFeedback("");
+  };
+
+  return (
+    <div className="merge-sort-exercise">
+      <h1>Merge Sort Drag-and-Drop Exercise</h1>
+
+      <div className="array-container">
+        <h2>Step 1: Drag items to split the array</h2>
+        <p>Original Array: [{array.join(", ")}]</p>
+
+        <div className="drag-items">
+          {array.map((item) => (
+            <div
+              key={item}
+              className="draggable-item"
+              draggable
+              onDragStart={(e) => e.dataTransfer.setData("text/plain", item)}
+            >
+              {item}
+            </div>
+          ))}
+        </div>
+
+        <div className="drop-zones">
+          <div
+            className="drop-zone"
+            onDrop={(e) => handleDrop(leftArray, setLeftArray, +e.dataTransfer.getData("text/plain"))}
+            onDragOver={(e) => e.preventDefault()}
+          >
+            <h3>Left Half</h3>
+            <div>{leftArray.join(", ")}</div>
+          </div>
+
+          <div
+            className="drop-zone"
+            onDrop={(e) => handleDrop(rightArray, setRightArray, +e.dataTransfer.getData("text/plain"))}
+            onDragOver={(e) => e.preventDefault()}
+          >
+            <h3>Right Half</h3>
+            <div>{rightArray.join(", ")}</div>
+          </div>
+        </div>
+      </div>
+
+      <div className="merge-step">
+        <h2>Step 2: Drag items to merge the arrays</h2>
+        <div className="drag-items">
+          {[...leftArray, ...rightArray].map((item) => (
+            <div
+              key={item}
+              className="draggable-item"
+              draggable
+              onDragStart={(e) => e.dataTransfer.setData("text/plain", item)}
+            >
+              {item}
+            </div>
+          ))}
+        </div>
+
+        <div
+          className="drop-zone merge-zone"
+          onDrop={(e) => handleDrop(mergedArray, setMergedArray, +e.dataTransfer.getData("text/plain"))}
+          onDragOver={(e) => e.preventDefault()}
+        >
+          <h3>Merged Array</h3>
+          <div>{mergedArray.join(", ")}</div>
+        </div>
+
+        <button className="btn" onClick={handleMergeSubmit}>Submit Merge</button>
+      </div>
+
+      {feedback && <div className="feedback">{feedback}</div>}
+
+      <button className="btn reset-btn" onClick={resetExercise}>Reset Exercise</button>
+    </div>
+  );
+};
+
+
+
+
+
 
 // Header Component
 const Header = ({ toggleSidebar }) => (
@@ -239,6 +577,16 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
             </section>
           </>
         );
+
+      case 'Practice': 
+      return (
+          <MergeSortSimulator/>
+      );
+
+      case 'Exercise': 
+      return (
+          <MergeSortDragDrop/>
+      );
       default:
         return <p>Select an option from the sidebar.</p>;
     }
@@ -246,8 +594,8 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
 
   const downloadPDF = () => {
     const doc = new jsPDF();
-    const startY = 20; // Starting Y position for the first element
-    let currentY = startY; // Keep track of current Y position
+    const startY = 20; 
+    let currentY = startY; 
 
     // Title Section
     doc.setFontSize(15);
@@ -256,20 +604,17 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
 
     // Add a thicker Line Below Title
     doc.setLineWidth(1);
-    doc.line(20, currentY + 6, 190, currentY + 6); // Adjusted line position
+    doc.line(20, currentY + 6, 190, currentY + 6); 
     <br></br>
 
-    // Reset Color and Font for Answers Section
-    currentY += 10; // Move down for answers heading
+    currentY += 10; 
     doc.setTextColor(0);
     doc.setFontSize(10);
 
-    // Move down for answers section
     currentY += 5;
 
-    // Loop through quizzes to display questions and options
     quizzes.forEach((quiz, index) => {
-      // Question
+
       const questionText = `${quiz.question}`;
       doc.setFont("helvetica", "bold");
       doc.text(questionText, 20, currentY);
@@ -306,7 +651,7 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
       doc.setTextColor(0);
 
       // Add extra space after each question block
-      currentY += 5; // Additional spacing between questions
+      currentY += 5; 
     });
 
     // Score Section
