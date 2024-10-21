@@ -23,7 +23,7 @@ const authors = [
         name: "Netal Sharma",
         image: netalImage,
         description: "Second-year UI/UX Designer who builds intuitive and user-friendly interfaces for web and mobile applications.",
-        linkedin: "https://www.linkedin.com/in/emily-johnson",
+        linkedin: "https://www.linkedin.com/in/netal-sharma-863356327/",
     },
     {
         name: "Himanshu Thakur",
