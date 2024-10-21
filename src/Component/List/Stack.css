@@ -71,7 +71,7 @@
   left: 0;
   font-size: large;
   color: black;
-  background-color: #faf8f8;
+  background-color: #e2e1e1;
   display: contain;
   cursor: pointer;
   width: 200px;
@@ -198,15 +198,13 @@ ol li a{
 }
 
 .correct {
-  background-color: white;
-  color: green;
-  font-weight: bold;
+  background-color: lightgreen;
+  color: darkgreen;
 }
 
 .incorrect {
-  color: red;
-  background-color: white;
-  font-weight: bold;
+  background-color: lightcoral;
+  color: darkred;
 }
 
 .option-label {
@@ -216,222 +214,206 @@ ol li a{
   border-radius: 5px;
 }
 
-/* responsive code start from here */
-/* for header  */
-header {
-  width: 100vw;
-  height: 150px;
-}
-
-.header-head {
-  width: 70vw;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: auto;
-  padding-top: 10px;
-}
-
-.left-head,
-.right-head {
-  display: inline-block;
-}
-
-.left-head,
-img,
-p {
-  display: inline-block;
-}
-
-.vl-logo {
-  height: 100px;
-  width: auto;
-}
-
-input[type=search] {
-  border: 1px solid rgba(128, 128, 128, 0.9);
-  padding: 6px 70px 6px 10px;
-  border-radius: 15px;
-}
-
-/* Media Queries for Responsive Header */
-
-/* For tablet devices (width <= 768px) */
-@media (max-width: 768px) {
-  .header-head {
-      width: 90vw;
-      flex-direction: column;
-      justify-content: center;
-      padding-top: 5px;
-  }
-
-  .vl-logo {
-      height: 80px;
-  }
-
-  .right-head {
-      margin-top: 10px;
-  }
-
-  input[type=search] {
-      width: 100%;
-      padding: 6px 10px;
-  }
-}
-
-/* For mobile devices (width <= 480px) */
-@media (max-width: 480px) {
-  .header-head {
-      width: 95vw;
-      flex-direction: column;
-      justify-content: center;
-  }
-
-  .vl-logo {
-      height: 60px;
-  }
-
-  input[type=search] {
-      width: 100%;
-      padding: 6px 10px;
-  }
-
-  .nav ul li a {
-      font-size: 16px;
-      padding: 5px 10px;
-  }
-
-  .nav ul li {
-      padding: 0px 10px;
-  }
-}
-
-/* For very small mobile devices (width <= 320px) */
-@media (max-width: 320px) {
-  .vl-logo {
-      height: 50px;
-  }
-
-  .header-head {
-      width: 100vw;
-      flex-direction: column;
-  }
-
-  input[type=search] {
-      width: 100%;
-      padding: 5px 10px;
-  }
-
-  .nav ul li a {
-      font-size: 14px;
-      padding: 5px 8px;
-  }
-
-  .nav ul li {
-      padding: 0px 5px;
-  }
-}
-
-
-/* for MQ of footer  */
-footer {
-  width: 100vw;
-  background-color: #02263c;
-  color: white;
-  font-size: 14px;
-  font-family: Arial, Helvetica, sans-serif;
-  padding: 20px 0;
-}
-
-.footer-head {
-  width: 70vw;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin: auto;
-  flex-wrap: wrap; /* To handle responsiveness */
-}
-
-footer ul {
-  list-style: none;
+* {
+  margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
-footer li,
-a {
-  color: white;
-  text-decoration: none;
-  padding-bottom: 10px;
-  display: block;
+.stack-body {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
 }
 
-footer p {
+.stack-header {
+  height: 100px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.heading {
+  color: rgb(52,239,223,1);
+}
+
+.stack-container {
+  height: 620px;
+  width: 1000px;
+  box-shadow: 8px 8px 20px #34efdf;
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.stack-container-header {
+  height: 90px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+.stack-container-header input {
+  height: 50px;
+  width: 400px;
+  font-size: 25px;
+  border-radius: 10px;
+  padding-left: 20px;
+  padding-right: 5px;
+}
+
+.push, .pop, .reset, .box {
+  height: 50px;
+  width: 140px;
+  font-size: 25px;
+  background-color: rgb(79, 60, 176);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+  border: none;
+}
+
+.disable-button {
+  background-color: green;
+}
+
+.container-header button:active {
+  transform: scale(0.95);
+}
+
+.stack-container-body {
+  width: 1000px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.stack {
+  width: 500px;
+  height: 470px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-width: 0 3px 0 0;
+  border-color: black;
+  border-style: solid;
+}
+
+.main-stack-bucket {
+  height: 450px;
+  width: 200px;
+  border-width: 0 4px 4px 4px;
+  border-color: black;
+  border-style: solid;
+  border-radius: 0 0 10px 10px;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  flex-direction: column-reverse;
+  gap: 5px;
+  padding-bottom: 5px;
+}
+
+.ele {
+  height: 80px;
+  width: 170px;
+  background-color: rgb(63, 197, 238);
+  border: 4px black solid;
+  border-radius: 10px;
+  font-size: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ele-add {
+  animation: pushAnimation 0.3s infinite linear;
+}
+
+.ele-remove {
+  animation: popAnimation 0.3s infinite linear;
+}
+
+@keyframes pushAnimation {
+  0% {
+    background-color: green;
+  }
+  100% {
+    background-color: rgb(17, 92, 255);
+  }
+}
+
+@keyframes popAnimation {
+  0% {
+    background-color: green;
+  }
+  100% {
+    background-color: rgb(255, 15, 59);
+  }
+}
+
+.info {
+  height: 470px;
+  width: 500px;
+  padding-left: 20px;
+}
+
+[class^="sec"] {
+  display: flex;
+  width: 350px;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  justify-content: space-between;
+}
+
+.massage-box {
+  height: 180px;
+  width: 400px;
+  margin-top: 30px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: rgb(140, 116, 165);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.massage-box h2 {
   text-align: center;
-  margin-top: 20px;
-  font-size: 15px;
+  font-weight: 600;
 }
 
-/* Flexbox columns for each section */
-.foot-one,
-.foot-two,
-.foot-three {
-  flex: 1;
-  margin: 10px;
-  min-width: 200px; 
+.massage {
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
 }
 
-@media (max-width: 768px) {
-  .footer-head {
-      width: 90vw;
-      flex-direction: column;
-      text-align: center;
-  }
+.error-massage {
+  animation: errorMassage 0.4s infinite linear;
+}
 
-  .foot-one,
-  .foot-two,
-  .foot-three {
-      margin: 20px 0;
+@keyframes errorMassage {
+  0% {
+    background-color: bisque;
   }
-
-  footer p {
-      font-size: 14px;
+  100% {
+    background-color: rgb(255, 15, 59);
   }
 }
 
-/* For mobile devices (width <= 480px) */
-@media (max-width: 480px) {
-  .footer-head {
-      width: 95vw;
-      flex-direction: column;
-      text-align: center;
-  }
-
-  .foot-one,
-  .foot-two,
-  .foot-three {
-      margin: 15px 0;
-  }
-
-  footer p {
-      font-size: 13px;
-  }
-}
-
-/* For very small mobile devices (width <= 320px) */
-@media (max-width: 320px) {
-  .footer-head {
-      width: 100vw;
-      flex-direction: column;
-      text-align: center;
-  }
-
-  footer p {
-      font-size: 12px;
-  }
-
-  .foot-one,
-  .foot-two,
-  .foot-three {
-      margin: 10px 0;
-  }
-}
