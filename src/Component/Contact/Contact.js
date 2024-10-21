@@ -73,7 +73,7 @@ const Contact = () => {
             </header>
 
             <main>
-                <div className="sec-nav">
+                <div className="sec-nav" style={{width:"100%"}}>
                     Contact Us
                 </div>
 

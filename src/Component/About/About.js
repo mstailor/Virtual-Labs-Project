@@ -113,7 +113,7 @@ const About = () => {
             </header>
 
             <main>
-                <div className="sec-nav">
+                <div className="sec-nav" style={{width:"100%"}}>
                     About RBU, Nagpur - VIRTUAL LAB
                 </div>
 
