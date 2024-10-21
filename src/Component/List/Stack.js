@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import jsPDF from 'jspdf';
 import './Stack.css'; // Ensure your CSS file is included for styling
 
 // Predefined quizzes
@@ -175,7 +174,9 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
               <br />
               <br />
               <h2 className='sub-heading'>Estimated Time</h2>
-              <p></p>
+              <p> 20 minutes</p><br></br>
+              <h2 className='sub-heading'>About</h2>
+              <p>A stack is a linear data structure that follows the Last In, First Out (LIFO) principle, meaning the last element added to the stack is the first one to be removed. Stacks are composed of a collection of elements, where each element is added or removed from one end, called the "top." Stacks are widely used in various applications, including function call management, expression evaluation, and backtracking algorithms.</p>
               <br />
               <br />
               <h2 className='sub-heading'>Learning Objectives of this Module</h2>
@@ -183,6 +184,8 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
                 <li>Gain basic understanding of stacks</li>
                 <li>Understand Stack operations and associated time complexities</li>
                 <li>Understand applications of Stacks</li>
+                <li>Analyze common use cases and applications of Stacks</li>
+                <li>Understand the advantages and disadvantages of Stacks</li>
               </ul>
             </div>
           </>
@@ -219,8 +222,63 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
               <br />
               <br />
               <h2 className='sub-heading'> Stack Demonstration </h2>
-              <img className='image' src="/Sources/.jpeg"></img>
+              <img className='image' src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/20221219100314/stack.drawio2.png"></img>
               <br />
+              <h2>1. Basic Operations</h2>
+    <ul>
+        <li><strong>Push</strong>: Adds an element to the top of the stack.</li>
+        <li><strong>Pop</strong>: Removes the top element from the stack and returns it.</li>
+        <li><strong>Peek (or Top)</strong>: Returns the top element without removing it from the stack.</li>
+        <li><strong>isEmpty</strong>: Checks if the stack is empty.</li>
+        <li><strong>Size</strong>: Returns the number of elements in the stack.</li>
+    </ul>
+
+    <h2>2. Implementation</h2>
+    <p>Stacks can be implemented using arrays or linked lists:</p>
+    <ul>
+        <li><strong>Array-based Stack</strong>: Uses a fixed-size array to store elements. The top of the stack is tracked using an index.</li>
+        <li><strong>Linked List-based Stack</strong>: Uses a linked list where each node points to the next node. The top of the stack is represented by the head of the list.</li>
+    </ul>
+
+    <h2>3. Characteristics</h2>
+    <ul>
+        <li><strong>LIFO Structure</strong>: The last element added is the first one to be removed.</li>
+        <li><strong>Dynamic Size</strong>: Depending on the implementation, stacks can grow and shrink dynamically.</li>
+        <li><strong>Limited Access</strong>: Only the top element is accessible; elements below it cannot be accessed directly.</li>
+    </ul>
+
+    <h2>4. Applications</h2>
+    <ul>
+        <li><strong>Function Call Management</strong>: Stacks are used to keep track of function calls in programming languages.</li>
+        <li><strong>Expression Evaluation</strong>: Stacks are used in algorithms for evaluating expressions (like infix, postfix, and prefix).</li>
+        <li><strong>Backtracking Algorithms</strong>: Stacks are used in algorithms that explore all possible solutions, such as depth-first search (DFS) in graphs.</li>
+        <li><strong>Undo Mechanisms</strong>: Many applications use stacks to implement undo functionality.</li>
+    </ul>
+
+    <h2>5. Time Complexity</h2>
+    <ul>
+        <li><strong>Push</strong>: O(1) – Adding an element to the top of the stack is done in constant time.</li>
+        <li><strong>Pop</strong>: O(1) – Removing the top element is also done in constant time.</li>
+        <li><strong>Peek</strong>: O(1) – Accessing the top element is done in constant time.</li>
+        <li><strong>isEmpty</strong>: O(1) – Checking if the stack is empty is done in constant time.</li>
+    </ul>
+
+    <h2>Example of Stack Operations</h2>
+    <p>Here’s a simple example to illustrate stack operations:</p>
+    <ol>
+        <li><strong>Initialization</strong>: Start with an empty stack.</li>
+        <li><strong>Push Elements</strong>: 
+            <ul>
+                <li>Push <code>10</code>: Stack becomes <code>[10]</code></li>
+                <li>Push <code>20</code>: Stack becomes <code>[10, 20]</code></li>
+                <li>Push <code>30</code>: Stack becomes <code>[10, 20, 30]</code></li>
+            </ul>
+        </li>
+        <li><strong>Peek</strong>: Returns <code>30</code> (the top element).</li>
+        <li><strong>Pop</strong>: Removes <code>30</code>, stack becomes <code>[10, 20]</code>.</li>
+        <li><strong>Pop</strong>: Removes <code>20</code>, stack becomes <code>[10]</code>.</li>
+        <li><strong>isEmpty</strong>: Returns <code>false</code> (stack is not empty).</li>
+    </ol>
             </div>
           </>
         );
@@ -230,6 +288,8 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
           <>
             <div className='intro'>
               <h1 className='heading'> Stack </h1>
+              <h2>Stack Visualisation Here</h2>
+              <p><a href="https://google.com/" target="_blank" rel="noopener noreferrer">Click here</a></p>
               <br />
               <br />
             </div>
@@ -273,21 +333,12 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
                 </div>
               </div>
             ))}
-            <div className="Button-container">
-  <button className="SubmitButton" onClick={handleSubmit} disabled={submitted}>
-    Submit
-  </button>
-  {submitted && (
-    <button onClick={downloadPDF} className="pdfButton">
-      Download Results as PDF
-    </button>
-  )}
-</div>
-
+            <button className='SubmitButton' onClick={handleSubmit} disabled={submitted}>
+              Submit
+            </button>
             {submitted && (
               <div className='score-display'>
                 <h3>Your Score: {correctAnswers} / {quizzes.length}</h3>
-                
               </div>
             )}
           </div>
@@ -298,81 +349,6 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
     }
   };
 
-  const downloadPDF = () => {
-    const doc = new jsPDF();
-    const startY = 20; // Starting Y position for the first element
-    let currentY = startY; // Keep track of current Y position
-  
-    // Title Section
-    doc.setFontSize(15);
-    doc.setFont("helvetica", "bold");
-    doc.text('Quiz Results', 20, currentY);
-    
-    // Add a thicker Line Below Title
-    doc.setLineWidth(1);
-    doc.line(20, currentY + 6, 190, currentY + 6); // Adjusted line position
-    <br></br>
-  
-    // Reset Color and Font for Answers Section
-    currentY += 10; // Move down for answers heading
-    doc.setTextColor(0);
-    doc.setFontSize(10);
-  
-    // Move down for answers section
-    currentY += 5; 
-  
-    // Loop through quizzes to display questions and options
-    quizzes.forEach((quiz, index) => {
-      // Question
-      const questionText = `${quiz.question}`;
-      doc.setFont("helvetica", "bold");
-      doc.text(questionText, 20, currentY);
-      
-      // Move down for options
-      currentY += 8; 
-  
-      // Options
-      doc.setFont("helvetica", "normal"); 
-      quiz.options.forEach((option, optionIndex) => {
-        const userAnswer = userAnswers[quiz.id];
-        const isCorrect = option === quiz.answer;
-        const isUserAnswer = option === userAnswer;
-  
-        // Color Logic
-        if (isUserAnswer && !isCorrect) {
-          // Wrong answer in red
-          doc.setTextColor(255, 0, 0); // Red
-        } else if (isCorrect) {
-          // Correct answer in green
-          doc.setTextColor(0, 128, 0); // Green
-        } else {
-          doc.setTextColor(0); // Default color for other options
-        }
-  
-        // Print the option
-        doc.text(`${String.fromCharCode(65 + optionIndex)}. ${option}`, 20, currentY);
-        
-        // Move down for the next option
-        currentY += 8; // Adjust spacing as needed
-      });
-  
-      // Reset color for the next question
-      doc.setTextColor(0);
-      
-      // Add extra space after each question block
-      currentY += 5; // Additional spacing between questions
-    });
-
-        // Score Section
-        currentY += 10; // Move down for score
-        doc.setTextColor(0, 102, 204); // Blue color
-        doc.setFontSize(15);
-        doc.text(`Your Score: ${correctAnswers} / ${quizzes.length}`, 20, currentY);
-      
-  
-    // Save the PDF
-    doc.save('quiz-results.pdf');
-  };
   return (
     <div className="main-content">
       {renderContent()}
