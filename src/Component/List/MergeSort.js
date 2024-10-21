@@ -580,12 +580,16 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
 
       case 'Practice': 
       return (
+        <>
           <MergeSortSimulator/>
+        </>
       );
 
       case 'Exercise': 
       return (
+        <>
           <MergeSortDragDrop/>
+        </>
       );
       default:
         return <p>Select an option from the sidebar.</p>;
