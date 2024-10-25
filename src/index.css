@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
 }
 
 .top {
@@ -44,53 +45,51 @@ p {
 
 input[type=search] {
   border: 1px solid rgba(128, 128, 128, 0.9);
-  padding: 4px 10px 4px 10px;
+  padding: 4px 10px;
   border-radius: 15px;
 }
 
 nav {
-  height: 35px;
-  width: 100vw; 
+  width: 100%; /* Full width */
   background-color: #00446d;
-  overflow: hidden; 
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center navigation items */
   padding: 0; 
-  margin: 0; 
-  display: flex; 
-  align-items: center; 
-  box-sizing: border-box; 
 }
 
 .nav {
   margin: auto;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+}
+
+.nav ul {
+  display: flex; /* Use flexbox for horizontal layout */
+  list-style: none; /* Remove default list style */
+  padding: 0; /* Reset padding */
+  margin: 0; /* Reset margin */
 }
 
 .nav ul li {
-  display: inline-block;
-  padding: 0px 15px;
+  padding: 0 15px; /* Space between items */
 }
 
 .nav ul li a {
-  display: inline-block;
-  padding: 5px 20px 5px 0px;
   color: #fff;
   font-size: 18px;
   text-decoration: none;
-  border-right: 1px solid #2b88c2;
+  padding: 5px 0; /* Adjust padding for links */
+  display: block; /* Ensure links occupy full height */
 }
 
 .nav ul li a:hover {
   color: red;
 }
 
-/* section one */
-
+/* Section One */
 .wrapper {
   display: flex;
   max-width: 90vw;
-  width: 100%;
   height: 400px;
   margin: auto;
   align-items: center;
@@ -157,8 +156,7 @@ i#next {
   object-fit: cover;
 }
 
-
-/* section two */
+/* Section Two */
 .two {
   margin-top: 30px;
   color: black;
@@ -188,18 +186,16 @@ i#next {
 .topic-name {
   font-size: 30px;
   font-weight: 400;
-  font-family: Arial, Helvetica, sans-serif;
   color: rgb(0, 58, 104);
   margin-bottom: 20px;
 }
 
 .topic-bio {
   font-size: 18px;
-  font-family: Arial, Helvetica, sans-serif;
   color: black;
 }
 
-/* Section three */
+/* Section Three */
 .three {
   width: 100vw;
   margin-top: 30px;
@@ -209,7 +205,6 @@ i#next {
 .three-sec {
   font-size: 30px;
   font-weight: 300;
-  font-family: Arial, Helvetica, sans-serif;
   color: rgb(0, 58, 104);
   padding-top: 50px;
   margin-left: 400px;
@@ -221,8 +216,8 @@ i#next {
   height: 300px;
   margin: auto;
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(5, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   color: rgba(255, 255, 255, 0.7);
   row-gap: 15px;
 }
@@ -230,7 +225,6 @@ i#next {
 .lab-link ul li a {
   font-size: 20px;
   font-weight: 300;
-  font-family: Arial, Helvetica, sans-serif;
   color: rgb(0, 58, 104);
   text-decoration: none;
 }
@@ -241,13 +235,12 @@ footer {
   color: white;
   padding: 3px;
   font-size: 14px;
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 .footer-head {
   width: 70vw;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   margin: auto;
   padding-top: 20px;
 }
@@ -294,7 +287,7 @@ footer p {
   }
 }
 
-@media screen and (min-width:600)and (max-width: 1100px) {
+@media screen and (min-width: 600px) and (max-width: 1100px) {
   .nav {
       max-width: 80vw;
       margin: auto;
@@ -362,8 +355,8 @@ footer p {
   }
 }
 
-/* responsive code start from here */
-/* for header  */
+/* Responsive code start from here */
+/* For header  */
 header {
   width: 100vw;
   height: 150px;
@@ -428,328 +421,14 @@ input[type=search] {
 /* For mobile devices (width <= 480px) */
 @media (max-width: 480px) {
   .header-head {
-      width: 95vw;
-      flex-direction: column;
-      justify-content: center;
+      width: 100vw;
   }
 
   .vl-logo {
       height: 60px;
   }
 
-  input[type=search] {
-      width: 100%;
-      padding: 6px 10px;
-  }
-
-  .nav ul li a {
-      font-size: 16px;
-      padding: 5px 10px;
-  }
-
-  .nav ul li {
-      padding: 0px 10px;
-  }
-}
-
-/* For very small mobile devices (width <= 320px) */
-@media (max-width: 320px) {
-  .vl-logo {
-      height: 50px;
-  }
-
-  .header-head {
-      width: 100vw;
-      flex-direction: column;
-  }
-
-  input[type=search] {
-      width: 100%;
-      padding: 5px 10px;
-  }
-
-  .nav ul li a {
-      font-size: 14px;
-      padding: 5px 8px;
-  }
-
-  .nav ul li {
-      padding: 0px 5px;
-  }
-}
-
-
-/* for MQ of footer  */
-footer {
-  width: 100vw;
-  background-color: #02263c;
-  color: white;
-  font-size: 14px;
-  font-family: Arial, Helvetica, sans-serif;
-  padding: 20px 0;
-}
-
-.footer-head {
-  width: 70vw;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin: auto;
-  flex-wrap: wrap; /* To handle responsiveness */
-}
-
-footer ul {
-  list-style: none;
-  padding: 0;
-}
-
-footer li,
-a {
-  color: white;
-  text-decoration: none;
-  padding-bottom: 10px;
-  display: block;
-}
-
-footer p {
-  text-align: center;
-  margin-top: 20px;
-  font-size: 15px;
-}
-
-/* Flexbox columns for each section */
-.foot-one,
-.foot-two,
-.foot-three {
-  flex: 1;
-  margin: 10px;
-  min-width: 200px; 
-}
-
-@media (max-width: 768px) {
-  .footer-head {
-      width: 90vw;
-      flex-direction: column;
-      text-align: center;
-  }
-
-  .foot-one,
-  .foot-two,
-  .foot-three {
-      margin: 20px 0;
-  }
-
-  footer p {
-      font-size: 14px;
-  }
-}
-
-/* For mobile devices (width <= 480px) */
-@media (max-width: 480px) {
-  .footer-head {
-      width: 95vw;
-      flex-direction: column;
-      text-align: center;
-  }
-
-  .foot-one,
-  .foot-two,
-  .foot-three {
-      margin: 15px 0;
-  }
-
-  footer p {
-      font-size: 13px;
-  }
-}
-
-/* For very small mobile devices (width <= 320px) */
-@media (max-width: 320px) {
-  .footer-head {
-      width: 100vw;
-      flex-direction: column;
-      text-align: center;
-  }
-
-  footer p {
-      font-size: 12px;
-  }
-
-  .foot-one,
-  .foot-two,
-  .foot-three {
-      margin: 10px 0;
-  }
-}
-
-/* General styling */
-.two {
-  padding: 20px;
-  background-color: #f8f9fa;
-  font-family: Arial, sans-serif;
-}
-
-.contain-two {
-  width: 70vw;
-  margin: auto;
-  text-align: center;
-}
-
-/* Styling for tab buttons */
-.tab {
-  display: flex;
-  margin-bottom: 20px;
-}
-
-.tab button {
-  color: black;
-  padding: 10px 20px;
-  margin: 0 10px;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  font-size: 16px;
-  transition: background-color 0.3s ease;
-}
-
-.tab button:hover {
-  background-color: #0056b3;
-}
-
-.below-div {
-  text-align: left;
-  margin-top: 20px;
-}
-
-.topic-name {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 10px;
-  color: #333;
-}
-
-.topic-bio {
-  font-size: 18px;
-  line-height: 1.6;
-  color: #555;
-}
-
-/* Responsive Media Queries */
-
-/* For Tablets (width <= 768px) */
-@media (max-width: 768px) {
-  .contain-two {
-      width: 90vw;
-  }
-
-  .tab button {
-      margin: 10px 0;
-      width: 100%;  /* Full width for buttons on smaller screens */
-  }
-
-  .topic-bio {
-      font-size: 16px;
-  }
-
-  .topic-name {
-      font-size: 22px;
-  }
-}
-
-/* For Mobile Devices (width <= 480px) */
-@media (max-width: 480px) {
-  .contain-two {
-      width: 95vw;
-  }
-
-  .tab button {
-      padding: 12px;
-      font-size: 14px;
-  }
-
-  .topic-bio {
-      font-size: 15px;
-  }
-
-  .topic-name {
-      font-size: 20px;
-  }
-}
-
-/* For very small devices (width <= 320px) */
-@media (max-width: 320px) {
-  .tab button {
-      padding: 10px;
-      font-size: 12px;
-  }
-
-  .topic-bio {
-      font-size: 14px;
-  }
-
-  .topic-name {
-      font-size: 18px;
-  }
-}
-
-
-/* General styles for the VideoSection */
-.three {
-  padding: 40px 0;
-  background-color: #f4f4f4;
-  font-family: Arial, sans-serif;
-}
-
-.three-sec {
-  width: 70vw;
-  margin: auto;
-  text-align: center;
-}
-
-.labs {
-  font-size: 28px;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 20px;
-}
-
-/* Make the iframe responsive */
-.three-sec iframe {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 9; /* Maintain 16:9 ratio for video */
-  max-width: 100%;
-  border: none;
-}
-
-/* Responsive adjustments */
-
-/* For Tablets (width <= 768px) */
-@media (max-width: 768px) {
-  .three-sec {
-      width: 90vw; /* Adjust container width for tablets */
-  }
-
-  .labs {
-      font-size: 24px;
-  }
-
-  .three-sec iframe {
-      height: 280px; /* Slightly smaller video height for tablets */
-  }
-}
-
-/* For Mobile Devices (width <= 480px) */
-@media (max-width: 480px) {
-  .three-sec {
-      width: 95vw; /* Use almost full width of the screen */
-  }
-
-  .labs {
-      font-size: 20px;
-  }
-
-  .three-sec iframe {
-      height: 200px; /* Smaller video height for mobile */
+  .right-head {
+      margin-top: 5px;
   }
 }
