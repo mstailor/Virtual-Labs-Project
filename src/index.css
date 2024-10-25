@@ -1,7 +1,6 @@
 * {
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
 }
 
 .top {
@@ -17,8 +16,7 @@
   max-width: 80vw;
   margin: auto;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: space-between;;
 }
 
 .face-id img {
@@ -28,7 +26,6 @@
 header {
   width: 100vw;
   height: 150px;
-  /* background-color: greenyellow; */
 }
 
 .header-head {
