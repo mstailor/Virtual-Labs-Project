@@ -8,32 +8,33 @@
   color: white;
 }
 
-.two .contain-two button{
+.two .contain-two button {
   color: black;
   font-weight: 700;
   margin-right: 10px;
   padding: 10px 15px;
   border: 1px solid black;
 }
-.two .contain-two button:hover{
+
+.two .contain-two button:hover {
   color: white;
   background-color: black;
 }
 
-.top-bar-above{
+.top-bar-above {
   width: 100vw;
 }
 
-.intro .topicForLL{
+.intro .topicForLL {
   margin-left: 40px;
 }
 
-.intro .topicForLL li a{
+.intro .topicForLL li a {
   color: rgb(58, 5, 249);
   line-height: 1.5;
 }
 
-.intro .topicForLL li a:hover{
+.intro .topicForLL li a:hover {
   color: red;
   line-height: 1.5;
 }
@@ -45,7 +46,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color:  #07385e;
+  background-color: #07385e;
   color: white;
 }
 
@@ -137,7 +138,7 @@ progress {
   text-align: justify;
 }
 
-.intro-out{
+.intro-out {
   font-size: 2em;
   font-weight: 600;
 }
@@ -184,35 +185,38 @@ progress {
   line-height: 1.5;
 }
 
-.feed .but-feedback{
+.feed .but-feedback {
   cursor: pointer;
   font-weight: 500;
   padding: 8px 20px;
   background-color: #e7e4e4;
 }
 
-.list-exp{
+.list-exp {
   display: flex;
   flex-direction: column;
   text-align: justify;
   margin-left: 50px;
   line-height: 30px;
 }
-ul , ol {
+
+ul,
+ol {
   font-size: 18px;
   font-weight: 500;
 }
-ol li{
+
+ol li {
   margin-left: 20px;
-  
+
 }
 
-ol li a{
+ol li a {
   color: darkblue;
-  
+
 }
 
-.intro .SubmitButton{
+.intro .SubmitButton {
   margin-top: 50px;
   padding: 20px;
   background-color: rgb(66, 66, 175);
@@ -256,43 +260,40 @@ ol li a{
   margin-bottom: 20px;
 }
 
-.linked-list-diagram {
-  display: flex;
-  align-items: center;
-  margin: 20px 0;
-}
-
 .node {
   display: flex;
   align-items: center;
-  background-color: #fff;
   border: 2px solid #333;
   padding: 10px;
-  margin: 0 25px; 
+  margin: 0 25px;
   border-radius: 5px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-  position: relative; 
+  position: relative;
+  width: 100px;
 }
 
 .arrow-right {
-  width: 30px;
-  height: 2px;
-  background-color: #333;
-  position: absolute; 
-  right: -40px; 
-  top: 50%;
-  transform: translateY(-50%); 
+  display: flex; 
+  align-items: center; 
+  position:absolute;
+  left: 40px;
 }
 
-.arrow-right::before {
-  content: '';
-  position: absolute;
-  right: -5px;
-  top: -4px;
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid transparent;
-  border-left: 5px solid #333;
+.line {
+  width: 30px; 
+  height: 2px; 
+  background-color: black; 
+  margin-right: 5px; 
 }
+
+.arrowhead {
+  width: 0;  
+  height: 0; 
+  border-top: 5px solid transparent; 
+  border-bottom: 5px solid transparent; 
+  border-left: 10px solid black; 
+}
+
 
 .head,
 .null {
@@ -378,7 +379,8 @@ ol li a{
   margin: 20px 0;
 }
 
-.head, .null {
+.head,
+.null {
   font-weight: bold;
   margin-right: 10px;
 }
@@ -449,159 +451,81 @@ button:hover {
   }
 }
 
-/* responsive code start from here */
-/* for header  */
-header {
-  width: 100vw;
-  height: 150px;
-}
-
-.header-head {
-  width: 70vw;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: auto;
-  padding-top: 10px;
-}
-
-.left-head,
-.right-head {
-  display: inline-block;
-}
-
-.left-head,
-img,
-p {
-  display: inline-block;
-}
-
-.vl-logo {
-  height: 100px;
-  width: auto;
-}
-
-input[type=search] {
-  border: 1px solid rgba(128, 128, 128, 0.9);
-  padding: 6px 70px 6px 10px;
-  border-radius: 15px;
-}
-
-/* Media Queries for Responsive Header */
 
 /* For tablet devices (width <= 768px) */
 @media (max-width: 768px) {
   .header-head {
-      width: 90vw;
-      flex-direction: column;
-      justify-content: center;
-      padding-top: 5px;
+    width: 90vw;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 5px;
   }
 
   .vl-logo {
-      height: 80px;
+    height: 80px;
   }
 
   .right-head {
-      margin-top: 10px;
+    margin-top: 10px;
   }
 
   input[type=search] {
-      width: 100%;
-      padding: 6px 10px;
+    width: 100%;
+    padding: 6px 10px;
   }
 }
 
 /* For mobile devices (width <= 480px) */
 @media (max-width: 480px) {
   .header-head {
-      width: 95vw;
-      flex-direction: column;
-      justify-content: center;
+    width: 95vw;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .vl-logo {
-      height: 60px;
+    height: 60px;
   }
 
   input[type=search] {
-      width: 100%;
-      padding: 6px 10px;
+    width: 100%;
+    padding: 6px 10px;
   }
 
   .nav ul li a {
-      font-size: 16px;
-      padding: 5px 10px;
+    font-size: 16px;
+    padding: 5px 10px;
   }
 
   .nav ul li {
-      padding: 0px 10px;
+    padding: 0px 10px;
   }
 }
 
 /* For very small mobile devices (width <= 320px) */
 @media (max-width: 320px) {
   .vl-logo {
-      height: 50px;
+    height: 50px;
   }
 
   .header-head {
-      width: 100vw;
-      flex-direction: column;
+    width: 100vw;
+    flex-direction: column;
   }
 
   input[type=search] {
-      width: 100%;
-      padding: 5px 10px;
+    width: 100%;
+    padding: 5px 10px;
   }
 
   .nav ul li a {
-      font-size: 14px;
-      padding: 5px 8px;
+    font-size: 14px;
+    padding: 5px 8px;
   }
 
   .nav ul li {
-      padding: 0px 5px;
+    padding: 0px 5px;
   }
-}
-
-
-/* for MQ of footer  */
-footer {
-  width: 100vw;
-  background-color: #02263c;
-  color: white;
-  font-size: 14px;
-  font-family: Arial, Helvetica, sans-serif;
-  padding: 20px 0;
-}
-
-.footer-head {
-  width: 70vw;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin: auto;
-  flex-wrap: wrap; /* To handle responsiveness */
-}
-
-footer ul {
-  list-style: none;
-  padding: 0;
-}
-
-footer li,
-a {
-  color: white;
-  text-decoration: none;
-  padding-bottom: 10px;
-  display: block;
-}
-
-footer p {
-  text-align: center;
-  margin-top: 20px;
-  font-size: 15px;
 }
 
 /* Flexbox columns for each section */
@@ -610,61 +534,63 @@ footer p {
 .foot-three {
   flex: 1;
   margin: 10px;
-  min-width: 200px; 
+  min-width: 200px;
 }
 
 @media (max-width: 768px) {
   .footer-head {
-      width: 90vw;
-      flex-direction: column;
-      text-align: center;
+    width: 90vw;
+    flex-direction: column;
+    text-align: center;
   }
 
   .foot-one,
   .foot-two,
   .foot-three {
-      margin: 20px 0;
+    margin: 20px 0;
   }
 
   footer p {
-      font-size: 14px;
+    font-size: 14px;
   }
 }
 
 /* For mobile devices (width <= 480px) */
 @media (max-width: 480px) {
   .footer-head {
-      width: 95vw;
-      flex-direction: column;
-      text-align: center;
+    width: 95vw;
+    flex-direction: column;
+    text-align: center;
   }
 
   .foot-one,
   .foot-two,
   .foot-three {
-      margin: 15px 0;
+    margin: 15px 0;
   }
 
   footer p {
-      font-size: 13px;
+    font-size: 13px;
   }
 }
 
 /* For very small mobile devices (width <= 320px) */
 @media (max-width: 320px) {
   .footer-head {
-      width: 100vw;
-      flex-direction: column;
-      text-align: center;
+    width: 100vw;
+    flex-direction: column;
+    text-align: center;
   }
 
   footer p {
-      font-size: 12px;
+    font-size: 12px;
   }
 
   .foot-one,
   .foot-two,
   .foot-three {
-      margin: 10px 0;
+    margin: 10px 0;
   }
 }
+
+/* new code for arrow  */
