@@ -264,11 +264,11 @@ const Practice = () => {
 
 // For Exercise
 const Exercise = () => {
-  const [list, setList] = useState([]); 
+  const [list, setList] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [indexValue, setIndexValue] = useState('');
-  const [question, setQuestion] = useState(generateQuestion()); 
-  const [message, setMessage] = useState(''); 
+  const [question, setQuestion] = useState(generateQuestion());
+  const [message, setMessage] = useState('');
 
   function generateQuestion() {
     const randomList = Array.from({ length: 5 }, () => Math.floor(Math.random() * 100) + 1);
@@ -317,10 +317,10 @@ const Exercise = () => {
     }
 
     setTimeout(() => {
-      setList([]); 
-      setQuestion(generateQuestion()); 
-      setMessage(''); 
-    }, 2000); 
+      setList([]);
+      setQuestion(generateQuestion());
+      setMessage('');
+    }, 2000);
   };
 
   return (
@@ -376,7 +376,7 @@ const quizzesData = {
   pretest: [
     {
       id: 1,
-      question: "1. What is the primary difference between an array and a linked list?",
+      question: "What is the primary difference between an array and a linked list?",
       options: [
         "Arrays are dynamic, linked lists are static.",
         "Arrays store elements in contiguous memory locations, linked lists store elements in non-contiguous memory locations.",
@@ -387,13 +387,13 @@ const quizzesData = {
     },
     {
       id: 2,
-      question: "2. Which of the following data structures allows random access to its elements?",
+      question: "Which of the following data structures allows random access to its elements?",
       options: ["Array", "Stack", "Queue", "Linked List"],
       answer: "Array",
     },
     {
       id: 3,
-      question: "3. Which of the following operations takes O(1) time in an array?",
+      question: "Which of the following operations takes O(1) time in an array?",
       options: [
         "Insertion at the beginning",
         "Deletion at the end",
@@ -404,14 +404,14 @@ const quizzesData = {
     },
     {
       id: 4,
-      question: "4. What is the time complexity to insert an element at the beginning of an array of size n?",
+      question: "What is the time complexity to insert an element at the beginning of an array of size n?",
       options: ["O(1)", "O(n)", "O(log n)", "O(n²)"],
       answer: "O(n)",
       explanation: "Shifting all the elements to make space for the new element takes linear time."
     },
     {
       id: 5,
-      question: "5. What is a pointer in programming?",
+      question: "What is a pointer in programming?",
       options: [
         "A variable that stores the address of another variable",
         "A function used to manipulate arrays",
@@ -420,11 +420,99 @@ const quizzesData = {
       ],
       answer: "A variable that stores the address of another variable",
     },
+    {
+      id: 6,
+      question: "Which data structure follows the Last-In-First-Out (LIFO) principle?",
+      options: ["Array", "Queue", "Stack", "Tree"],
+      answer: "Stack",
+    },
+    {
+      id: 7,
+      question: "What is the time complexity for accessing an element in a linked list by its index?",
+      options: ["O(1)", "O(log n)", "O(n)", "O(n²)"],
+      answer: "O(n)",
+      explanation: "Linked lists do not allow random access, so you need to traverse the list to reach the index."
+    },
+    {
+      id: 8,
+      question: "Which of the following data structures is best suited for implementing recursion?",
+      options: ["Queue", "Array", "Linked List", "Stack"],
+      answer: "Stack",
+      explanation: "Stacks are used to store the return address, local variables, and other information during recursive function calls."
+    },
+    {
+      id: 9,
+      question: "What is the primary advantage of using a linked list over an array?",
+      options: [
+        "Easier to implement sorting algorithms",
+        "Dynamic memory allocation and easier insertion and deletion",
+        "Lower memory usage",
+        "Faster random access"
+      ],
+      answer: "Dynamic memory allocation and easier insertion and deletion",
+    },
+    {
+      id: 10,
+      question: "Which of the following is NOT a characteristic of an array?",
+      options: [
+        "Fixed size once initialized",
+        "Elements stored in contiguous memory locations",
+        "Efficient insertion and deletion",
+        "Allows random access to elements"
+      ],
+      answer: "Efficient insertion and deletion",
+      explanation: "Arrays require shifting elements, making insertion and deletion inefficient compared to linked lists."
+    },
+    {
+      id: 11,
+      question: "In which scenario is a linked list preferred over an array?",
+      options: [
+        "When quick access to elements is required",
+        "When the data size is known and fixed",
+        "When frequent insertion and deletion are required",
+        "When memory usage needs to be minimal"
+      ],
+      answer: "When frequent insertion and deletion are required",
+    },
+    {
+      id: 12,
+      question: "What is the main difference between a stack and a queue?",
+      options: [
+        "Stack follows FIFO, Queue follows LIFO",
+        "Stack follows LIFO, Queue follows FIFO",
+        "Stack allows random access, Queue does not",
+        "Stack is static, Queue is dynamic"
+      ],
+      answer: "Stack follows LIFO, Queue follows FIFO",
+    },
+    {
+      id: 13,
+      question: "Which data structure is commonly used to implement a queue?",
+      options: ["Array", "Stack", "Linked List", "Binary Tree"],
+      answer: "Linked List",
+    },
+    {
+      id: 14,
+      question: "Which data structure is best for implementing a phone directory, where searching by name is required?",
+      options: ["Stack", "Queue", "Array", "Hash Table"],
+      answer: "Hash Table",
+    },
+    {
+      id: 15,
+      question: " What is the purpose of a header node in a linked list?",
+      options: [
+        "To store additional information",
+        "To simplify list insertion and deletion operations",
+        "To store the memory address of the previous node",
+        "To allow random access to elements"
+      ],
+      answer: "To simplify list insertion and deletion operations",
+    },
   ],
   posttest: [
     {
       id: 1,
-      question: "1. Which of the following is NOT a type of Linked List?",
+      question: "Which of the following is NOT a type of Linked List?",
       options: [
         "Singly Linked List",
         "Doubly Linked List",
@@ -434,7 +522,7 @@ const quizzesData = {
     },
     {
       id: 2,
-      question: "2. What is the time complexity for inserting an element at the beginning of a singly linked list?",
+      question: "What is the time complexity for inserting an element at the beginning of a singly linked list?",
       options: [
         "O(n)",
         "O(log n)",
@@ -444,7 +532,7 @@ const quizzesData = {
     },
     {
       id: 3,
-      question: "3. In a doubly linked list, how many pointers does each node contain?",
+      question: "In a doubly linked list, how many pointers does each node contain?",
       options: [
         "1",
         "2",
@@ -454,7 +542,7 @@ const quizzesData = {
     },
     {
       id: 4,
-      question: "4. What is the advantage of using a circular linked list over a linear linked list?",
+      question: "What is the advantage of using a circular linked list over a linear linked list?",
       options: [
         "It uses less memory.",
         "It allows quick access to the middle element.",
@@ -464,13 +552,125 @@ const quizzesData = {
     },
     {
       id: 5,
-      question: "5. Which of the following operations cannot be performed in constant time in a singly linked list?",
+      question: "Which of the following operations cannot be performed in constant time in a singly linked list?",
       options: [
         "Insert at the beginning",
         "Insert at the end",
         "Delete at the beginning",
         "Search for an element"],
       answer: "Search for an element",
+    },
+    {
+      id: 6,
+      question: "Which of the following is true about a circular linked list?",
+      options: [
+        "The last node points to NULL.",
+        "It cannot contain duplicate elements.",
+        "The last node points back to the first node.",
+        "It is always sorted."
+      ],
+      answer: "The last node points back to the first node.",
+    },
+    {
+      id: 7,
+      question: "What is a potential disadvantage of a doubly linked list?",
+      options: [
+        "It requires more memory per node than a singly linked list.",
+        "It does not allow traversal in reverse.",
+        "It is difficult to insert elements at the beginning.",
+        "It cannot be used to implement a stack."
+      ],
+      answer: "It requires more memory per node than a singly linked list.",
+    },
+    {
+      id: 8,
+      question: "In a linked list, what is a 'head' node?",
+      options: [
+        "The last node in the list",
+        "The node with the highest value",
+        "The first node in the list",
+        "A node that does not store any data"
+      ],
+      answer: "The first node in the list",
+    },
+    {
+      id: 9,
+      question: "Which of the following can efficiently find the middle of a linked list?",
+      options: [
+        "Using a single pointer traversal",
+        "Using two pointers, one moving twice as fast",
+        "Using a stack",
+        "Using recursion"
+      ],
+      answer: "Using two pointers, one moving twice as fast",
+      explanation: "This approach, known as the 'tortoise and hare' method, is efficient for finding the middle element in a single traversal."
+    },
+    {
+      id: 10,
+      question: "How does a circular doubly linked list differ from a regular doubly linked list?",
+      options: [
+        "It cannot store more than 10 elements.",
+        "Its head and tail nodes point to each other.",
+        "It does not have a tail node.",
+        "It uses only one pointer per node."
+      ],
+      answer: "Its head and tail nodes point to each other.",
+    },
+    {
+      id: 11,
+      question: "Which operation takes more time on a linked list than on an array?",
+      options: [
+        "Insertion at the beginning",
+        "Accessing an element by index",
+        "Insertion at the end",
+        "Deletion at the beginning"
+      ],
+      answer: "Accessing an element by index",
+      explanation: "Linked lists require traversal to access an element by index, which takes linear time."
+    },
+    {
+      id: 12,
+      question: "Which of the following linked list operations has a time complexity of O(n) for a singly linked list?",
+      options: [
+        "Inserting at the beginning",
+        "Inserting at the end",
+        "Deleting at the beginning",
+        "Accessing the head"
+      ],
+      answer: "Inserting at the end",
+    },
+    {
+      id: 13,
+      question: "What is the main reason for using a doubly linked list over a singly linked list?",
+      options: [
+        "Faster memory allocation",
+        "Reduced memory usage",
+        "Efficient two-way traversal",
+        "Simpler code structure"
+      ],
+      answer: "Efficient two-way traversal",
+    },
+    {
+      id: 14,
+      question: "Which of the following scenarios would benefit most from using a circular linked list?",
+      options: [
+        "Implementing a basic stack",
+        "Implementing a round-robin scheduling algorithm",
+        "Performing quick random access operations",
+        "Handling fixed-size data"
+      ],
+      answer: "Implementing a round-robin scheduling algorithm",
+    },
+    {
+      id: 15,
+      question: "In a singly linked list, what is the effect of deleting the head node?",
+      options: [
+        "The list becomes empty",
+        "The next node becomes the new head",
+        "The entire list is deleted",
+        "The last node becomes the new head"
+      ],
+      answer: "The next node becomes the new head",
     },
   ],
 };
@@ -518,11 +718,19 @@ const Sidebar = ({ handleOptionClick }) => (
 );
 
 // Main Content Component
+
 const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) => {
   const [quizzes, setQuizzes] = useState([]);
   const [activeTestType, setActiveTestType] = useState('pretest');
   const [submitted, setSubmitted] = useState(false);
   const [correctAnswers, setCorrectAnswers] = useState(0);
+
+  // Helper function to get a random subset of questions
+  const getRandomQuestions = (quizType, numberOfQuestions = 5) => {
+    const questions = quizzesData[quizType];
+    const shuffledQuestions = questions.sort(() => 0.5 - Math.random());
+    return shuffledQuestions.slice(0, numberOfQuestions);
+  };
 
   useEffect(() => {
     if (activeContent === 'Pretest') {
@@ -533,7 +741,8 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
   }, [activeContent]);
 
   useEffect(() => {
-    setQuizzes(quizzesData[activeTestType]);
+    const quizQuestions = getRandomQuestions(activeTestType, 5);
+    setQuizzes(quizQuestions);
     setSubmitted(false);
     setUserAnswers({});
   }, [activeTestType]);
@@ -624,9 +833,9 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
               <br />
               <h4>Explore Topic Like:</h4>
               <ul className='topicForLL'>
-                  <li><a href='https://www.geeksforgeeks.org/c-pointers/' target='_blank' >Pointers</a></li>
-                  <li><a href='https://www.geeksforgeeks.org/structures-c/' target='_blank' >Structure</a></li>
-                  <li><a href='https://www.w3schools.com/c/c_memory_allocate.php' target='_blank' >Dynamic Memory Allocation (malloc and free)</a></li>
+                <li><a href='https://www.geeksforgeeks.org/c-pointers/' target='_blank' >Pointers</a></li>
+                <li><a href='https://www.geeksforgeeks.org/structures-c/' target='_blank' >Structure</a></li>
+                <li><a href='https://www.w3schools.com/c/c_memory_allocate.php' target='_blank' >Dynamic Memory Allocation (malloc and free)</a></li>
               </ul>
               <p className='description'>
                 Linked lists are widely used in scenarios where dynamic memory allocation is needed, such as in operating
@@ -654,49 +863,48 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
       case 'Pretest':
       case 'Posttest':
 
-        return (
-          <div className='intro'>
-            <h1 className='heading'>{activeTestType.charAt(0).toUpperCase() + activeTestType.slice(1)} Quiz</h1>
-            {quizzes.map((quiz) => (
-              <div key={quiz.id}>
-                <br />
-                <h3>{quiz.question}</h3>
-                <br />
-                <div className='indent'>
-                  {quiz.options.map((option) => (
-                    <label key={option} className={`option-label ${getOptionClass(quiz, option)}`}>
-                      <input
-                        type="radio"
-                        name={quiz.id}
-                        onChange={() => handleAnswerChange(quiz.id, option)}
-                        disabled={submitted} // Disable inputs after submission
-                      />
-                      {option}
-                      <br />
-                    </label>
-                  ))}
-                </div>
+      return (
+        <div className="intro" style={{ textAlign: 'left' }}> {/* Aligns content to the left */}
+          <h1 className="heading">{activeTestType.charAt(0).toUpperCase() + activeTestType.slice(1)} Quiz</h1>
+          {quizzes.map((quiz, index) => (
+            <div key={quiz.id}>
+              <br />
+              <h3>{index + 1}. {quiz.question}</h3> {/* Uses index to display sequential question numbers */}
+              <br />
+              <div className="indent">
+                {quiz.options.map((option) => (
+                  <label key={option} className={`option-label ${getOptionClass(quiz, option)}`}>
+                    <input
+                      type="radio"
+                      name={quiz.id}
+                      onChange={() => handleAnswerChange(quiz.id, option)}
+                      disabled={submitted}
+                    />
+                    {option}
+                    <br />
+                  </label>
+                ))}
               </div>
-            ))}
-            <div className="Button-container">
-  <button className="SubmitButton" onClick={handleSubmit} disabled={submitted}>
-    Submit
-  </button>
-  {submitted && (
-    <button onClick={downloadPDF} className="pdfButton">
-      Download Results as PDF
-    </button>
-  )}
-</div>
-
+            </div>
+          ))}
+          <div className="Button-container">
+            <button className="SubmitButton" onClick={handleSubmit} disabled={submitted}>
+              Submit
+            </button>
             {submitted && (
-              <div className='score-display'>
-                <h3>Your Score: {correctAnswers} / {quizzes.length}</h3>
-                
-              </div>
+              <button onClick={downloadPDF} className="pdfButton">
+                Download Results as PDF
+              </button>
             )}
           </div>
-        );
+    
+          {submitted && (
+            <div className="score-display">
+              <h3>Your Score: {correctAnswers} / {quizzes.length}</h3>
+            </div>
+          )}
+        </div>
+      );
 
       case 'Concept':
         return (
@@ -762,42 +970,42 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
     const doc = new jsPDF();
     const startY = 20; // Starting Y position for the first element
     let currentY = startY; // Keep track of current Y position
-  
+
     // Title Section
     doc.setFontSize(15);
     doc.setFont("helvetica", "bold");
     doc.text('Quiz Results', 20, currentY);
-    
+
     // Add a thicker Line Below Title
     doc.setLineWidth(1);
     doc.line(20, currentY + 6, 190, currentY + 6); // Adjusted line position
     <br></br>
-  
+
     // Reset Color and Font for Answers Section
     currentY += 10; // Move down for answers heading
     doc.setTextColor(0);
     doc.setFontSize(10);
-  
+
     // Move down for answers section
-    currentY += 5; 
-  
+    currentY += 5;
+
     // Loop through quizzes to display questions and options
     quizzes.forEach((quiz, index) => {
       // Question
       const questionText = `${quiz.question}`;
       doc.setFont("helvetica", "bold");
       doc.text(questionText, 20, currentY);
-      
+
       // Move down for options
-      currentY += 8; 
-  
+      currentY += 8;
+
       // Options
-      doc.setFont("helvetica", "normal"); 
+      doc.setFont("helvetica", "normal");
       quiz.options.forEach((option, optionIndex) => {
         const userAnswer = userAnswers[quiz.id];
         const isCorrect = option === quiz.answer;
         const isUserAnswer = option === userAnswer;
-  
+
         // Color Logic
         if (isUserAnswer && !isCorrect) {
           // Wrong answer in red
@@ -808,28 +1016,28 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
         } else {
           doc.setTextColor(0); // Default color for other options
         }
-  
+
         // Print the option
         doc.text(`${String.fromCharCode(65 + optionIndex)}. ${option}`, 20, currentY);
-        
+
         // Move down for the next option
         currentY += 8; // Adjust spacing as needed
       });
-  
+
       // Reset color for the next question
       doc.setTextColor(0);
-      
+
       // Add extra space after each question block
       currentY += 5; // Additional spacing between questions
     });
 
-        // Score Section
-        currentY += 10; // Move down for score
-        doc.setTextColor(0, 102, 204); // Blue color
-        doc.setFontSize(15);
-        doc.text(`Your Score: ${correctAnswers} / ${quizzes.length}`, 20, currentY);
-      
-  
+    // Score Section
+    currentY += 10; // Move down for score
+    doc.setTextColor(0, 102, 204); // Blue color
+    doc.setFontSize(15);
+    doc.text(`Your Score: ${correctAnswers} / ${quizzes.length}`, 20, currentY);
+
+
     // Save the PDF
     doc.save('quiz-results.pdf');
   };
