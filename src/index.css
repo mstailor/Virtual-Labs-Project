@@ -7,7 +7,6 @@
   width: 100vw;
   background-color: #02263c;
   color: white;
-  padding: 10px;
   font-size: 12px;
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -19,13 +18,9 @@
   justify-content: space-between;;
 }
 
-.face-id img {
-  height: 25px;
-}
-
 header {
   width: 100vw;
-  height: 150px;
+  background-color: white; 
 }
 
 .header-head {
@@ -34,7 +29,6 @@ header {
   justify-content: space-between;
   align-items: center;
   margin: auto;
-  padding-top: 10px;
 }
 
 .left-head,
@@ -48,25 +42,25 @@ p {
   display: inline-block;
 }
 
-.vl-logo {
-  height: 100px;
-  width: auto;
-}
-
 input[type=search] {
   border: 1px solid rgba(128, 128, 128, 0.9);
-  padding: 6px 10px 6px 10px;
+  padding: 4px 10px 4px 10px;
   border-radius: 15px;
 }
 
 nav {
-  width: 100vw;
+  height: 35px;
+  width: 100vw; 
   background-color: #00446d;
-  padding: 8px 0px;
+  overflow: hidden; 
+  padding: 0; 
+  margin: 0; 
+  display: flex; 
+  align-items: center; 
+  box-sizing: border-box; 
 }
 
 .nav {
-  max-width: 70vw;
   margin: auto;
   display: flex;
   justify-content: space-between;
@@ -103,7 +97,6 @@ nav {
   justify-content: center;
   position: relative;
   border-radius: 12px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
 .fa-arrow-left {
@@ -147,7 +140,6 @@ i#next {
   height: 320px;
   max-width: 90vw;
   width: 100%;
-  overflow: hidden;
 }
 
 .image-container .carousel {
@@ -158,7 +150,7 @@ i#next {
 }
 
 .carousel img {
-  height: 100%;
+  height: 90%;
   width: 100%;
   border-radius: 18px;
   border: 10px solid #fff;
@@ -171,12 +163,10 @@ i#next {
   margin-top: 30px;
   color: black;
   width: 100vw;
-  height: 300px;
 }
 
 .contain-two {
   width: 70vw;
-  height: 300px;
   margin: auto;
 }
 

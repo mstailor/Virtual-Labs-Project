@@ -4,6 +4,15 @@
   overflow-x: hidden;
 }
 
+.header-heading {
+  padding-top: 1.5%;
+  color: white;
+}
+
+.head-container {
+  background-color: white;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -14,14 +23,15 @@
 }
 
 .top-bar {
-  width: 100vw;
-  margin: auto;
   height: 40px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+  width: 100vw;
   background-color:   #07385e;
-  color: white;
+  overflow: hidden; 
+  padding: 0; 
+  margin: 0; 
+  display: flex; 
+  align-items: center; 
+  box-sizing: border-box; 
 }
 
 .top-bar a {
@@ -95,25 +105,63 @@
   width: calc(100% - 220px); 
 }
 
-.progress-bar {
-  font-size: large;
-  width: 250px;
+.list-exp-container {
+  display: flex;
+  flex-wrap: wrap; /* Make it responsive */
+  gap: 20px;
   padding: 20px;
-  background-color: #f7f7f7;
-  border-left: 1px solid #e2e1e1;
-  position: absolute;
-  right: 50px;
+  justify-content: space-around; /* Center items with equal space */
 }
 
-.progress-section {
-  font-size: large;
-  width: 100%;
-  margin-bottom: 20px;
+/* Individual experiment box */
+.experiment {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 45%; /* Half width on desktop */
+  background-color: #f9f9f9; /* Light background */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-progress {
-  width: 100px;
-  margin-right: 10px;
+/* Hover effect for experiment box */
+.experiment:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Experiment title and description */
+.experiment-title h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #07385e;
+}
+
+.experiment-title p {
+  margin: 10px 0 15px;
+  font-size: 1rem;
+  color: #555;
+}
+
+/* List of links inside the experiment */
+.experiment-links ol {
+  padding-left: 20px;
+}
+
+.experiment-links li {
+  margin-bottom: 5px;
+}
+
+.experiment-links a {
+  color: #007bff;
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+
+.experiment-links a:hover {
+  text-decoration: underline;
 }
 
 .footer-head {

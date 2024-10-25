@@ -4,7 +4,7 @@ import './experiments.css';
 
 // Header Component
 const Header = ({ toggleSidebar, toggleProgressBar }) => (
-  <div>
+  <div className='head-container'>
     <div className="header-head">
       <div className="left-head">
         <img className="vl-logo" src="/Sources/rbulogo.jpg" alt="Virtual Labs logo" />
@@ -22,7 +22,7 @@ const Header = ({ toggleSidebar, toggleProgressBar }) => (
         </button>
         <a href="/">Home</a>
       </div>
-      <h1>DATA STRUCTURE 1</h1>
+      <h1 className='header-heading'>DATA STRUCTURE 1</h1>
       <a href='/contact'>Contact Us</a>
     </div>
   </div>
@@ -43,27 +43,6 @@ const Sidebar = ({ handleOptionClick }) => (
       <br />
       <li onClick={() => handleOptionClick('Feedback')}>Feedback</li>
     </ul>
-  </div>
-);
-
-// ProgressBar Component
-const ProgressBar = ({ progress }) => (
-  <div className="toggle-section">
-    {Object.keys(progress).map((experiment, index) => (
-      <div key={index}>
-        <h5>{experiment.replace(/^\w/, (c) => c.toUpperCase())}</h5>
-        <div className="progress-section">
-          <p>Lecture progress:</p>
-          <progress value={progress[experiment].lecture} max="100" />
-          <span>{progress[experiment].lecture}%</span>
-        </div>
-        <div className="progress-section">
-          <p>Assignment progress:</p>
-          <progress value={progress[experiment].assignment} max="100" />
-          <span>{progress[experiment].assignment}%</span>
-        </div>
-      </div>
-    ))}
   </div>
 );
 
@@ -97,40 +76,57 @@ const MainContent = ({ activeContent, sidebarOpen }) => {
 
       case 'List of Experiments':
         return (
-          <>
-            <div>
-              <h1 className='heading'> Data Structures Lab </h1>
-              <br />
-              <br />
-              <div className='list-exp'>
-                <ul>
-                  <li>Sorting</li>
-                  <ol>
-                    <li><a href='/list/merge' >Merge Sort</a></li>
-                  </ol>
-                </ul>
-                <ul>
-                  <li>Linked List</li>
-                  <ol>
-                    <li><a href='/list/linkedlist' >Linked List</a></li>
-                  </ol>
-                </ul>
-                <ul>
-                  <li>Stack</li>
-                  <ol>
-                    <li><a href='/list/stack' >Stack</a></li>
-                  </ol>
-                </ul>
-                <ul>
-                  <li>Hashing</li>
-                  <ol>
-                    <li><a href='/list/probing' >Quadratic Probing</a></li>
-                  </ol>
-                </ul>
-              </div>
+          <div className="list-exp-container">
+          <div className="experiment">
+            <div className="experiment-title">
+              <h3>Sorting</h3>
+              <p>Experience the elegance of Merge Sort, where arrays are split and conquered for efficient sorting!</p>
             </div>
-          </>
-        );
+            <div className="experiment-links">
+              <ol>
+                <li><Link to="/list/merge">Merge Sort</Link></li>
+              </ol>
+            </div>
+          </div>
+        
+          <div className="experiment">
+            <div className="experiment-title">
+              <h3>Linked List</h3>
+              <p>Step into the world of Linked Lists, where nodes link together dynamically!</p>
+            </div>
+            <div className="experiment-links">
+              <ol>
+                <li><Link to="/list/linkedlist">Linked List Basics</Link></li>
+              </ol>
+            </div>
+          </div>
+        
+          <div className="experiment">
+            <div className="experiment-title">
+              <h3>Stack</h3>
+              <p>Enter the realm of Stacks, where the last item in is the first one out!</p>
+            </div>
+            <div className="experiment-links">
+              <ol>
+                <li><Link to="/list/stack">Implement Stack</Link></li>
+              </ol>
+            </div>
+          </div>
+        
+          <div className="experiment">
+            <div className="experiment-title">
+              <h3>Hashing</h3>
+              <p>Unlock the power of Quadratic Probing to tackle collisions in hashing!</p>
+            </div>
+            <div className="experiment-links">
+              <ol>
+                <li><Link to="/list/probing">Quadratic Probing</Link></li>
+              </ol>
+            </div>
+          </div>
+        </div>
+        
+      );
 
       case 'Course Outcome':
         return (

@@ -382,7 +382,7 @@ const Header = ({ toggleSidebar }) => (
         </button>
         <a href="/">Home</a>
       </div>
-      <h1>DATA STRUCTURE 1</h1>
+      <h1 className='header-heading'>DATA STRUCTURE 1</h1>
       <a href="/experiments">Experiments List</a>
     </div>
   </div>

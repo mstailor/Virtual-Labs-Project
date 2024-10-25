@@ -1,16 +1,46 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Feedback.css';
+import emailjs from 'emailjs-com';
 
 const FeedbackForm = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [feedback, setFeedback] = useState('');
     const [submitted, setSubmitted] = useState(false);
+    const navigate = useNavigate();
+
+    // Initialize EmailJS with your public key
+    useEffect(() => {
+        emailjs.init('i6YTDCWTjjmljnbAX'); // Replace with your public key
+    }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log({ name, email, feedback });
-        setSubmitted(true);
+
+        const templateParams = {
+            name: name.trim(),
+            from_email: email.trim(), // User's email
+            feedback: feedback.trim(),
+        };
+
+        // Send email using EmailJS
+        emailjs.send('service_8oxogjq', 'template_l755war', templateParams) // Replace with your Service ID and Template ID
+            .then((response) => {
+                console.log('SUCCESS!', response.status, response.text);
+                setSubmitted(true);
+                // Reset form fields
+                setName('');
+                setEmail('');
+                setFeedback('');
+            })
+            .catch((error) => {
+                console.error('FAILED...', error);
+            });
+    };
+
+    const handleBackToExperiments = () => {
+        navigate(-1);
     };
 
     return (
@@ -20,6 +50,9 @@ const FeedbackForm = () => {
                 <div className="thank-you-message">
                     <h3>Thank you for your feedback!</h3>
                     <p>Your response has been recorded.</p>
+                    <button onClick={handleBackToExperiments} className="submit-button">
+                        Back to Experiments
+                    </button>
                 </div>
             ) : (
                 <form onSubmit={handleSubmit} className="feedback-form">

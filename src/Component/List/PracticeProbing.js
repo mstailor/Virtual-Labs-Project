@@ -50,6 +50,7 @@ const QuadraticProbing = () => {
       setMessage(`Element ${key} added at index ${index}.`);
       setMessageColor('green');
     }
+    setInputValue('');
   };
 
   const handleSearch = () => {
@@ -70,6 +71,7 @@ const QuadraticProbing = () => {
       setMessage('Element not found.');
       setMessageColor('red');
     }
+    setInputValue('');
   };
 
   const handleRemove = () => {
@@ -93,6 +95,7 @@ const QuadraticProbing = () => {
       setMessage('Element not found.');
       setMessageColor('red');
     }
+    setInputValue('');
   };
 
   const handleReset = () => {
@@ -105,7 +108,7 @@ const QuadraticProbing = () => {
 
     return (
     <div className="quadratic-probing">
-      <h2>Quadratic Probing Simulation</h2>
+      <h2 className='heading3'>Quadratic Probing Simulation</h2>
       <div className="hash-table">
         {hashTable.map((value, index) => (
           <div key={index} className="hash-cell">
@@ -148,97 +151,78 @@ const QuadraticProbing = () => {
 };
 
 const Exercise = () => {
+  const tableSize = 10;
+  
   // Generate random numbers for the question
   const generateQuestion = () => {
-    const hashTableSize = 10; // Size of the hash table
-    const numbers = new Set();  // Using a Set to avoid duplicates
+    const hashTableSize = 10;
+    const numbers = new Set();
 
-    // Generate numbers that will collide based on the hash function
     while (numbers.size < 5) {
-        const baseNumber = Math.floor(Math.random() * 50); // Base number to generate from 0 to 49
-        // Generate a number that will hash to the same index
-        const collidingNumber = baseNumber + (Math.floor(Math.random() * 5) * hashTableSize); // Adding multiples of the hash table size for collision
-        numbers.add(baseNumber); // Add the base number
-        numbers.add(collidingNumber); // Add the colliding number
+      const baseNumber = Math.floor(Math.random() * 50);
+      for (let i = 1; i <= 3; i++) {
+        const collidingNumber = baseNumber + (Math.floor(Math.random() * 5) * hashTableSize);
+        numbers.add(collidingNumber);
+      }
+  
+      numbers.add(baseNumber);
+    }
+    return Array.from(numbers).slice(0, 5);
+  };
+
+  // Quadratic probing logic
+  const quadraticProbe = (num, table, size) => {
+    let i = 1;
+    let index = num % size;
+
+    while (table[index] !== '' && i <= size) {
+      index = (num % size + i * i) % size;
+      i++;
     }
 
-    return Array.from(numbers).slice(0, 5); // Convert Set to Array and ensure we return only 5 unique numbers
-};
+    return (table[index] === '') ? index : -1;
+  };
 
-const quadraticProbe = (num, table, size) => {
-  let i = 1; // Start probing with i = 1
-  let index = num % size; // Initial index
-
-  // Quadratic probing to find an empty slot
-  while (table[index] !== '' && i <= size) {
-    index = (num % size + i * i) % size; // Quadratic probing formula
-    i++;  // Increment after probing
-  }
-
-  // If a valid slot is found, return the index
-  return (table[index] === '') ? index : -1; // Return -1 if the table is full
-};
-
-// Initialize the table and elements to insert
-let size = 10;
-let table = Array(size).fill('');
-let elements = [15, 4, 35, 65, 14];
-
-// Insert elements into the hash table
-elements.forEach(num => {
-  let result = quadraticProbe(num, table, size);
-  if (result !== -1) {
-    table[result] = num; // Insert the element into the table
-  } else {
-    console.log(`Table full, couldn't insert ${num}`);
-  }
-});
-
-
-
-  const tableSize = 10;
   const [question, setQuestion] = useState(generateQuestion());
   const [hashTable, setHashTable] = useState(Array(tableSize).fill(''));
-  const [boxColors, setBoxColors] = useState(Array(tableSize).fill('')); // Track colors
+  const [boxColors, setBoxColors] = useState(Array(tableSize).fill(''));
 
-  // Update table values based on user input
+  // Handle user input in the hash table
   const handleInputChange = (index, value) => {
     const newHashTable = [...hashTable];
     newHashTable[index] = value;
     setHashTable(newHashTable);
   };
 
-  // Check correctness
+  // Check if the answers are correct
   const checkAnswers = () => {
-    const newColors = [...boxColors]; // Copy the current box colors state
-  
-    // Reset all boxes to no special class
-    for (let i = 0; i < newColors.length; i++) {
-      newColors[i] = ''; // Initially, all boxes are unmarked
-    }
-  
-    // Mark correct answers based on quadratic probing
+    const newColors = Array(tableSize).fill(''); // Reset all box colors
+    const filledTable = Array(tableSize).fill(''); // To simulate the insertion
+
     question.forEach((num) => {
-      const correctIndex = quadraticProbe(num, Array(tableSize).fill(''), tableSize); // Correct index based on probing
-      const userValue = parseInt(hashTable[correctIndex], 10);  // User's input at that index
-  
-      if (userValue === num) {
-        newColors[correctIndex] = 'correct1'; // If correct, mark it as correct (no cross)
+      const correctIndex = quadraticProbe(num, filledTable, tableSize);
+
+      if (correctIndex !== -1) {
+        const userValue = parseInt(hashTable[correctIndex], 10);
+
+        if (userValue === num) {
+          newColors[correctIndex] = 'correct1'; // Mark as correct
+        }
+        filledTable[correctIndex] = num; // Simulate the insertion
       }
     });
-  
-    // Cross out all remaining boxes that are not marked as correct
+
+    // Mark incorrect answers
     for (let i = 0; i < newColors.length; i++) {
       if (newColors[i] !== 'correct1') {
-        newColors[i] = 'crossed'; // Cross out all boxes that are not correct
+        newColors[i] = 'crossed'; // Mark incorrect answers
       }
     }
-  
-    setBoxColors(newColors); // Update the boxColors state
-  };
-  
 
-  // Reset table and colors
+    setBoxColors(newColors); // Update colors
+  };
+
+  // Reset the table and box colors
   const resetTable = () => {
     setHashTable(Array(tableSize).fill(''));
     setBoxColors(Array(tableSize).fill(''));
@@ -252,25 +236,24 @@ elements.forEach(num => {
 
   return (
     <div className="Exercise">
-      <h1>Quadratic Probing Hash Table Simulation</h1>
+      <h1>Quadratic Probing Exercise</h1>
       <p>
         <strong>Question:</strong> Insert {question.join(', ')} into the hash table using quadratic probing.
       </p>
 
       <div className="hash-table">
         {hashTable.map((value, index) => (
-          <div>
-          <div key={index} className={`box ${boxColors[index]}`}>
-            <input
-              type="text"
-              value={value}
-              onChange={(e) => handleInputChange(index, e.target.value)}
-              maxLength={2}
-            />
+          <div key={index}>
+            <div className={`box ${boxColors[index]}`}>
+              <input
+                type="text"
+                value={value}
+                onChange={(e) => handleInputChange(index, e.target.value)}
+                maxLength={2}
+              />
+            </div>
+            <div><span className="index-label">{index}</span></div>
           </div>
-          <div> <span className="index-label">{index}</span></div>
-          </div>
-
         ))}
       </div>
 
@@ -281,7 +264,8 @@ elements.forEach(num => {
       </div>
 
       <div className="legend">
-        <p><span className="box correct"></span> Correctly Filled Boxes</p>
+        <p><span className="box correct1"></span> Correctly Filled Boxes</p>
+        <p><span className="box crossed"></span> Incorrectly Filled Boxes</p>
       </div>
     </div>
   );
