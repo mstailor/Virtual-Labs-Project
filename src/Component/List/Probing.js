@@ -3,101 +3,190 @@ import jsPDF from 'jspdf';
 import './Probing.css'; // Ensure your CSS file is included for styling
 import { QuadraticProbing, Exercise } from './PracticeProbing';
 
-
 // Predefined quizzes data
 const quizzesData = {
   pretest: [
     {
       id: 1,
-      question: "1. What is result of 29 mod(5)?",
+      question: " What is result of 29 mod(5)?",
       options: [" 1", " 4", " 5", " 9"],
       answer: "4",
     },
     {
       id: 2,
-      question: "2. What is the primary purpose of a hash function?",
-      options: [
-        " To multiply the keys with a constant value",
-        " To map a given key to a specific index in an array",
-        " To sort the keys",
-        " To compress the data for storage",
-      ],
+      question: " What is the primary purpose of a hash function?",
+      options: [" To multiply the keys with a constant value"," To map a given key to a specific index in an array"," To sort the keys"," To compress the data for storage",],
       answer: " To map a given key to a specific index in an array",
     },
     {
       id: 3,
-      question: "3. Which of the following is a characteristic of a good hash function?",
-      options: [
-        " It minimizes collision",
-        " It generates shorter hashes for shorter inputs",
-        " It always produces large hash values for larger inputs",
-        " It ensures that all hash values are sequential",
-      ],
+      question: " Which of the following is a characteristic of a good hash function?",
+      options: [" It minimizes collision"," It generates shorter hashes for shorter inputs"," It always produces large hash values for larger inputs"," It ensures that all hash values are sequential",],
       answer: " It minimizes collision",
     },
     {
       id: 4,
-      question: "4. In which scenarios are you more likely to encounter collisions in a hash table?",
-      options: [
-        " When hash table is empty or nearly empty",
-        " When table size is a prime number",
-        " When a simple hash function like h(k) = k mod(10) is used",
-        " When each key is assigned a unique hash value",
-      ],
+      question: " In which scenarios are you more likely to encounter collisions in a hash table?",
+      options: [" When hash table is empty or nearly empty"," When table size is a prime number"," When a simple hash function like h(k) = k mod(10) is used"," When each key is assigned a unique hash value",],
       answer: " When a simple hash function like h(k) = k mod(10) is used",
     },
     {
       id: 5,
-      question: "5. For a hash table with a size of 12, if a key 94 is hashed using h(k) = k mod(12), what is the resulting index?",
+      question: " For a hash table with a size of 12, if a key 94 is hashed using h(k) = k mod(12), what is the resulting index?",
       options: [" 10", " 8", " 6", " 3"],
       answer: " 10",
+    },
+    {
+      id: 6,
+      question: " What is a hash table?",
+      options: [" A type of array"," A list of elements"," A data structure that maps keys to values"," None of the above"],
+      answer: " A data structure that maps keys to values",
+    },
+    {
+      id: 7,
+      question: " What is hashing?",
+      options: [" The process of encrypting data"," The process of combining data"," The process of combining data"," The process of converting input into a fixed-size string"],
+      answer: " The process of converting input into a fixed-size string",
+    },
+    {
+      id: 8,
+      question: " What is a common application of hash tables?",
+      options: ["  Database indexing"," Caching"," Symbol tables in compilers"," All of the above"],
+      answer: "  All of the above",
+    },
+    {
+      id: 9,
+      question: " What is a collision in the context of hash tables?",
+      options: [" When two keys hash to the same index","  When a key is not found"," When the hash table is full"," None of the above"],
+      answer: " When two keys hash to the same index",
+    },
+    {
+      id: 10,
+      question: " How does the choice of hash function impact the efficiency of a hash table?",
+      options: [" It doesn't impact efficiency"," It determines the table size"," It affects the distribution of keys"," None of the above"],
+      answer: "  It affects the distribution of keys",
+    },
+    {
+      id: 11,
+      question: " What does the term 'backtracking' refer to in probing?",
+      options: [" Re-evaluating the hash function"," Returning to a previous index to check for availability"," Moving back to the original index"," None of the above"],
+      answer: " Returning to a previous index to check for availability",
+    },
+    {
+      id: 12,
+      question: " What data structure can be used to implement a hash table?",
+      options: [" Array"," Linked list"," Tree"," All of the above"],
+      answer: " Array",
+    },
+    {
+      id: 13,
+      question: " What is the main advantage of using a hash table?",
+      options: [" Reduced memory usage"," Simplicity in debugging"," Guaranteed order of elements"," Fast access time"],
+      answer: " Fast access time",
+    },
+    {
+      id: 14,
+      question: " For a hash table with a size of 8, if a key 45 is hashed using h(k) = k mod(8), what is the resulting index?",
+      options: [" 3"," 5"," 0"," 1"],
+      answer: " 5",
+    },
+    {
+      id: 15,
+      question: " What is the result of 88 mod 9?",
+      options: [" 8"," 9"," 3"," 7"],
+      answer: " 7",
     },
   ],
   posttest: [
     {
       id: 1,
-      question: "1. Explain how quadratic probing resolves collisions.",
-      options: [" It uses the formula h(k) = h(k) + i*i  to find the next index for collisions, where i is the number of attempts",
-        " It always uses the next index regardless of the value of i",
-        " It only allows one collision per entry, otherwise it gives an error", 
-        " It uses a linear function to calculate the next index after a collision"],
+      question: " Explain how quadratic probing resolves collisions.",
+      options: [" It uses the formula h(k) = h(k) + i*i  to find the next index for collisions, where i is the number of attempts"," It always uses the next index regardless of the value of i"," It only allows one collision per entry, otherwise it gives an error", " It uses a linear function to calculate the next index after a collision"],
       answer: " It uses the formula h(k) = h(k) + i*i  to find the next index for collisions, where i is the number of attempts",
     },
     {
       id: 2,
-      question: "2. Given a hash table of size 11, and the following hash function: h(k) = k % 11, insert the keys 20, 21, 31, and 42.",
-      options: [" The keys will collide at index 1 and stay there", 
-        " The final placement is 20 at index 9, 21 at index 10, 31 at index 9, and 42 at index 8", 
-        " All keys will be placed sequentially in the table without any collisions", 
-        " All keys will be placed at random index"],
+      question: " Given a hash table of size 11, and the following hash function: h(k) = k % 11, insert the keys 20, 21, 31, and 42.",
+      options: [" The keys will collide at index 1 and stay there", " The final placement is 20 at index 9, 21 at index 10, 31 at index 9, and 42 at index 8", " All keys will be placed sequentially in the table without any collisions", " All keys will be placed at random index"],
       answer: " The final placement is 20 at index 9, 21 at index 10, 31 at index 9, and 42 at index 8",
     },
     {
       id: 3,
-      question: "3. What is a significant limitation of quadratic probing?",
-      options: [" It only works with a hash table size that is a prime number", 
-        " It is slower than separate chaining in all cases", 
-        " It can lead to secondary clustering, where sequences of occupied slots can form", 
-        " It can only handle small datasets"],
+      question: " What is a significant limitation of quadratic probing?",
+      options: [" It only works with a hash table size that is a prime number"," It is slower than separate chaining in all cases", " It can lead to secondary clustering, where sequences of occupied slots can form", " It can only handle small datasets"],
       answer: " It can lead to secondary clustering, where sequences of occupied slots can form",
     },
     {
       id: 4,
-      question: "4. How does quadratic probing affect memory usage in a hash table?",
-      options: [" It always uses less memory than linear probing", 
-        " It guarantees that all entries are stored consecutively in memory", 
-        " It requires additional memory for each entry", 
-        " It can lead to inefficient memory use when the load factor is high"],
+      question: " How does quadratic probing affect memory usage in a hash table?",
+      options: [" It always uses less memory than linear probing", " It guarantees that all entries are stored consecutively in memory", " It requires additional memory for each entry", " It can lead to inefficient memory use when the load factor is high"],
       answer: " It can lead to inefficient memory use when the load factor is high",
     },
     {
       id: 5,
-      question: "5. How is the load factor of a hash table calculated?",
-      options: [" Load factor = number of empty slots / total slots", 
-        " Load factor = size of the table / number of entries", 
-        " Load factor = number of entries / size of the table", 
-        " Load factor = total slots / number of collisions"],
+      question: " How is the load factor of a hash table calculated?",
+      options: [" Load factor = number of empty slots / total slots"," Load factor = size of the table / number of entries", " Load factor = number of entries / size of the table"," Load factor = total slots / number of collisions"],
       answer: " Load factor = number of entries / size of the table",
+    },
+    {
+      id: 6,
+      question: " If the initial hash index is 2 and the first collision occurs, what will be the index for the second probe?",
+      options: [" 5"," 9"," 3"," 4"],
+      answer: " 4",
+    },
+    {
+      id: 7,
+      question: " Which of the following is an advantage of quadratic probing over linear probing?",
+      options: [" It always finds a slot"," It uses less memory"," It has fewer clustering issues"," It is simpler to implement"],
+      answer: " It has fewer clustering issues",
+    },
+    {
+      id: 8,
+      question: " What is the time complexity for searching an element using quadratic probing in the worst case?",
+      options: [" O(n log(n))"," O(n)"," O(1)"," O(log(n))"],
+      answer: " O(n)",
+    },
+    {
+      id: 9,
+      question: " In quadratic probing, how does the value of c change with each probe?",
+      options: [" It remains constant"," It decreases quadratically"," It increases linearly"," It increases quadratically"],
+      answer: " It increases quadratically",
+    },
+    {
+      id: 10,
+      question: " If you attempt to insert the same key multiple times in a hash table with quadratic probing, what will happen?",
+      options: [" It will overwrite the existing key"," It will create duplicates"," It will not insert the key"," It will fail and stop"],
+      answer: " It will not insert the key",
+    },
+    {
+      id: 11,
+      question: " What is a common method to enhance quadratic probing performance?",
+      options: [" Use dynamic resizing of the hash table"," Use linear probing instead"," Use a larger load factor"," Increase the number of collisions"],
+      answer: " Use dynamic resizing of the hash table",
+    },
+    {
+      id: 12,
+      question: " Given a hash table of size 7 initialized with empty slots (denoted by -1), insert the elements 7, 21,44 and 42 using quadratic probing. What will be the final state of the table?",
+      options: [" [7, 21, -1, , 42, -1, 44]"," [-1, 7, 21, , 42, -1, 44]"," [7, 21, 44, , 42, -1, -1]"," [7, 21, 44, , -1, 42, -1]"],
+      answer: " [7, 21, 44, , 42, -1, -1]",
+    },
+    {
+      id: 13,
+      question: "",
+      options: ["","","",""],
+      answer: "",
+    },
+    {
+      id: 14,
+      question: " Given a hash table of size 11 initialized with empty slots (denoted by -1), insert the elements 7, 81, 99, 65, 44 and 42 using quadratic probing. What will be the final state of the table?",
+      options: [" [99, 44, -1, -1, 81, -1, -1, 7, -1, 42, 65]"," [99, 44, -1, -1, 81, -1, -1, -1, 7, 42, 65]"," [99, 44, -1, -1, -1, 81, 7, -1, -1, 42, 65]"," [99, -1, 44, -1, 81, -1, -1, 7, -1, 42, 65]"],
+      answer: " [99, 44, -1, -1, 81, -1, -1, 7, -1, 42, 65]",
+    },
+    {
+      id: 15,
+      question: "",
+      options: ["","","",""],
+      answer: "",
     },
   ],
 };
@@ -122,7 +211,7 @@ const Header = ({ toggleSidebar }) => (
         </button>
         <a href="/">Home</a>
       </div>
-      <h1>DATA STRUCTURE 1</h1>
+      <h1 className='header-heading'>DATA STRUCTURE 1</h1>
       <a href="/experiments">Experiments List</a>
     </div>
   </div>
@@ -151,8 +240,14 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
   const [submitted, setSubmitted] = useState(false);
   const [correctAnswers, setCorrectAnswers] = useState(0);
 
+  const getRandomQuestions = (questions, count) => {
+    const shuffled = [...questions].sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, count);
+  };
+
   useEffect(() => {
-    setQuizzes(quizzesData[activeTestType]);
+    const selectedQuestions = getRandomQuestions(quizzesData[activeTestType], 5);
+    setQuizzes(selectedQuestions);
     setSubmitted(false);
     setUserAnswers({});
   }, [activeTestType]);
@@ -184,10 +279,6 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
     setSubmitted(true);
   };
 
-  const toggleTestType = () => {
-    setActiveTestType((prevType) => (prevType === 'pretest' ? 'posttest' : 'pretest'));
-  };
-
   const getOptionClass = (quiz, option) => {
     if (!submitted) return '';
     if (userAnswers[quiz.id] === option) {
@@ -196,6 +287,7 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
     return '';
   };
 
+  let index =0;
   const videoId = "0WzhEhhKb9o";
   const videoId2 = "VzAPaX0zU90";
   
@@ -248,24 +340,24 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
         return (
           <div className='intro'>
             <h1 className='heading'>{activeTestType.charAt(0).toUpperCase() + activeTestType.slice(1)} Quiz</h1>
-            {quizzes.map((quiz) => (
-              <div key={quiz.id}>
-                <br />
-                <h3>{quiz.question}</h3>
-                <br />
-                <div className='indent'>
-                  {quiz.options.map((option) => (
-                    <label key={option} className={`option-label ${getOptionClass(quiz, option)}`}>
-                      <input
-                        type="radio"
-                        name={quiz.id}
-                        onChange={() => handleAnswerChange(quiz.id, option)}
-                        disabled={submitted} // Disable inputs after submission
-                      />
-                      {option}
-                      <br />
-                    </label>
-                  ))}
+            {quizzes.map((quiz, index) => (
+  <div key={quiz.id}>
+    <br />
+    <h3>{index + 1}. {quiz.question}</h3>
+    <br />
+    <div className='indent'>
+      {quiz.options.map((option) => (
+        <label key={option} className={`option-label ${getOptionClass(quiz, option)}`}>
+          <input
+            type="radio"
+            name={quiz.id}
+            onChange={() => handleAnswerChange(quiz.id, option)}
+            disabled={submitted} // Disable inputs after submission
+          />
+          {option}
+          <br />
+        </label>
+      ))}
                 </div>
               </div>
             ))}
