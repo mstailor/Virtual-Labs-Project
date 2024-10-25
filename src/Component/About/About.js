@@ -106,6 +106,7 @@ const About = () => {
                         <ul>
                             <li><a className="nav-link" href="/">HOME</a></li>
                             <li><a className="nav-link" href="/about">ABOUT US</a></li>
+                            <li><a className="nav-link" href="/experiments">EXPERIMENTS</a></li>
                             <li><a className="nav-link" href="/contact">CONTACT US</a></li>
                         </ul>
                     </div>
