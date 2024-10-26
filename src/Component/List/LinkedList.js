@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import jsPDF from 'jspdf';
 import './LinkedList.css';
 
-
-
 // Node class for Linked List
 // For Practice
 class Node {
@@ -66,7 +64,7 @@ class SinglyLinkedList {
     }
   }
 
-  // Search for a node
+  // Search 
   search(value) {
     let current = this.head;
     let index = 0;
@@ -77,14 +75,13 @@ class SinglyLinkedList {
       current = current.next;
       index++;
     }
-    return -1; // Node not found
+    return -1;
   }
 
-  // Remove node by value
+  // Remove
   remove(value) {
     if (!this.head) return;
 
-    // If head is the node to be deleted
     if (this.head.value === value) {
       this.head = this.head.next;
       return;
@@ -124,12 +121,10 @@ const Practice = () => {
   const [nodeValue, setNodeValue] = useState('');
   const [removeValue, setRemoveValue] = useState('');
 
-  // Update list display
   const updateList = () => {
     setListState(linkedList.printList());
   };
 
-  // Insert at head
   const handleInsertAtHead = () => {
     if (inputValue) {
       linkedList.insertAtHead(inputValue);
@@ -138,7 +133,6 @@ const Practice = () => {
     }
   };
 
-  // Insert at tail
   const handleInsertAtTail = () => {
     if (inputTailValue) {
       linkedList.insertAtTail(inputTailValue);
@@ -147,7 +141,6 @@ const Practice = () => {
     }
   };
 
-  // Insert at node
   const handleInsertAtNode = () => {
     if (nodeIndex && nodeValue) {
       linkedList.insertAtNode(parseInt(nodeIndex), nodeValue);
@@ -157,7 +150,6 @@ const Practice = () => {
     }
   };
 
-  // Remove node
   const handleRemove = () => {
     if (removeValue) {
       linkedList.remove(removeValue);
@@ -166,7 +158,6 @@ const Practice = () => {
     }
   };
 
-  // Search node
   const handleSearch = () => {
     if (searchValue) {
       const index = linkedList.search(searchValue);
@@ -188,11 +179,20 @@ const Practice = () => {
           {listState.map((node, index) => (
             <div key={index} className="node">
               <p>{node}</p>
-              <div className="arrow-right"></div>
+              <div className="arrow-right">
+                <div className="line"></div>
+                {index === listState.length - 1 ? (
+                  <div className="arrowhead"></div>
+                ) : (
+                  <div className="arrowhead"></div>
+                )}
+              </div>
             </div>
           ))}
           <p className="null">Null</p>
         </div>
+
+
 
         <div className="observations">
           <div className="inputs">
@@ -258,8 +258,6 @@ const Practice = () => {
     </>
   );
 };
-
-
 
 
 // For Exercise
@@ -329,17 +327,24 @@ const Exercise = () => {
         <h1 className="heading">Singly Linked List Exercise</h1>
         <p className="question">Convert to: {question.join(', ')}</p>
       </div>
-
       <div className="linked-list-diagram">
         <span className="head">Head</span>
         {list.map((node, index) => (
           <div key={index} className="node">
             {node}
-            {index < list.length - 1 && <div className="arrow-right"></div>}
+            <div className="arrow-right">
+            <div className="line"></div>
+              {index === list.length - 1 ? (
+                <div className="arrowhead"></div>
+              ) : (
+                <div className="arrowhead"></div>
+              )}
+            </div>
           </div>
         ))}
         <span className="null">Null</span>
       </div>
+
 
       <div className="inputs">
         <input
@@ -367,8 +372,6 @@ const Exercise = () => {
     </>
   );
 };
-
-
 
 
 // Predefined quizzes
@@ -725,7 +728,6 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
   const [submitted, setSubmitted] = useState(false);
   const [correctAnswers, setCorrectAnswers] = useState(0);
 
-  // Helper function to get a random subset of questions
   const getRandomQuestions = (quizType, numberOfQuestions = 5) => {
     const questions = quizzesData[quizType];
     const shuffledQuestions = questions.sort(() => 0.5 - Math.random());
@@ -784,7 +786,6 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
 
         return (
           <>
-            <h3 className='intro-out'>Aim : </h3>
             <div className='intro'>
               <h1 className='heading'>Singly Linked List</h1>
               <br />
@@ -863,48 +864,48 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
       case 'Pretest':
       case 'Posttest':
 
-      return (
-        <div className="intro" style={{ textAlign: 'left' }}> {/* Aligns content to the left */}
-          <h1 className="heading">{activeTestType.charAt(0).toUpperCase() + activeTestType.slice(1)} Quiz</h1>
-          {quizzes.map((quiz, index) => (
-            <div key={quiz.id}>
-              <br />
-              <h3>{index + 1}. {quiz.question}</h3> {/* Uses index to display sequential question numbers */}
-              <br />
-              <div className="indent">
-                {quiz.options.map((option) => (
-                  <label key={option} className={`option-label ${getOptionClass(quiz, option)}`}>
-                    <input
-                      type="radio"
-                      name={quiz.id}
-                      onChange={() => handleAnswerChange(quiz.id, option)}
-                      disabled={submitted}
-                    />
-                    {option}
-                    <br />
-                  </label>
-                ))}
+        return (
+          <div className="intro" style={{ textAlign: 'left' }}> {/* Aligns content to the left */}
+            <h1 className="heading">{activeTestType.charAt(0).toUpperCase() + activeTestType.slice(1)} Quiz</h1>
+            {quizzes.map((quiz, index) => (
+              <div key={quiz.id}>
+                <br />
+                <h3>{index + 1}. {quiz.question}</h3>
+                <br />
+                <div className="indent">
+                  {quiz.options.map((option) => (
+                    <label key={option} className={`option-label ${getOptionClass(quiz, option)}`}>
+                      <input
+                        type="radio"
+                        name={quiz.id}
+                        onChange={() => handleAnswerChange(quiz.id, option)}
+                        disabled={submitted}
+                      />
+                      {option}
+                      <br />
+                    </label>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
-          <div className="Button-container">
-            <button className="SubmitButton" onClick={handleSubmit} disabled={submitted}>
-              Submit
-            </button>
-            {submitted && (
-              <button onClick={downloadPDF} className="pdfButton">
-                Download Results as PDF
+            ))}
+            <div className="Button-container">
+              <button className="SubmitButton" onClick={handleSubmit} disabled={submitted}>
+                Submit
               </button>
+              {submitted && (
+                <button onClick={downloadPDF} className="pdfButton">
+                  Download Results as PDF
+                </button>
+              )}
+            </div>
+
+            {submitted && (
+              <div className="score-display">
+                <h3>Your Score: {correctAnswers} / {quizzes.length}</h3>
+              </div>
             )}
           </div>
-    
-          {submitted && (
-            <div className="score-display">
-              <h3>Your Score: {correctAnswers} / {quizzes.length}</h3>
-            </div>
-          )}
-        </div>
-      );
+        );
 
       case 'Concept':
         return (
@@ -968,77 +969,60 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
 
   const downloadPDF = () => {
     const doc = new jsPDF();
-    const startY = 20; // Starting Y position for the first element
-    let currentY = startY; // Keep track of current Y position
+    const startY = 20;
+    let currentY = startY;
 
-    // Title Section
     doc.setFontSize(15);
     doc.setFont("helvetica", "bold");
     doc.text('Quiz Results', 20, currentY);
 
-    // Add a thicker Line Below Title
     doc.setLineWidth(1);
-    doc.line(20, currentY + 6, 190, currentY + 6); // Adjusted line position
+    doc.line(20, currentY + 6, 190, currentY + 6);
     <br></br>
 
-    // Reset Color and Font for Answers Section
-    currentY += 10; // Move down for answers heading
+    currentY += 10;
     doc.setTextColor(0);
     doc.setFontSize(10);
 
-    // Move down for answers section
     currentY += 5;
 
-    // Loop through quizzes to display questions and options
     quizzes.forEach((quiz, index) => {
-      // Question
+
       const questionText = `${quiz.question}`;
       doc.setFont("helvetica", "bold");
       doc.text(questionText, 20, currentY);
 
-      // Move down for options
       currentY += 8;
 
-      // Options
       doc.setFont("helvetica", "normal");
       quiz.options.forEach((option, optionIndex) => {
         const userAnswer = userAnswers[quiz.id];
         const isCorrect = option === quiz.answer;
         const isUserAnswer = option === userAnswer;
 
-        // Color Logic
         if (isUserAnswer && !isCorrect) {
-          // Wrong answer in red
-          doc.setTextColor(255, 0, 0); // Red
+          doc.setTextColor(255, 0, 0);
         } else if (isCorrect) {
-          // Correct answer in green
-          doc.setTextColor(0, 128, 0); // Green
+          doc.setTextColor(0, 128, 0);
         } else {
-          doc.setTextColor(0); // Default color for other options
+          doc.setTextColor(0);
         }
 
-        // Print the option
         doc.text(`${String.fromCharCode(65 + optionIndex)}. ${option}`, 20, currentY);
 
-        // Move down for the next option
-        currentY += 8; // Adjust spacing as needed
+        currentY += 8;
       });
 
-      // Reset color for the next question
       doc.setTextColor(0);
 
-      // Add extra space after each question block
-      currentY += 5; // Additional spacing between questions
+      currentY += 5;
     });
 
-    // Score Section
-    currentY += 10; // Move down for score
-    doc.setTextColor(0, 102, 204); // Blue color
+    currentY += 10;
+    doc.setTextColor(0, 102, 204);
     doc.setFontSize(15);
     doc.text(`Your Score: ${correctAnswers} / ${quizzes.length}`, 20, currentY);
 
-
-    // Save the PDF
     doc.save('quiz-results.pdf');
   };
 
@@ -1090,8 +1074,8 @@ const Experiments = () => {
   const toggleSidebar = () => setShowSidebar(!showSidebar);
 
   const handleOptionClick = (content) => {
-    setActiveContent(content);  // Set the selected content
-    setShowSidebar(false);      // Automatically close the sidebar
+    setActiveContent(content);
+    setShowSidebar(false);
   };
 
   return (
@@ -1110,4 +1094,6 @@ const Experiments = () => {
     </div>
   );
 };
+
+
 export default Experiments;

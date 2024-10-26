@@ -322,6 +322,10 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
               A stack is a linear data structure that operates on the Last In, First Out (LIFO) principle, where the last element added is the first one to be removed. It supports essential operations like push (to add an element), pop (to remove an element), and peek (to view the top element without removing it). Stacks can be implemented using arrays or linked lists and are widely used in programming for various purposes. Key applications include managing function calls during recursion, expression evaluation, backtracking algorithms, undo mechanisms in software, and checking for balanced parentheses in code. Despite its simplicity and efficiency, the stack has limitations such as access restrictions (only the top element can be directly accessed) and potential overflow or underflow errors when working with fixed-size implementations.
               </p>
             </div>
+           <h2 className='sub-heads'>Conceptual Video</h2>
+              <div style={{ display: 'flex', justifyContent: 'center', padding: '20px' }}>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/h4HpJMSxcF8?si=qd3zgzOpaGd9CcNr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
           </>
         );
 
