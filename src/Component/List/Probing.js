@@ -172,9 +172,9 @@ const quizzesData = {
     },
     {
       id: 13,
-      question: "",
-      options: ["","","",""],
-      answer: "",
+      question: " Which of the following schemes does quadratic probing come under?",
+      options: [" extended hashing"," rehashing"," open addressing"," separate chaining"],
+      answer: " open addressing",
     },
     {
       id: 14,
@@ -184,9 +184,9 @@ const quizzesData = {
     },
     {
       id: 15,
-      question: "",
-      options: ["","","",""],
-      answer: "",
+      question: " Keys 9, 19, 29, 39, 49, 59, 69 are inserted into a hash Table of size 10 using the hash function H(k) = k mod(10) and Quadratic Probing is used for collision resolution. What is the index into which 59 will be inserted ?",
+      options: [" 4"," 6"," 9"," 8"],
+      answer: " 8",
     },
   ],
 };
@@ -441,35 +441,34 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
     const doc = new jsPDF();
     const startY = 20; // Starting Y position for the first element
     let currentY = startY; // Keep track of current Y position
+    const margin = 20; // Left margin for text
+    const maxWidth = doc.internal.pageSize.getWidth() - 2 * margin; // Maximum width for text
   
     // Title Section
     doc.setFontSize(15);
     doc.setFont("helvetica", "bold");
-    doc.text('Quiz Results', 20, currentY);
+    doc.text('Quiz Results', margin, currentY);
     
     // Add a thicker Line Below Title
     doc.setLineWidth(1);
-    doc.line(20, currentY + 6, 190, currentY + 6); // Adjusted line position
-    <br></br>
-  
+    doc.line(margin, currentY + 6, doc.internal.pageSize.getWidth() - margin, currentY + 6); // Adjusted line position
+    
     // Reset Color and Font for Answers Section
     currentY += 10; // Move down for answers heading
     doc.setTextColor(0);
     doc.setFontSize(10);
-  
-    // Move down for answers section
-    currentY += 5; 
-  
+    
     // Loop through quizzes to display questions and options
-    quizzes.forEach((quiz, index) => {
+    quizzes.forEach((quiz) => {
       // Question
       const questionText = `${quiz.question}`;
       doc.setFont("helvetica", "bold");
-      doc.text(questionText, 20, currentY);
+      const questionLines = doc.splitTextToSize(questionText, maxWidth);
+      doc.text(questionLines, margin, currentY);
       
       // Move down for options
-      currentY += 8; 
-  
+      currentY += questionLines.length * 8 + 5; // Adjust based on question height
+      
       // Options
       doc.setFont("helvetica", "normal"); 
       quiz.options.forEach((option, optionIndex) => {
@@ -479,20 +478,20 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
   
         // Color Logic
         if (isUserAnswer && !isCorrect) {
-          // Wrong answer in red
-          doc.setTextColor(255, 0, 0); // Red
+          doc.setTextColor(255, 0, 0); // Red for wrong answers
         } else if (isCorrect) {
-          // Correct answer in green
-          doc.setTextColor(0, 128, 0); // Green
+          doc.setTextColor(0, 128, 0); // Green for correct answers
         } else {
           doc.setTextColor(0); // Default color for other options
         }
   
-        // Print the option
-        doc.text(`${String.fromCharCode(65 + optionIndex)}. ${option}`, 20, currentY);
+        // Print the option with proper wrapping
+        const optionText = `${String.fromCharCode(65 + optionIndex)}. ${option}`;
+        const optionLines = doc.splitTextToSize(optionText, maxWidth);
+        doc.text(optionLines, margin, currentY);
         
         // Move down for the next option
-        currentY += 8; // Adjust spacing as needed
+        currentY += optionLines.length * 8; // Adjust spacing based on option height
       });
   
       // Reset color for the next question
@@ -501,17 +500,17 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
       // Add extra space after each question block
       currentY += 5; // Additional spacing between questions
     });
-
-        // Score Section
-        currentY += 10; // Move down for score
-        doc.setTextColor(0, 102, 204); // Blue color
-        doc.setFontSize(15);
-        doc.text(`Your Score: ${correctAnswers} / ${quizzes.length}`, 20, currentY);
-      
+  
+    // Score Section
+    currentY += 10; // Move down for score
+    doc.setTextColor(0, 102, 204); // Blue color
+    doc.setFontSize(15);
+    doc.text(`Your Score: ${correctAnswers} / ${quizzes.length}`, margin, currentY);
   
     // Save the PDF
     doc.save('quiz-results.pdf');
   };
+  
   
   return (
     <div className="main-content">
