@@ -108,8 +108,8 @@ const mergeSortSteps = (arr) => {
   const merge = (left, right) => {
     let sorted = [], i = 0, j = 0;
 
-    steps.push({ 
-      array: [...left, ...right], 
+    steps.push({
+      array: [...left, ...right],
       message: `Merging arrays: [${left.join(', ')}] and [${right.join(', ')}]`,
       status: "merging"
     });
@@ -134,8 +134,8 @@ const mergeSortSteps = (arr) => {
 
   const mergeSort = (arr) => {
     if (arr.length <= 1) {
-      steps.push({ 
-        array: arr, 
+      steps.push({
+        array: arr,
         message: `An array of length 1 cannot be split, ready for merge`,
         status: "ready"
       });
@@ -191,9 +191,9 @@ const MergeSortSimulator = () => {
           <option value={[5, 3, 8, 6, 2, 1]}>Array: [5, 3, 8, 6, 2, 1]</option>
         </select>
         <div className='new-but-merge-sort'>
-        <button className="btn" onClick={setup}>Setup</button>
-        <button className="btn" onClick={reset}>Reset</button>
-        <button className="btn" onClick={nextStep}>Next</button>
+          <button className="btn" onClick={setup}>Setup</button>
+          <button className="btn" onClick={reset}>Reset</button>
+          <button className="btn" onClick={nextStep}>Next</button>
         </div>
       </div>
 
@@ -483,6 +483,18 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
               <h1>Merge Sort</h1>
               Merge Sort is a divide-and-conquer algorithm that divides the input array into two halves, recursively sorts the two halves, and then merges the sorted halves to produce the final sorted array. It has a time complexity of O(n log n), making it more efficient than many simpler sorting algorithms. Merge Sort works by continuously dividing the array into smaller sub-arrays until each sub-array has a single element. These sub-arrays are then merged back together in the correct order. One advantage of merge sort is its stable sorting property, meaning it maintains the relative order of equal elements, and it can be used for external sorting as it works well with large datasets. However, its space complexity is O(n) due to the additional space needed for merging.
             </p>
+            <div>
+              <iframe
+                width="650"
+                height="340"
+                src="https://www.youtube.com/embed/RX5qrkYhemc"
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              ></iframe>
+            </div>
           </div>
         );
 
@@ -546,6 +558,18 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
             </p>
             <h2 className='sub-heading'> Merge Sort Demonstration </h2>
             <img className='image' src="https://media.geeksforgeeks.org/wp-content/uploads/20230706153706/Merge-Sort-Algorithm-(1).png" alt="Merge Sort Illustration" />
+            <div>
+              <iframe
+                width="650"
+                height="340"
+                src="https://www.youtube.com/embed/G5MLYKtU27A"
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              ></iframe>
+            </div>
           </div>
         );
 
@@ -578,19 +602,19 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
           </>
         );
 
-      case 'Practice': 
-      return (
-        <>
-          <MergeSortSimulator/>
-        </>
-      );
+      case 'Practice':
+        return (
+          <>
+            <MergeSortSimulator />
+          </>
+        );
 
-      case 'Exercise': 
-      return (
-        <>
-          <MergeSortDragDrop/>
-        </>
-      );
+      case 'Exercise':
+        return (
+          <>
+            <MergeSortDragDrop />
+          </>
+        );
       default:
         return <p>Select an option from the sidebar.</p>;
     }
@@ -598,8 +622,8 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
 
   const downloadPDF = () => {
     const doc = new jsPDF();
-    const startY = 20; 
-    let currentY = startY; 
+    const startY = 20;
+    let currentY = startY;
 
     // Title Section
     doc.setFontSize(15);
@@ -608,10 +632,10 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
 
     // Add a thicker Line Below Title
     doc.setLineWidth(1);
-    doc.line(20, currentY + 6, 190, currentY + 6); 
+    doc.line(20, currentY + 6, 190, currentY + 6);
     <br></br>
 
-    currentY += 10; 
+    currentY += 10;
     doc.setTextColor(0);
     doc.setFontSize(10);
 
@@ -655,7 +679,7 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
       doc.setTextColor(0);
 
       // Add extra space after each question block
-      currentY += 5; 
+      currentY += 5;
     });
 
     // Score Section

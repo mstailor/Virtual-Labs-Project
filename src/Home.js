@@ -74,20 +74,20 @@ const Header = () => {
                 </div>
                 <div className="right-head">
                     <form>
-                        <input style={{paddingRight:"10px"}} type="search" name="search-bar" id="searching" placeholder="Search lab" />
+                        <input style={{ paddingRight: "10px" }} type="search" name="search-bar" id="searching" placeholder="Search lab" />
                     </form>
                 </div>
             </div>
             <nav>
-    <div className="nav">
-        <ul>
-            <li><a className="nav-link" href="/">HOME</a></li>
-            <li><a className="nav-link" href="/about">ABOUT US</a></li> 
-            <li><a className="nav-link" href="/experiments">EXPERIMENTS</a></li>
-            <li><a className="nav-link" href="/contact">CONTACT US</a></li>
-        </ul>
-    </div>
-</nav>
+                <div className="nav">
+                    <ul>
+                        <li><a className="nav-link" href="/">HOME</a></li>
+                        <li><a className="nav-link" href="/about">ABOUT US</a></li>
+                        <li><a className="nav-link" href="/experiments">EXPERIMENTS</a></li>
+                        <li><a className="nav-link" href="/contact">CONTACT US</a></li>
+                    </ul>
+                </div>
+            </nav>
 
         </header>
     );
@@ -189,7 +189,7 @@ const VideoSection = () => {
                 <iframe
                     width="650"
                     height="340"
-                    src="https://www.youtube.com/embed/Yhqyuv0336c?si=iLqOfWso36SXhScF"
+                    src="https://www.youtube.com/embed/AoUL3eb8iHs"
                     title="YouTube video player"
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
