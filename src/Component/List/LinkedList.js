@@ -333,7 +333,7 @@ const Exercise = () => {
           <div key={index} className="node">
             {node}
             <div className="arrow-right">
-            <div className="line"></div>
+              <div className="line"></div>
               {index === list.length - 1 ? (
                 <div className="arrowhead"></div>
               ) : (
@@ -825,6 +825,9 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
                 allowing for dynamic memory allocation and efficient insertion and deletion operations.
               </p>
               <br />
+              <div>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/Jlw2s2mIXC8?si=rsutX_TtYq5sNf77" title="YouTube cvideo player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              </div>
               <h2 className='sub-heading'>Key Features of Linked List:</h2>
               <ul className='list'>
                 <li>Dynamic in size: Can grow or shrink as needed.</li>
@@ -931,6 +934,9 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
               <h2 className='sub-heading'> Linked List Demonstration </h2>
               <img className='image' src="https://media.geeksforgeeks.org/wp-content/uploads/20240410135517/linked-list.webp"></img>
               <br />
+              <div>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/Ei2u20hlBPA?si=UysLVOWsPc_i6vDY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              </div>
             </div>
           </>
         );
