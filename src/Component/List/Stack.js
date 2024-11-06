@@ -352,6 +352,9 @@ const MainContent = ({ activeContent, setUserAnswers, userAnswers, setScore }) =
               <br />
               <h2 className='sub-heading'> Stack Demonstration </h2>
               <img className='image' src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/20221219100314/stack.drawio2.png"></img>
+              <div>
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/4-vg7YDrl_k?si=Xu2zW7spVMEzRx90" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              </div>
               <br />
               <h2>1. Basic Operations</h2>
     <ul>
